@@ -1,6 +1,6 @@
 # Oh My OpenCode setup
 
-This repo can be integrated with Oh My OpenCode (OMO) via its `claude-code-hooks` compatibility hook.
+This repo can be integrated with Oh My OpenCode (OMO) by using OMO as the runtime and enabling its `claude-code-hooks` bridge.
 
 Goal:
 
@@ -16,7 +16,21 @@ From the `opencode-mem` repo root:
 bun plugin/scripts/worker-service.cjs start
 ```
 
-## 2) Configure Claude Code-style hooks
+## 2) Enable the bridge in OMO config
+
+Edit `~/.config/opencode/oh-my-opencode.json` (or `.opencode/oh-my-opencode.json`) and ensure:
+
+```json
+{
+  "claude_code": {
+    "hooks": true
+  }
+}
+```
+
+`claude-code-hooks` is enabled by default unless explicitly disabled in `disabled_hooks`.
+
+## 3) Configure hook commands (Claude-style settings consumed by OMO bridge)
 
 OMO reads Claude Code hook configuration from `~/.claude/settings.json` (or `./.claude/settings.json`).
 
@@ -26,6 +40,18 @@ Quick helper (prints ready-to-paste JSON using your current absolute repo path):
 
 ```bash
 npm run opencode:hooks
+```
+
+Print OMO snippet only:
+
+```bash
+npm run opencode:hooks:omo
+```
+
+Print both snippets (`oh_my_opencode` + `claude_settings`) together:
+
+```bash
+npm run opencode:hooks:all
 ```
 
 Example (replace `/ABS/PATH/TO/opencode-mem`):
@@ -98,7 +124,7 @@ Notes:
 - The `opencode` platform is an alias of `claude-code` for hook input normalization.
 - OMO's hook runner will pipe JSON to stdin; `worker-service.cjs hook ...` consumes stdin.
 
-## 3) (Optional) Add MCP search tools to OpenCode
+## 4) (Optional) Add MCP search tools to OpenCode
 
 Configure a local MCP server that points at `plugin/scripts/mcp-server.cjs`.
 Exact config location depends on whether you are using OpenCode global config or project config.

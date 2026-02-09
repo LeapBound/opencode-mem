@@ -27,15 +27,11 @@ export const summarizeHandler: EventHandler = {
 
     const port = getWorkerPort();
 
-    // Validate required fields before processing
-    if (!transcriptPath) {
-      throw new Error(`Missing transcriptPath in Stop hook input for session ${sessionId}`);
-    }
-
-    // Extract last assistant message from transcript (the work Claude did)
-    // Note: "user" messages in transcripts are mostly tool_results, not actual user input.
-    // The user's original request is already stored in user_prompts table.
-    const lastAssistantMessage = extractLastMessage(transcriptPath, 'assistant', true);
+    // Claude-compatible hooks provide transcript_path. Some OpenCode-native stop events do not.
+    // In that case, request summarization without transcript-derived assistant text.
+    const lastAssistantMessage = transcriptPath
+      ? extractLastMessage(transcriptPath, 'assistant', true)
+      : undefined;
 
     logger.dataIn('HOOK', 'Stop: Requesting summary', {
       workerPort: port,

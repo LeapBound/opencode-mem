@@ -13,12 +13,19 @@ worker + MCP search tools in an OpenCode/OMO workflow.
 
 ## Oh My OpenCode integration
 
-Oh My OpenCode has a `claude-code-hooks` compatibility hook that can run Claude Code-style
-`~/.claude/settings.json` hooks on `PostToolUse`, `Stop`, etc.
+Oh My OpenCode can run this project through its `claude-code-hooks` bridge.
+Enable `claude_code.hooks` in `~/.config/opencode/oh-my-opencode.json`, then provide
+hook commands via Claude Code-style `~/.claude/settings.json`.
 
 Use that to call this repo's worker hook commands.
 
 See: `docs/opencode-setup.md`
+
+Helper commands:
+
+- `npm run opencode:hooks` -> Claude-style `hooks` JSON
+- `npm run opencode:hooks:omo` -> OMO `claude_code.hooks` snippet
+- `npm run opencode:hooks:all` -> both snippets in one JSON object
 
 ## Development
 

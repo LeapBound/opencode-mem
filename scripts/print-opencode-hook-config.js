@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const path = require("path");
+import path from "node:path";
 
 const repoRoot = process.cwd();
 const bunRunner = path.join(repoRoot, "plugin", "scripts", "bun-runner.js");
@@ -47,4 +47,16 @@ const config = {
   },
 };
 
-process.stdout.write(`${JSON.stringify(config, null, 2)}\n`);
+const omoConfig = {
+  claude_code: {
+    hooks: true,
+  },
+};
+
+if (process.argv.includes("--omo")) {
+  process.stdout.write(`${JSON.stringify(omoConfig, null, 2)}\n`);
+} else if (process.argv.includes("--all")) {
+  process.stdout.write(`${JSON.stringify({ oh_my_opencode: omoConfig, claude_settings: config }, null, 2)}\n`);
+} else {
+  process.stdout.write(`${JSON.stringify(config, null, 2)}\n`);
+}

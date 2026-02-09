@@ -1,0 +1,17 @@
+{
+  "name": "opencode-mem",
+  "version": "0.1.0",
+  "description": "Persistent memory + search tooling for OpenCode / Oh My OpenCode",
+  "author": {
+    "name": "Alex Newman"
+  },
+  "repository": "",
+  "license": "AGPL-3.0",
+  "keywords": [
+    "memory",
+    "context",
+    "persistence",
+    "hooks",
+    "mcp"
+  ]
+}

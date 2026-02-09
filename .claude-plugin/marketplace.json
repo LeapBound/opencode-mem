@@ -1,0 +1,18 @@
+{
+  "name": "opencode-mem",
+  "owner": {
+    "name": "Alex Newman"
+  },
+  "metadata": {
+    "description": "opencode-mem local marketplace (fork of claude-mem)",
+    "homepage": ""
+  },
+  "plugins": [
+    {
+      "name": "opencode-mem",
+      "version": "0.1.0",
+      "source": "./plugin",
+      "description": "Persistent memory + MCP search tools for OpenCode / Oh My OpenCode"
+    }
+  ]
+}

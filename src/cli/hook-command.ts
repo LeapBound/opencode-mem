@@ -1,6 +1,6 @@
 import { readJsonFromStdin } from './stdin-reader.js';
 import { getPlatformAdapter } from './adapters/index.js';
-import { getEventHandler } from './handlers/index.js';
+import { getEventHandler, type EventType } from './handlers/index.js';
 import { HOOK_EXIT_CODES } from '../shared/hook-constants.js';
 
 export interface HookCommandOptions {
@@ -8,7 +8,7 @@ export interface HookCommandOptions {
   skipExit?: boolean;
 }
 
-export async function hookCommand(platform: string, event: string, options: HookCommandOptions = {}): Promise<number> {
+export async function hookCommand(platform: string, event: EventType, options: HookCommandOptions = {}): Promise<number> {
   try {
     const adapter = getPlatformAdapter(platform);
     const handler = getEventHandler(event);
@@ -19,7 +19,13 @@ export async function hookCommand(platform: string, event: string, options: Hook
     const result = await handler.execute(input);
     const output = adapter.formatOutput(result);
 
-    console.log(JSON.stringify(output));
+    if (output !== undefined && output !== null) {
+      if (typeof output === 'string') {
+        process.stdout.write(output.endsWith('\n') ? output : `${output}\n`);
+      } else {
+        console.log(JSON.stringify(output));
+      }
+    }
     const exitCode = result.exitCode ?? HOOK_EXIT_CODES.SUCCESS;
     if (!options.skipExit) {
       process.exit(exitCode);

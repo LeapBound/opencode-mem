@@ -36,7 +36,8 @@ OMO reads Claude Code hook configuration from `~/.claude/settings.json` (or `./.
 
 Create/update `~/.claude/settings.json` with commands pointing at this repo checkout.
 
-Quick helper (prints ready-to-paste JSON using your current absolute repo path):
+Quick helper (prints ready-to-paste JSON using your current absolute repo path).
+This includes prompt-time memory context injection via `UserPromptSubmit`.
 
 ```bash
 npm run opencode:hooks

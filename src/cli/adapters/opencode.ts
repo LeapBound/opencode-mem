@@ -62,13 +62,18 @@ export const opencodeAdapter: PlatformAdapter = {
     };
   },
   formatOutput(result: HookResult): unknown {
+    // For OMO's `claude-code-hooks` bridge:
+    // - UserPromptSubmit: stdout is injected into the prompt (string), not parsed as JSON
+    // - PostToolUse/Stop: stdout is treated as messages/warnings unless JSON-parsed
+    //
+    // So for OpenCode/OMO, stay silent unless we INTEND to inject context.
     if (result.hookSpecificOutput) {
-      return { hookSpecificOutput: result.hookSpecificOutput };
+      const ctx = (result.hookSpecificOutput.additionalContext ?? '').trim();
+      if (!ctx) return '';
+      return `<claude-mem-context>\n${ctx}\n</claude-mem-context>`;
     }
 
-    return {
-      continue: result.continue ?? true,
-      suppressOutput: result.suppressOutput ?? true,
-    };
+    // Default: no stdout (prevents polluting tool output / prompt)
+    return undefined;
   }
 };

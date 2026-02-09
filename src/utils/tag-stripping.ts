@@ -27,7 +27,8 @@ const MAX_TAG_COUNT = 100;
 function countTags(content: string): number {
   const privateCount = (content.match(/<private>/g) || []).length;
   const contextCount = (content.match(/<claude-mem-context>/g) || []).length;
-  return privateCount + contextCount;
+  const omoHookCount = (content.match(/<user-prompt-submit-hook>/g) || []).length;
+  return privateCount + contextCount + omoHookCount;
 }
 
 /**
@@ -48,6 +49,7 @@ function stripTagsInternal(content: string): string {
 
   return content
     .replace(/<claude-mem-context>[\s\S]*?<\/claude-mem-context>/g, '')
+    .replace(/<user-prompt-submit-hook>[\s\S]*?<\/user-prompt-submit-hook>/g, '')
     .replace(/<private>[\s\S]*?<\/private>/g, '')
     .trim();
 }

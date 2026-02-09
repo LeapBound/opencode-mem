@@ -22,6 +22,12 @@ OMO reads Claude Code hook configuration from `~/.claude/settings.json` (or `./.
 
 Create/update `~/.claude/settings.json` with commands pointing at this repo checkout.
 
+Quick helper (prints ready-to-paste JSON using your current absolute repo path):
+
+```bash
+npm run opencode:hooks
+```
+
 Example (replace `/ABS/PATH/TO/opencode-mem`):
 
 ```json
@@ -96,3 +102,7 @@ Notes:
 
 Configure a local MCP server that points at `plugin/scripts/mcp-server.cjs`.
 Exact config location depends on whether you are using OpenCode global config or project config.
+
+Example config is provided at:
+
+`.opencode/opencode.json.example`

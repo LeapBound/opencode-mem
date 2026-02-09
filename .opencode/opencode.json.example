@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "opencode_mem": {
+      "type": "local",
+      "command": [
+        "node",
+        "/ABS/PATH/TO/opencode-mem/plugin/scripts/mcp-server.cjs"
+      ],
+      "enabled": true
+    }
+  }
+}

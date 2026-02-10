@@ -9,21 +9,20 @@
  */
 
 import path from 'path';
-import { homedir } from 'os';
 import { existsSync, writeFileSync, readFileSync, unlinkSync, mkdirSync } from 'fs';
 import { exec, execSync, spawn } from 'child_process';
 import { promisify } from 'util';
 import { logger } from '../../utils/logger.js';
 import { HOOK_TIMEOUTS } from '../../shared/hook-constants.js';
+import { DATA_DIR } from '../../shared/paths.js';
 
 const execAsync = promisify(exec);
 
 // Standard paths for PID file management
-const DATA_DIR = path.join(homedir(), '.claude-mem');
 const PID_FILE = path.join(DATA_DIR, 'worker.pid');
 
 // Orphaned process cleanup patterns and thresholds
-// These are claude-mem processes that can accumulate if not properly terminated
+// These are opencode-mem processes that can accumulate if not properly terminated
 const ORPHAN_PROCESS_PATTERNS = [
   'mcp-server.cjs',    // Main MCP server process
   'worker-service.cjs', // Background worker daemon
@@ -208,7 +207,7 @@ export function parseElapsedTime(etime: string): number {
 }
 
 /**
- * Clean up orphaned claude-mem processes from previous worker sessions
+ * Clean up orphaned opencode-mem processes from previous worker sessions
  *
  * Targets mcp-server.cjs, worker-service.cjs, and chroma-mcp processes
  * that survived a previous daemon crash. Only kills processes older than
@@ -233,7 +232,7 @@ export async function cleanupOrphanedProcesses(): Promise<void> {
       const { stdout } = await execAsync(cmd, { timeout: HOOK_TIMEOUTS.POWERSHELL_COMMAND });
 
       if (!stdout.trim() || stdout.trim() === 'null') {
-        logger.debug('SYSTEM', 'No orphaned claude-mem processes found (Windows)');
+        logger.debug('SYSTEM', 'No orphaned opencode-mem processes found (Windows)');
         return;
       }
 
@@ -266,7 +265,7 @@ export async function cleanupOrphanedProcesses(): Promise<void> {
       );
 
       if (!stdout.trim()) {
-        logger.debug('SYSTEM', 'No orphaned claude-mem processes found (Unix)');
+        logger.debug('SYSTEM', 'No orphaned opencode-mem processes found (Unix)');
         return;
       }
 
@@ -299,7 +298,7 @@ export async function cleanupOrphanedProcesses(): Promise<void> {
     return;
   }
 
-  logger.info('SYSTEM', 'Cleaning up orphaned claude-mem processes', {
+  logger.info('SYSTEM', 'Cleaning up orphaned opencode-mem processes', {
     platform: isWindows ? 'Windows' : 'Unix',
     count: pidsToKill.length,
     pids: pidsToKill,
@@ -356,7 +355,7 @@ export function spawnDaemon(
   const isWindows = process.platform === 'win32';
   const env = {
     ...process.env,
-    CLAUDE_MEM_WORKER_PORT: String(port),
+    OPENCODE_MEM_WORKER_PORT: String(port),
     ...extraEnv
   };
 

@@ -1,7 +1,7 @@
 {
   "name": "opencode-mem",
   "version": "0.1.0",
-  "description": "Persistent memory + MCP search tools for OpenCode / Oh My OpenCode (ported from claude-mem)",
+  "description": "Persistent memory + MCP search tools for OpenCode / Oh My OpenCode (ported from opencode-mem)",
   "keywords": [
     "opencode",
     "oh-my-opencode",
@@ -14,7 +14,7 @@
     "typescript",
     "nodejs"
   ],
-  "author": "Alex Newman (original claude-mem) + opencode-mem contributors",
+  "author": "Alex Newman (original opencode-mem) + opencode-mem contributors",
   "license": "AGPL-3.0",
   "repository": {
     "type": "git",
@@ -48,8 +48,8 @@
     "dev": "npm run build",
     "build": "node scripts/build-hooks.js",
     "build:binaries": "node scripts/build-worker-binary.js",
-    "worker:logs": "tail -n 50 ~/.claude-mem/logs/worker-$(date +%Y-%m-%d).log",
-    "worker:tail": "tail -f 50 ~/.claude-mem/logs/worker-$(date +%Y-%m-%d).log",
+    "worker:logs": "tail -n 50 ~/.opencode-mem/logs/worker-$(date +%Y-%m-%d).log",
+    "worker:tail": "tail -f 50 ~/.opencode-mem/logs/worker-$(date +%Y-%m-%d).log",
     "changelog:generate": "node scripts/generate-changelog.js",
     "discord:notify": "node scripts/discord-release-notify.js",
     "worker:start": "bun plugin/scripts/worker-service.cjs start",

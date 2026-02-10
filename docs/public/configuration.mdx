@@ -1,32 +1,32 @@
 ---
 title: "Configuration"
-description: "Environment variables and settings for Claude-Mem"
+description: "Environment variables and settings for OpenCode-Mem"
 ---
 
 # Configuration
 
 ## Settings File
 
-Settings are managed in `~/.claude-mem/settings.json`. The file is auto-created with defaults on first run.
+Settings are managed in `~/.opencode-mem/settings.json`. The file is auto-created with defaults on first run.
 
 ### Core Settings
 
 | Setting                       | Default                         | Description                           |
 |-------------------------------|---------------------------------|---------------------------------------|
-| `CLAUDE_MEM_MODEL`            | `sonnet`                        | AI model for processing observations (when using Claude) |
-| `CLAUDE_MEM_PROVIDER`         | `claude`                        | AI provider: `claude`, `gemini`, or `openrouter` |
-| `CLAUDE_MEM_MODE`             | `code`                          | Active mode profile (e.g., `code--es`, `email-investigation`) |
-| `CLAUDE_MEM_CONTEXT_OBSERVATIONS` | `50`                        | Number of observations to inject      |
-| `CLAUDE_MEM_WORKER_PORT`      | `37777`                         | Worker service port                   |
-| `CLAUDE_MEM_WORKER_HOST`      | `127.0.0.1`                     | Worker service host address           |
-| `CLAUDE_MEM_SKIP_TOOLS`       | `ListMcpResourcesTool,SlashCommand,Skill,TodoWrite,AskUserQuestion` | Comma-separated tools to exclude from observations |
+| `OPENCODE_MEM_MODEL`            | `sonnet`                        | AI model for processing observations (when using Claude) |
+| `OPENCODE_MEM_PROVIDER`         | `claude`                        | AI provider: `claude`, `gemini`, or `openrouter` |
+| `OPENCODE_MEM_MODE`             | `code`                          | Active mode profile (e.g., `code--es`, `email-investigation`) |
+| `OPENCODE_MEM_CONTEXT_OBSERVATIONS` | `50`                        | Number of observations to inject      |
+| `OPENCODE_MEM_WORKER_PORT`      | `37777`                         | Worker service port                   |
+| `OPENCODE_MEM_WORKER_HOST`      | `127.0.0.1`                     | Worker service host address           |
+| `OPENCODE_MEM_SKIP_TOOLS`       | `ListMcpResourcesTool,SlashCommand,Skill,TodoWrite,AskUserQuestion` | Comma-separated tools to exclude from observations |
 
 ### Gemini Provider Settings
 
 | Setting                       | Default                         | Description                           |
 |-------------------------------|---------------------------------|---------------------------------------|
-| `CLAUDE_MEM_GEMINI_API_KEY`   | —                               | Gemini API key ([get free key](https://aistudio.google.com/app/apikey)) |
-| `CLAUDE_MEM_GEMINI_MODEL`     | `gemini-2.5-flash-lite`          | Gemini model: `gemini-2.5-flash-lite`, `gemini-2.5-flash`, `gemini-3-flash-preview` |
+| `OPENCODE_MEM_GEMINI_API_KEY`   | —                               | Gemini API key ([get free key](https://aistudio.google.com/app/apikey)) |
+| `OPENCODE_MEM_GEMINI_MODEL`     | `gemini-2.5-flash-lite`          | Gemini model: `gemini-2.5-flash-lite`, `gemini-2.5-flash`, `gemini-3-flash-preview` |
 
 See [Gemini Provider](usage/gemini-provider) for detailed configuration and free tier information.
 
@@ -34,12 +34,12 @@ See [Gemini Provider](usage/gemini-provider) for detailed configuration and free
 
 | Setting                                      | Default                     | Description                           |
 |----------------------------------------------|-----------------------------|---------------------------------------|
-| `CLAUDE_MEM_OPENROUTER_API_KEY`              | —                           | OpenRouter API key ([get key](https://openrouter.ai/keys)) |
-| `CLAUDE_MEM_OPENROUTER_MODEL`                | `xiaomi/mimo-v2-flash:free` | Model identifier (supports 100+ models) |
-| `CLAUDE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES` | `20`                        | Max messages in conversation history  |
-| `CLAUDE_MEM_OPENROUTER_MAX_TOKENS`           | `100000`                    | Token budget safety limit             |
-| `CLAUDE_MEM_OPENROUTER_SITE_URL`             | —                           | Optional: URL for analytics           |
-| `CLAUDE_MEM_OPENROUTER_APP_NAME`             | `claude-mem`                | Optional: App name for analytics      |
+| `OPENCODE_MEM_OPENROUTER_API_KEY`              | —                           | OpenRouter API key ([get key](https://openrouter.ai/keys)) |
+| `OPENCODE_MEM_OPENROUTER_MODEL`                | `xiaomi/mimo-v2-flash:free` | Model identifier (supports 100+ models) |
+| `OPENCODE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES` | `20`                        | Max messages in conversation history  |
+| `OPENCODE_MEM_OPENROUTER_MAX_TOKENS`           | `100000`                    | Token budget safety limit             |
+| `OPENCODE_MEM_OPENROUTER_SITE_URL`             | —                           | Optional: URL for analytics           |
+| `OPENCODE_MEM_OPENROUTER_APP_NAME`             | `opencode-mem`                | Optional: App name for analytics      |
 
 See [OpenRouter Provider](usage/openrouter-provider) for detailed configuration, free model list, and usage guide.
 
@@ -47,9 +47,9 @@ See [OpenRouter Provider](usage/openrouter-provider) for detailed configuration,
 
 | Setting                       | Default                         | Description                           |
 |-------------------------------|---------------------------------|---------------------------------------|
-| `CLAUDE_MEM_DATA_DIR`         | `~/.claude-mem`                 | Data directory location               |
-| `CLAUDE_MEM_LOG_LEVEL`        | `INFO`                          | Log verbosity (DEBUG, INFO, WARN, ERROR, SILENT) |
-| `CLAUDE_MEM_PYTHON_VERSION`   | `3.13`                          | Python version for chroma-mcp         |
+| `OPENCODE_MEM_DATA_DIR`         | `~/.opencode-mem`                 | Data directory location               |
+| `OPENCODE_MEM_LOG_LEVEL`        | `INFO`                          | Log verbosity (DEBUG, INFO, WARN, ERROR, SILENT) |
+| `OPENCODE_MEM_PYTHON_VERSION`   | `3.13`                          | Python version for chroma-mcp         |
 | `CLAUDE_CODE_PATH`            | _(auto-detect)_                 | Path to Claude Code CLI (for Windows) |
 
 ## Model Configuration
@@ -67,18 +67,18 @@ Shorthand model names automatically forward to the latest version:
 ### Using the Interactive Script
 
 ```bash
-./claude-mem-settings.sh
+./opencode-mem-settings.sh
 ```
 
-This script manages settings in `~/.claude-mem/settings.json`.
+This script manages settings in `~/.opencode-mem/settings.json`.
 
 ### Manual Configuration
 
-Edit `~/.claude-mem/settings.json`:
+Edit `~/.opencode-mem/settings.json`:
 
 ```json
 {
-  "CLAUDE_MEM_MODEL": "sonnet"
+  "OPENCODE_MEM_MODEL": "sonnet"
 }
 ```
 
@@ -90,21 +90,21 @@ Configure the active workflow mode and language.
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `CLAUDE_MEM_MODE` | `code` | Defines behavior and language. See [Modes & Languages](modes). |
+| `OPENCODE_MEM_MODE` | `code` | Defines behavior and language. See [Modes & Languages](modes). |
 
 ### Examples
 
 **Spanish Code Mode:**
 ```json
 {
-  "CLAUDE_MEM_MODE": "code--es"
+  "OPENCODE_MEM_MODE": "code--es"
 }
 ```
 
 **Email Investigation Mode:**
 ```json
 {
-  "CLAUDE_MEM_MODE": "email-investigation"
+  "OPENCODE_MEM_MODE": "email-investigation"
 }
 ```
 
@@ -113,12 +113,12 @@ Configure the active workflow mode and language.
 ### Data Directory Structure
 
 The data directory location depends on the environment:
-- **Production (installed plugin)**: `~/.claude-mem/` (always, regardless of CLAUDE_PLUGIN_ROOT)
-- **Development**: Can be overridden with `CLAUDE_MEM_DATA_DIR`
+- **Production (installed plugin)**: `~/.opencode-mem/` (always, regardless of CLAUDE_PLUGIN_ROOT)
+- **Development**: Can be overridden with `OPENCODE_MEM_DATA_DIR`
 
 ```
-~/.claude-mem/
-├── claude-mem.db           # SQLite database
+~/.opencode-mem/
+├── opencode-mem.db           # SQLite database
 ├── .install-version        # Cached version for smart installer
 ├── worker.port             # Current worker port file
 └── logs/
@@ -192,7 +192,7 @@ Hooks are configured in `plugin/hooks/hooks.json`:
 
 ### Search Configuration
 
-Claude-Mem provides MCP search tools for querying your project history.
+OpenCode-Mem provides MCP search tools for querying your project history.
 
 **No configuration required** - MCP tools are automatically available in Claude Code sessions.
 
@@ -203,7 +203,7 @@ Search operations are provided via:
 
 ## Version Channel
 
-Claude-Mem supports switching between stable and beta versions via the web viewer UI.
+OpenCode-Mem supports switching between stable and beta versions via the web viewer UI.
 
 ### Accessing Version Channel
 
@@ -233,13 +233,13 @@ Claude-mem can automatically generate `CLAUDE.md` files in your project folders 
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `CLAUDE_MEM_FOLDER_CLAUDEMD_ENABLED` | `false` | Enable auto-generation of folder CLAUDE.md files |
+| `OPENCODE_MEM_FOLDER_CLAUDEMD_ENABLED` | `false` | Enable auto-generation of folder CLAUDE.md files |
 
 See [Folder Context Files](usage/folder-context) for full documentation on how this feature works, configuration options, and git integration recommendations.
 
 ## Context Injection Configuration
 
-Claude-Mem injects past observations into each new session, giving Claude awareness of recent work. You can configure exactly what gets injected using the **Context Settings Modal**.
+OpenCode-Mem injects past observations into each new session, giving Claude awareness of recent work. You can configure exactly what gets injected using the **Context Settings Modal**.
 
 ### Context Settings Modal
 
@@ -322,21 +322,21 @@ Token economics help you understand the value of cached observations vs. re-read
 
 ### Manual Configuration
 
-Settings are stored in `~/.claude-mem/settings.json`:
+Settings are stored in `~/.opencode-mem/settings.json`:
 
 ```json
 {
-  "CLAUDE_MEM_CONTEXT_OBSERVATIONS": "100",
-  "CLAUDE_MEM_CONTEXT_SESSION_COUNT": "20",
-  "CLAUDE_MEM_CONTEXT_OBSERVATION_TYPES": "bugfix,decision,discovery",
-  "CLAUDE_MEM_CONTEXT_OBSERVATION_CONCEPTS": "how-it-works,gotcha",
-  "CLAUDE_MEM_CONTEXT_FULL_COUNT": "10",
-  "CLAUDE_MEM_CONTEXT_FULL_FIELD": "narrative",
-  "CLAUDE_MEM_CONTEXT_SHOW_READ_TOKENS": "true",
-  "CLAUDE_MEM_CONTEXT_SHOW_WORK_TOKENS": "true",
-  "CLAUDE_MEM_CONTEXT_SHOW_SAVINGS_AMOUNT": "true",
-  "CLAUDE_MEM_CONTEXT_SHOW_LAST_SUMMARY": "false",
-  "CLAUDE_MEM_CONTEXT_SHOW_LAST_MESSAGE": "false"
+  "OPENCODE_MEM_CONTEXT_OBSERVATIONS": "100",
+  "OPENCODE_MEM_CONTEXT_SESSION_COUNT": "20",
+  "OPENCODE_MEM_CONTEXT_OBSERVATION_TYPES": "bugfix,decision,discovery",
+  "OPENCODE_MEM_CONTEXT_OBSERVATION_CONCEPTS": "how-it-works,gotcha",
+  "OPENCODE_MEM_CONTEXT_FULL_COUNT": "10",
+  "OPENCODE_MEM_CONTEXT_FULL_FIELD": "narrative",
+  "OPENCODE_MEM_CONTEXT_SHOW_READ_TOKENS": "true",
+  "OPENCODE_MEM_CONTEXT_SHOW_WORK_TOKENS": "true",
+  "OPENCODE_MEM_CONTEXT_SHOW_SAVINGS_AMOUNT": "true",
+  "OPENCODE_MEM_CONTEXT_SHOW_LAST_SUMMARY": "false",
+  "OPENCODE_MEM_CONTEXT_SHOW_LAST_MESSAGE": "false"
 }
 ```
 
@@ -344,23 +344,23 @@ Settings are stored in `~/.claude-mem/settings.json`:
 
 ## Customization
 
-Settings can be customized in `~/.claude-mem/settings.json`.
+Settings can be customized in `~/.opencode-mem/settings.json`.
 
 ### Custom Data Directory
 
-Edit `~/.claude-mem/settings.json`:
+Edit `~/.opencode-mem/settings.json`:
 ```json
 {
-  "CLAUDE_MEM_DATA_DIR": "/custom/path"
+  "OPENCODE_MEM_DATA_DIR": "/custom/path"
 }
 ```
 
 ### Custom Worker Port
 
-Edit `~/.claude-mem/settings.json`:
+Edit `~/.opencode-mem/settings.json`:
 ```json
 {
-  "CLAUDE_MEM_WORKER_PORT": "38000"
+  "OPENCODE_MEM_WORKER_PORT": "38000"
 }
 ```
 
@@ -371,25 +371,25 @@ npm run worker:restart
 
 ### Custom Model
 
-Edit `~/.claude-mem/settings.json`:
+Edit `~/.opencode-mem/settings.json`:
 ```json
 {
-  "CLAUDE_MEM_MODEL": "opus"
+  "OPENCODE_MEM_MODEL": "opus"
 }
 ```
 
 Then restart the worker:
 ```bash
-export CLAUDE_MEM_MODEL=opus
+export OPENCODE_MEM_MODEL=opus
 npm run worker:restart
 ```
 
 ### Custom Skip Tools
 
-Control which tools are excluded from observations. Edit `~/.claude-mem/settings.json`:
+Control which tools are excluded from observations. Edit `~/.opencode-mem/settings.json`:
 ```json
 {
-  "CLAUDE_MEM_SKIP_TOOLS": "ListMcpResourcesTool,SlashCommand,Skill"
+  "OPENCODE_MEM_SKIP_TOOLS": "ListMcpResourcesTool,SlashCommand,Skill"
 }
 ```
 
@@ -437,7 +437,7 @@ The worker service is managed by Bun and will automatically restart if it encoun
 Enable debug logging:
 
 ```bash
-export DEBUG=claude-mem:*
+export DEBUG=opencode-mem:*
 npm run worker:restart
 npm run worker:logs
 ```
@@ -461,8 +461,8 @@ npm run worker:logs
 
 2. Verify environment variables:
    ```bash
-   echo $CLAUDE_MEM_MODEL
-   echo $CLAUDE_MEM_WORKER_PORT
+   echo $OPENCODE_MEM_MODEL
+   echo $OPENCODE_MEM_WORKER_PORT
    ```
 
 3. Check worker logs:
@@ -485,7 +485,7 @@ If port 37777 is already in use:
 
 1. Set custom port:
    ```bash
-   export CLAUDE_MEM_WORKER_PORT=38000
+   export OPENCODE_MEM_WORKER_PORT=38000
    ```
 
 2. Restart worker:
@@ -495,7 +495,7 @@ If port 37777 is already in use:
 
 3. Verify new port:
    ```bash
-   cat ~/.claude-mem/worker.port
+   cat ~/.opencode-mem/worker.port
    ```
 
 ## Next Steps

@@ -19,13 +19,13 @@ function getDirname(): string {
 const _dirname = getDirname();
 
 /**
- * Simple path configuration for claude-mem
+ * Simple path configuration for opencode-mem
  * Standard paths based on Claude Code conventions
  */
 
 // Base directories
-export const DATA_DIR = SettingsDefaultsManager.get('CLAUDE_MEM_DATA_DIR');
-// Note: CLAUDE_CONFIG_DIR is a Claude Code setting, not claude-mem, so leave as env var
+export const DATA_DIR = SettingsDefaultsManager.get('OPENCODE_MEM_DATA_DIR');
+// Note: CLAUDE_CONFIG_DIR is a Claude Code setting, not opencode-mem, so leave as env var
 export const CLAUDE_CONFIG_DIR = process.env.CLAUDE_CONFIG_DIR || join(homedir(), '.claude');
 
 // Plugin installation directory - respects CLAUDE_CONFIG_DIR for users with custom Claude locations
@@ -38,7 +38,7 @@ export const TRASH_DIR = join(DATA_DIR, 'trash');
 export const BACKUPS_DIR = join(DATA_DIR, 'backups');
 export const MODES_DIR = join(DATA_DIR, 'modes');
 export const USER_SETTINGS_PATH = join(DATA_DIR, 'settings.json');
-export const DB_PATH = join(DATA_DIR, 'claude-mem.db');
+export const DB_PATH = join(DATA_DIR, 'opencode-mem.db');
 export const VECTOR_DB_DIR = join(DATA_DIR, 'vector-db');
 
 // Observer sessions directory - used as cwd for SDK queries

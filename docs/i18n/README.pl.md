@@ -2,11 +2,11 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-dark-mode.webp">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp" alt="Claude-Mem" width="400">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-dark-mode.webp">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp" alt="OpenCode-Mem" width="400">
     </picture>
   </a>
   <br>
@@ -65,9 +65,9 @@
 <p align="center">
   <a href="https://trendshift.io/repositories/15496" target="_blank">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/claude-mem | Trendshift" width="250" height="55"/>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/opencode-mem | Trendshift" width="250" height="55"/>
     </picture>
   </a>
 </p>
@@ -75,9 +75,9 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/cm-preview.gif" alt="Claude-Mem Preview" width="800">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/cm-preview.gif" alt="OpenCode-Mem Preview" width="800">
     </picture>
   </a>
 </p>
@@ -93,7 +93,7 @@
 </p>
 
 <p align="center">
-  Claude-Mem płynnie zachowuje kontekst między sesjami, automatycznie przechwytując obserwacje użycia narzędzi, generując semantyczne podsumowania i udostępniając je przyszłym sesjom. To umożliwia Claude utrzymanie ciągłości wiedzy o projektach nawet po zakończeniu lub ponownym połączeniu sesji.
+  OpenCode-Mem płynnie zachowuje kontekst między sesjami, automatycznie przechwytując obserwacje użycia narzędzi, generując semantyczne podsumowania i udostępniając je przyszłym sesjom. To umożliwia Claude utrzymanie ciągłości wiedzy o projektach nawet po zakończeniu lub ponownym połączeniu sesji.
 </p>
 
 ---
@@ -103,9 +103,9 @@
 Uruchom nową sesję Claude Code w terminalu i wprowadź następujące polecenia:
 
 ```
-> /plugin marketplace add thedotmack/claude-mem
+> /plugin marketplace add thedotmack/opencode-mem
 
-> /plugin install claude-mem
+> /plugin install opencode-mem
 ```
 
 Uruchom ponownie Claude Code. Kontekst z poprzednich sesji automatycznie pojawi się w nowych sesjach.
@@ -127,35 +127,35 @@ Uruchom ponownie Claude Code. Kontekst z poprzednich sesji automatycznie pojawi 
 
 ## Dokumentacja
 
-📚 **[Wyświetl Pełną Dokumentację](https://docs.claude-mem.ai/)** - Przeglądaj na oficjalnej stronie
+📚 **[Wyświetl Pełną Dokumentację](https://docs.opencode-mem.ai/)** - Przeglądaj na oficjalnej stronie
 
 ### Pierwsze Kroki
 
-- **[Przewodnik Instalacji](https://docs.claude-mem.ai/installation)** - Szybki start i zaawansowana instalacja
-- **[Przewodnik Użytkowania](https://docs.claude-mem.ai/usage/getting-started)** - Jak Claude-Mem działa automatycznie
-- **[Narzędzia Wyszukiwania](https://docs.claude-mem.ai/usage/search-tools)** - Przeszukuj historię projektu w języku naturalnym
-- **[Funkcje Beta](https://docs.claude-mem.ai/beta-features)** - Wypróbuj eksperymentalne funkcje, takie jak Endless Mode
+- **[Przewodnik Instalacji](https://docs.opencode-mem.ai/installation)** - Szybki start i zaawansowana instalacja
+- **[Przewodnik Użytkowania](https://docs.opencode-mem.ai/usage/getting-started)** - Jak OpenCode-Mem działa automatycznie
+- **[Narzędzia Wyszukiwania](https://docs.opencode-mem.ai/usage/search-tools)** - Przeszukuj historię projektu w języku naturalnym
+- **[Funkcje Beta](https://docs.opencode-mem.ai/beta-features)** - Wypróbuj eksperymentalne funkcje, takie jak Endless Mode
 
 ### Najlepsze Praktyki
 
-- **[Inżynieria Kontekstu](https://docs.claude-mem.ai/context-engineering)** - Zasady optymalizacji kontekstu agenta AI
-- **[Stopniowe Ujawnianie](https://docs.claude-mem.ai/progressive-disclosure)** - Filozofia strategii przygotowania kontekstu Claude-Mem
+- **[Inżynieria Kontekstu](https://docs.opencode-mem.ai/context-engineering)** - Zasady optymalizacji kontekstu agenta AI
+- **[Stopniowe Ujawnianie](https://docs.opencode-mem.ai/progressive-disclosure)** - Filozofia strategii przygotowania kontekstu OpenCode-Mem
 
 ### Architektura
 
-- **[Przegląd](https://docs.claude-mem.ai/architecture/overview)** - Komponenty systemu i przepływ danych
-- **[Ewolucja Architektury](https://docs.claude-mem.ai/architecture-evolution)** - Droga od v3 do v5
-- **[Architektura Hooków](https://docs.claude-mem.ai/hooks-architecture)** - Jak Claude-Mem wykorzystuje hooki cyklu życia
-- **[Dokumentacja Hooków](https://docs.claude-mem.ai/architecture/hooks)** - 7 skryptów hooków wyjaśnionych
-- **[Usługa Worker](https://docs.claude-mem.ai/architecture/worker-service)** - HTTP API i zarządzanie Bun
-- **[Baza Danych](https://docs.claude-mem.ai/architecture/database)** - Schemat SQLite i wyszukiwanie FTS5
-- **[Architektura Wyszukiwania](https://docs.claude-mem.ai/architecture/search-architecture)** - Hybrydowe wyszukiwanie z bazą wektorów Chroma
+- **[Przegląd](https://docs.opencode-mem.ai/architecture/overview)** - Komponenty systemu i przepływ danych
+- **[Ewolucja Architektury](https://docs.opencode-mem.ai/architecture-evolution)** - Droga od v3 do v5
+- **[Architektura Hooków](https://docs.opencode-mem.ai/hooks-architecture)** - Jak OpenCode-Mem wykorzystuje hooki cyklu życia
+- **[Dokumentacja Hooków](https://docs.opencode-mem.ai/architecture/hooks)** - 7 skryptów hooków wyjaśnionych
+- **[Usługa Worker](https://docs.opencode-mem.ai/architecture/worker-service)** - HTTP API i zarządzanie Bun
+- **[Baza Danych](https://docs.opencode-mem.ai/architecture/database)** - Schemat SQLite i wyszukiwanie FTS5
+- **[Architektura Wyszukiwania](https://docs.opencode-mem.ai/architecture/search-architecture)** - Hybrydowe wyszukiwanie z bazą wektorów Chroma
 
 ### Konfiguracja i Rozwój
 
-- **[Konfiguracja](https://docs.claude-mem.ai/configuration)** - Zmienne środowiskowe i ustawienia
-- **[Rozwój](https://docs.claude-mem.ai/development)** - Budowanie, testowanie, współpraca
-- **[Rozwiązywanie Problemów](https://docs.claude-mem.ai/troubleshooting)** - Typowe problemy i rozwiązania
+- **[Konfiguracja](https://docs.opencode-mem.ai/configuration)** - Zmienne środowiskowe i ustawienia
+- **[Rozwój](https://docs.opencode-mem.ai/development)** - Budowanie, testowanie, współpraca
+- **[Rozwiązywanie Problemów](https://docs.opencode-mem.ai/troubleshooting)** - Typowe problemy i rozwiązania
 
 ---
 
@@ -170,13 +170,13 @@ Uruchom ponownie Claude Code. Kontekst z poprzednich sesji automatycznie pojawi 
 5. **Umiejętność mem-search** - Zapytania w języku naturalnym ze stopniowym ujawnianiem
 6. **Baza Wektorów Chroma** - Hybrydowe wyszukiwanie semantyczne + słowa kluczowe dla inteligentnego pobierania kontekstu
 
-Zobacz [Przegląd Architektury](https://docs.claude-mem.ai/architecture/overview) dla szczegółów.
+Zobacz [Przegląd Architektury](https://docs.opencode-mem.ai/architecture/overview) dla szczegółów.
 
 ---
 
 ## Umiejętność mem-search
 
-Claude-Mem zapewnia inteligentne wyszukiwanie poprzez umiejętność mem-search, która automatycznie aktywuje się, gdy pytasz o przeszłą pracę:
+OpenCode-Mem zapewnia inteligentne wyszukiwanie poprzez umiejętność mem-search, która automatycznie aktywuje się, gdy pytasz o przeszłą pracę:
 
 **Jak To Działa:**
 - Po prostu pytaj naturalnie: *"Co robiliśmy w ostatniej sesji?"* lub *"Czy naprawiliśmy ten błąd wcześniej?"*
@@ -205,15 +205,15 @@ Claude-Mem zapewnia inteligentne wyszukiwanie poprzez umiejętność mem-search,
 "What was happening when we added the viewer UI?"
 ```
 
-Zobacz [Przewodnik Narzędzi Wyszukiwania](https://docs.claude-mem.ai/usage/search-tools) dla szczegółowych przykładów.
+Zobacz [Przewodnik Narzędzi Wyszukiwania](https://docs.opencode-mem.ai/usage/search-tools) dla szczegółowych przykładów.
 
 ---
 
 ## Funkcje Beta
 
-Claude-Mem oferuje **kanał beta** z eksperymentalnymi funkcjami, takimi jak **Endless Mode** (biomimetyczna architektura pamięci dla rozszerzonych sesji). Przełączaj się między stabilnymi a beta wersjami z interfejsu przeglądarki internetowej pod adresem http://localhost:37777 → Settings.
+OpenCode-Mem oferuje **kanał beta** z eksperymentalnymi funkcjami, takimi jak **Endless Mode** (biomimetyczna architektura pamięci dla rozszerzonych sesji). Przełączaj się między stabilnymi a beta wersjami z interfejsu przeglądarki internetowej pod adresem http://localhost:37777 → Settings.
 
-Zobacz **[Dokumentacja Funkcji Beta](https://docs.claude-mem.ai/beta-features)** dla szczegółów dotyczących Endless Mode i sposobu wypróbowania.
+Zobacz **[Dokumentacja Funkcji Beta](https://docs.opencode-mem.ai/beta-features)** dla szczegółów dotyczących Endless Mode i sposobu wypróbowania.
 
 ---
 
@@ -229,15 +229,15 @@ Zobacz **[Dokumentacja Funkcji Beta](https://docs.claude-mem.ai/beta-features)**
 
 ## Konfiguracja
 
-Ustawienia są zarządzane w `~/.claude-mem/settings.json` (automatycznie tworzone z domyślnymi wartościami przy pierwszym uruchomieniu). Skonfiguruj model AI, port workera, katalog danych, poziom logowania i ustawienia wstrzykiwania kontekstu.
+Ustawienia są zarządzane w `~/.opencode-mem/settings.json` (automatycznie tworzone z domyślnymi wartościami przy pierwszym uruchomieniu). Skonfiguruj model AI, port workera, katalog danych, poziom logowania i ustawienia wstrzykiwania kontekstu.
 
-Zobacz **[Przewodnik Konfiguracji](https://docs.claude-mem.ai/configuration)** dla wszystkich dostępnych ustawień i przykładów.
+Zobacz **[Przewodnik Konfiguracji](https://docs.opencode-mem.ai/configuration)** dla wszystkich dostępnych ustawień i przykładów.
 
 ---
 
 ## Rozwój
 
-Zobacz **[Przewodnik Rozwoju](https://docs.claude-mem.ai/development)** dla instrukcji budowania, testowania i przepływu pracy współpracy.
+Zobacz **[Przewodnik Rozwoju](https://docs.opencode-mem.ai/development)** dla instrukcji budowania, testowania i przepływu pracy współpracy.
 
 ---
 
@@ -245,7 +245,7 @@ Zobacz **[Przewodnik Rozwoju](https://docs.claude-mem.ai/development)** dla inst
 
 Jeśli napotkasz problemy, opisz problem Claude, a umiejętność troubleshoot automatycznie zdiagnozuje i dostarczy poprawki.
 
-Zobacz **[Przewodnik Rozwiązywania Problemów](https://docs.claude-mem.ai/troubleshooting)** dla typowych problemów i rozwiązań.
+Zobacz **[Przewodnik Rozwiązywania Problemów](https://docs.opencode-mem.ai/troubleshooting)** dla typowych problemów i rozwiązań.
 
 ---
 
@@ -268,7 +268,7 @@ Wkład jest mile widziany! Proszę:
 4. Zaktualizuj dokumentację
 5. Prześlij Pull Request
 
-Zobacz [Przewodnik Rozwoju](https://docs.claude-mem.ai/development) dla przepływu pracy współpracy.
+Zobacz [Przewodnik Rozwoju](https://docs.opencode-mem.ai/development) dla przepływu pracy współpracy.
 
 ---
 
@@ -294,8 +294,8 @@ Zobacz plik [LICENSE](LICENSE) dla pełnych szczegółów.
 ## Wsparcie
 
 - **Dokumentacja**: [docs/](docs/)
-- **Problemy**: [GitHub Issues](https://github.com/thedotmack/claude-mem/issues)
-- **Repozytorium**: [github.com/thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+- **Problemy**: [GitHub Issues](https://github.com/thedotmack/opencode-mem/issues)
+- **Repozytorium**: [github.com/thedotmack/opencode-mem](https://github.com/thedotmack/opencode-mem)
 - **Autor**: Alex Newman ([@thedotmack](https://github.com/thedotmack))
 
 ---

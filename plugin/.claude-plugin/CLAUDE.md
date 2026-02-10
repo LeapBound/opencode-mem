@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Nov 6, 2025
@@ -18,4 +18,4 @@
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
 | #22284 | 9:41 PM | 🔵 | Claude Plugin Metadata Configuration | ~183 |
-</claude-mem-context>
+</opencode-mem-context>

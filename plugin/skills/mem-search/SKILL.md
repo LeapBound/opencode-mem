@@ -1,6 +1,6 @@
 ---
 name: mem-search
-description: Search claude-mem's persistent cross-session memory database. Use when user asks "did we already solve this?", "how did we do X last time?", or needs work from previous sessions.
+description: Search opencode-mem's persistent cross-session memory database. Use when user asks "did we already solve this?", "how did we do X last time?", or needs work from previous sessions.
 ---
 
 # Memory Search
@@ -105,7 +105,7 @@ save_memory(text="Important discovery about the auth system", title="Auth Archit
 
 - `text` (string, required) - Content to remember
 - `title` (string, optional) - Short title, auto-generated if omitted
-- `project` (string, optional) - Project name, defaults to "claude-mem"
+- `project` (string, optional) - Project name, defaults to "opencode-mem"
 
 ## Examples
 

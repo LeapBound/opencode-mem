@@ -1,11 +1,11 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Nov 10, 2025
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
-| #6295 | 1:18 PM | 🔵 | Path Configuration Structure for claude-mem | ~305 |
+| #6295 | 1:18 PM | 🔵 | Path Configuration Structure for opencode-mem | ~305 |
 
 ### Dec 5, 2025
 
@@ -21,8 +21,8 @@
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
 | #23141 | 6:42 PM | 🔵 | Located getSettingsPath Function in paths.ts | ~261 |
-| #23134 | 6:41 PM | ✅ | Set CLAUDE_MEM_SKIP_TOOLS Default Value in SettingsDefaultsManager | ~261 |
-| #23133 | " | ✅ | Added CLAUDE_MEM_SKIP_TOOLS to SettingsDefaults Interface | ~231 |
+| #23134 | 6:41 PM | ✅ | Set OPENCODE_MEM_SKIP_TOOLS Default Value in SettingsDefaultsManager | ~261 |
+| #23133 | " | ✅ | Added OPENCODE_MEM_SKIP_TOOLS to SettingsDefaults Interface | ~231 |
 | #23131 | 6:40 PM | 🔵 | SettingsDefaultsManager Structure and Configuration Schema | ~363 |
 | #22858 | 2:28 PM | 🔄 | Removed Brittle save.md Validation from paths.ts | ~305 |
 | #22852 | 2:26 PM | 🔵 | Located save.md Validation Logic in paths.ts | ~255 |
@@ -53,7 +53,7 @@
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
-| #25088 | 7:18 PM | 🟣 | Added CLAUDE_MEM_EMBEDDING_FUNCTION to Settings Interface | ~269 |
+| #25088 | 7:18 PM | 🟣 | Added OPENCODE_MEM_EMBEDDING_FUNCTION to Settings Interface | ~269 |
 
 ### Dec 14, 2025
 
@@ -87,7 +87,7 @@
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
-| #29797 | 7:09 PM | 🔵 | Settings System Uses CLAUDE_MEM_MODE for Mode Selection | ~353 |
+| #29797 | 7:09 PM | 🔵 | Settings System Uses OPENCODE_MEM_MODE for Mode Selection | ~353 |
 | #29234 | 12:10 AM | 🔵 | Centralized Settings Management with Environment Defaults | ~394 |
 
 ### Dec 20, 2025
@@ -109,5 +109,5 @@
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
-| #38175 | 7:26 PM | 🔵 | Complete Claude-Mem Hook Output Architecture Documented | ~530 |
-</claude-mem-context>
+| #38175 | 7:26 PM | 🔵 | Complete OpenCode-Mem Hook Output Architecture Documented | ~530 |
+</opencode-mem-context>

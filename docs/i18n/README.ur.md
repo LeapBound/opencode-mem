@@ -4,11 +4,11 @@
 ---
 <h1 align="center">
   <br>
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-dark-mode.webp">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp" alt="Claude-Mem" width="400">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-dark-mode.webp">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp" alt="OpenCode-Mem" width="400">
     </picture>
   </a>
   <br>
@@ -66,9 +66,9 @@
 <p align="center">
   <a href="https://trendshift.io/repositories/15496" target="_blank">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/claude-mem | Trendshift" width="250" height="55"/>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/opencode-mem | Trendshift" width="250" height="55"/>
     </picture>
   </a>
 </p>
@@ -76,9 +76,9 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/cm-preview.gif" alt="Claude-Mem Preview" width="800">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/cm-preview.gif" alt="OpenCode-Mem Preview" width="800">
     </picture>
   </a>
 </p>
@@ -94,7 +94,7 @@
 </p>
 
 <p align="center">
-  Claude-Mem خودکار طور پر ٹول کے استعمال کے بعد کے مشاہدات کو ریکارڈ کرتا ہے، سیمانٹک خلاصے تیار کرتا ہے اور انہیں مستقبل کے سیشنز میں دستیاب کرتا ہے تاکہ آپ سیشن میں براہ راست تناسب محفوظ رہے۔ یہ Claude کو سیشن ختم ہونے یا دوبارہ جڑنے کے بعد بھی منصوبے کے بارے میں معلومات کی مسلسلیت برقرار رکھنے کے قابل بناتا ہے۔
+  OpenCode-Mem خودکار طور پر ٹول کے استعمال کے بعد کے مشاہدات کو ریکارڈ کرتا ہے، سیمانٹک خلاصے تیار کرتا ہے اور انہیں مستقبل کے سیشنز میں دستیاب کرتا ہے تاکہ آپ سیشن میں براہ راست تناسب محفوظ رہے۔ یہ Claude کو سیشن ختم ہونے یا دوبارہ جڑنے کے بعد بھی منصوبے کے بارے میں معلومات کی مسلسلیت برقرار رکھنے کے قابل بناتا ہے۔
 </p>
 
 ---
@@ -104,9 +104,9 @@
 ٹرمنل میں نیا Claude Code سیشن شروع کریں اور ہیں کمانڈز درج کریں:
 
 ```
-> /plugin marketplace add thedotmack/claude-mem
+> /plugin marketplace add thedotmack/opencode-mem
 
-> /plugin install claude-mem
+> /plugin install opencode-mem
 ```
 
 Claude Code کو دوبارہ شروع کریں۔ سابقہ سیشن کا تناسب خودکار طور پر نئے سیشن میں موجود ہوگا۔
@@ -132,31 +132,31 @@ Claude Code کو دوبارہ شروع کریں۔ سابقہ سیشن کا تن�
 
 ### شروعات کرنا
 
-- **[انسٹالیشن گائیڈ](https://docs.claude-mem.ai/installation)** - تیز رفتار شروعات اور اعلیٰ درجے کی انسٹالیشن
-- **[استعمال گائیڈ](https://docs.claude-mem.ai/usage/getting-started)** - Claude-Mem خودکار طور پر کیسے کام کرتا ہے
-- **[تلاش کے اوزار](https://docs.claude-mem.ai/usage/search-tools)** - قدرتی زبان کے ساتھ اپنے منصوبے کی تاریخ میں تلاش کریں
-- **[بیٹا خصوصیات](https://docs.claude-mem.ai/beta-features)** - Endless Mode جیسی تجرباتی خصوصیات آزمائیں
+- **[انسٹالیشن گائیڈ](https://docs.opencode-mem.ai/installation)** - تیز رفتار شروعات اور اعلیٰ درجے کی انسٹالیشن
+- **[استعمال گائیڈ](https://docs.opencode-mem.ai/usage/getting-started)** - OpenCode-Mem خودکار طور پر کیسے کام کرتا ہے
+- **[تلاش کے اوزار](https://docs.opencode-mem.ai/usage/search-tools)** - قدرتی زبان کے ساتھ اپنے منصوبے کی تاریخ میں تلاش کریں
+- **[بیٹا خصوصیات](https://docs.opencode-mem.ai/beta-features)** - Endless Mode جیسی تجرباتی خصوصیات آزمائیں
 
 ### بہترین طریقہ کار
 
-- **[تناسب انجینیئرنگ](https://docs.claude-mem.ai/context-engineering)** - AI ایجنٹ کے تناسب کی اہمیت کے اصول
-- **[بتدریج ظہور](https://docs.claude-mem.ai/progressive-disclosure)** - Claude-Mem کے تناسب کی تیاری کی حکمت عملی کے پیچھے فلسفہ
+- **[تناسب انجینیئرنگ](https://docs.opencode-mem.ai/context-engineering)** - AI ایجنٹ کے تناسب کی اہمیت کے اصول
+- **[بتدریج ظہور](https://docs.opencode-mem.ai/progressive-disclosure)** - OpenCode-Mem کے تناسب کی تیاری کی حکمت عملی کے پیچھے فلسفہ
 
 ### تعمیر
 
-- **[جائزہ](https://docs.claude-mem.ai/architecture/overview)** - نظام کے اجزاء اور ڈیٹا کے بہاؤ
-- **[تعمیر کا ارتقاء](https://docs.claude-mem.ai/architecture-evolution)** - v3 سے v5 تک کا سفر
-- **[ہکس تعمیر](https://docs.claude-mem.ai/hooks-architecture)** - Claude-Mem لائف سائیکل ہکس کا استعمال کیسے کرتا ہے
-- **[ہکس حوالہ](https://docs.claude-mem.ai/architecture/hooks)** - 7 ہک اسکرپٹس کی تشریح
-- **[ورکر سروس](https://docs.claude-mem.ai/architecture/worker-service)** - HTTP API اور Bun انتظام
-- **[ڈیٹا بیس](https://docs.claude-mem.ai/architecture/database)** - SQLite اسکیما اور FTS5 تلاش
-- **[تلاش تعمیر](https://docs.claude-mem.ai/architecture/search-architecture)** - Chroma ویکٹر ڈیٹا بیس کے ساتھ ہائبرڈ تلاش
+- **[جائزہ](https://docs.opencode-mem.ai/architecture/overview)** - نظام کے اجزاء اور ڈیٹا کے بہاؤ
+- **[تعمیر کا ارتقاء](https://docs.opencode-mem.ai/architecture-evolution)** - v3 سے v5 تک کا سفر
+- **[ہکس تعمیر](https://docs.opencode-mem.ai/hooks-architecture)** - OpenCode-Mem لائف سائیکل ہکس کا استعمال کیسے کرتا ہے
+- **[ہکس حوالہ](https://docs.opencode-mem.ai/architecture/hooks)** - 7 ہک اسکرپٹس کی تشریح
+- **[ورکر سروس](https://docs.opencode-mem.ai/architecture/worker-service)** - HTTP API اور Bun انتظام
+- **[ڈیٹا بیس](https://docs.opencode-mem.ai/architecture/database)** - SQLite اسکیما اور FTS5 تلاش
+- **[تلاش تعمیر](https://docs.opencode-mem.ai/architecture/search-architecture)** - Chroma ویکٹر ڈیٹا بیس کے ساتھ ہائبرڈ تلاش
 
 ### ترتیبات اور ترقی
 
-- **[ترتیبات](https://docs.claude-mem.ai/configuration)** - ماحول کے متغیرات اور سیٹنگز
-- **[ترقی](https://docs.claude-mem.ai/development)** - تعمیر، جانچ، حصہ داری
-- **[مسائل کی تشخیص](https://docs.claude-mem.ai/troubleshooting)** - عام مسائل اور حل
+- **[ترتیبات](https://docs.opencode-mem.ai/configuration)** - ماحول کے متغیرات اور سیٹنگز
+- **[ترقی](https://docs.opencode-mem.ai/development)** - تعمیر، جانچ، حصہ داری
+- **[مسائل کی تشخیص](https://docs.opencode-mem.ai/troubleshooting)** - عام مسائل اور حل
 
 ---
 
@@ -171,13 +171,13 @@ Claude Code کو دوبارہ شروع کریں۔ سابقہ سیشن کا تن�
 5. **mem-search مہارت** - بتدریج ظہور کے ساتھ قدرتی زبان کے سوالات
 6. **Chroma ویکٹر ڈیٹا بیس** - ہائبرڈ سیمانٹک + کلیدی لفظ تلاش ذہین تناسب کی بازیافت کے لیے
 
-تفصیلات کے لیے [تعمیر کا جائزہ](https://docs.claude-mem.ai/architecture/overview) دیکھیں۔
+تفصیلات کے لیے [تعمیر کا جائزہ](https://docs.opencode-mem.ai/architecture/overview) دیکھیں۔
 
 ---
 
 ## MCP تلاش کے اوزار
 
-Claude-Mem ٹوکن-موثر **3-لیئر ورک فلو پیٹرن** کی پیروی کرتے ہوئے **4 MCP اوزار** کے ذریعے ذہین میموری تلاش فراہم کرتا ہے:
+OpenCode-Mem ٹوکن-موثر **3-لیئر ورک فلو پیٹرن** کی پیروی کرتے ہوئے **4 MCP اوزار** کے ذریعے ذہین میموری تلاش فراہم کرتا ہے:
 
 **3-لیئر ورک فلو:**
 
@@ -211,15 +211,15 @@ search(query="authentication bug", type="bugfix", limit=10)
 get_observations(ids=[123, 456])
 ```
 
-تفصیلی مثالوں کے لیے [تلاش کے اوزار گائیڈ](https://docs.claude-mem.ai/usage/search-tools) دیکھیں۔
+تفصیلی مثالوں کے لیے [تلاش کے اوزار گائیڈ](https://docs.opencode-mem.ai/usage/search-tools) دیکھیں۔
 
 ---
 
 ## بیٹا خصوصیات
 
-Claude-Mem ایک **بیٹا چینل** فراہم کرتا ہے جس میں **Endless Mode** جیسی تجرباتی خصوصیات ہیں (بڑھی ہوئی سیشنز کے لیے حیاتی نقل میموری کی تعمیر)۔ http://localhost:37777 → Settings میں ویب ویور UI سے مستحکم اور بیٹا ورژن کے درمیان سوئچ کریں۔
+OpenCode-Mem ایک **بیٹا چینل** فراہم کرتا ہے جس میں **Endless Mode** جیسی تجرباتی خصوصیات ہیں (بڑھی ہوئی سیشنز کے لیے حیاتی نقل میموری کی تعمیر)۔ http://localhost:37777 → Settings میں ویب ویور UI سے مستحکم اور بیٹا ورژن کے درمیان سوئچ کریں۔
 
-Endless Mode اور اسے کیسے آزمائیں اس کے بارے میں تفصیلات کے لیے **[بیٹا خصوصیات دستاویزات](https://docs.claude-mem.ai/beta-features)** دیکھیں۔
+Endless Mode اور اسے کیسے آزمائیں اس کے بارے میں تفصیلات کے لیے **[بیٹا خصوصیات دستاویزات](https://docs.opencode-mem.ai/beta-features)** دیکھیں۔
 
 ---
 
@@ -235,15 +235,15 @@ Endless Mode اور اسے کیسے آزمائیں اس کے بارے میں ت�
 
 ## ترتیبات
 
-سیٹنگز `~/.claude-mem/settings.json` میں منظم ہیں (پہلی رن میں ڈیفالٹ کے ساتھ خودکار طور پر بنائی جاتی ہے)۔ AI ماڈل، ورکر پورٹ، ڈیٹا ڈائریکٹری، لاگ لیول اور تناسب انجیکشن سیٹنگز کو ترتیب دیں۔
+سیٹنگز `~/.opencode-mem/settings.json` میں منظم ہیں (پہلی رن میں ڈیفالٹ کے ساتھ خودکار طور پر بنائی جاتی ہے)۔ AI ماڈل، ورکر پورٹ، ڈیٹا ڈائریکٹری، لاگ لیول اور تناسب انجیکشن سیٹنگز کو ترتیب دیں۔
 
-تمام دستیاب سیٹنگز اور مثالوں کے لیے **[ترتیبات گائیڈ](https://docs.claude-mem.ai/configuration)** دیکھیں۔
+تمام دستیاب سیٹنگز اور مثالوں کے لیے **[ترتیبات گائیڈ](https://docs.opencode-mem.ai/configuration)** دیکھیں۔
 
 ---
 
 ## ترقی
 
-تعمیر کی ہدایات، جانچ اور حصہ داری کے کام کے بہاؤ کے لیے **[ترقی گائیڈ](https://docs.claude-mem.ai/development)** دیکھیں۔
+تعمیر کی ہدایات، جانچ اور حصہ داری کے کام کے بہاؤ کے لیے **[ترقی گائیڈ](https://docs.opencode-mem.ai/development)** دیکھیں۔
 
 ---
 
@@ -251,7 +251,7 @@ Endless Mode اور اسے کیسے آزمائیں اس کے بارے میں ت�
 
 اگر مسائل کا سامنا ہو تو Claude کو مسئلہ بتائیں اور troubleshoot مہارت خودکار طور پر تشخیص دے گی اور حل فراہم کرے گی۔
 
-عام مسائل اور حل کے لیے **[مسائل کی تشخیص گائیڈ](https://docs.claude-mem.ai/troubleshooting)** دیکھیں۔
+عام مسائل اور حل کے لیے **[مسائل کی تشخیص گائیڈ](https://docs.opencode-mem.ai/troubleshooting)** دیکھیں۔
 
 ---
 
@@ -274,7 +274,7 @@ npm run bug-report
 4. دستاویزات کو اپڈیٹ کریں
 5. ایک Pull Request جمع کریں
 
-حصہ داری کے کام کے بہاؤ کے لیے [ترقی گائیڈ](https://docs.claude-mem.ai/development) دیکھیں۔
+حصہ داری کے کام کے بہاؤ کے لیے [ترقی گائیڈ](https://docs.opencode-mem.ai/development) دیکھیں۔
 
 ---
 
@@ -300,8 +300,8 @@ Copyright (C) 2025 Alex Newman (@thedotmack)۔ تمام حقوق محفوظ ہی
 ## معاونت
 
 - **دستاویزات**: [docs/](docs/)
-- **مسائل**: [GitHub Issues](https://github.com/thedotmack/claude-mem/issues)
-- **رپوزیٹری**: [github.com/thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+- **مسائل**: [GitHub Issues](https://github.com/thedotmack/opencode-mem/issues)
+- **رپوزیٹری**: [github.com/thedotmack/opencode-mem](https://github.com/thedotmack/opencode-mem)
 - **مصنف**: Alex Newman ([@thedotmack](https://github.com/thedotmack))
 
 ---

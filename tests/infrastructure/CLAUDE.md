@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Jan 4, 2026
@@ -10,4 +10,4 @@
 | #36865 | 1:52 AM | ✅ | WMIC Test File Updated with Improved Mock Implementation | ~370 |
 | #36863 | 1:51 AM | 🟣 | WMIC Parsing Test File Created | ~581 |
 | #36861 | " | 🔵 | Existing ProcessManager Test File Structure Analyzed | ~516 |
-</claude-mem-context>
+</opencode-mem-context>

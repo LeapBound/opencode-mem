@@ -1,5 +1,5 @@
 /**
- * Structured Logger for claude-mem Worker Service
+ * Structured Logger for opencode-mem Worker Service
  * Provides readable, traceable logging with correlation IDs and data flow tracking
  */
 
@@ -15,7 +15,7 @@ export enum LogLevel {
   SILENT = 4
 }
 
-export type Component = 'HOOK' | 'WORKER' | 'SDK' | 'PARSER' | 'DB' | 'SYSTEM' | 'HTTP' | 'SESSION' | 'CHROMA' | 'FOLDER_INDEX' | 'CLAUDE_MD';
+export type Component = 'HOOK' | 'WORKER' | 'SDK' | 'PARSER' | 'DB' | 'SYSTEM' | 'HTTP' | 'SESSION' | 'CHROMA' | 'CHROMA_SYNC' | 'FOLDER_INDEX' | 'CLAUDE_MD' | 'ENV';
 
 interface LogContext {
   sessionId?: number;
@@ -26,7 +26,7 @@ interface LogContext {
 
 // NOTE: This default must match DEFAULT_DATA_DIR in src/shared/SettingsDefaultsManager.ts
 // Inlined here to avoid circular dependency with SettingsDefaultsManager
-const DEFAULT_DATA_DIR = join(homedir(), '.claude-mem');
+const DEFAULT_DATA_DIR = join(homedir(), '.opencode-mem');
 
 class Logger {
   private level: LogLevel | null = null;
@@ -59,7 +59,7 @@ class Logger {
 
       // Create log file path with date
       const date = new Date().toISOString().split('T')[0];
-      this.logFilePath = join(logsDir, `claude-mem-${date}.log`);
+      this.logFilePath = join(logsDir, `opencode-mem-${date}.log`);
     } catch (error) {
       // If log file initialization fails, just log to console
       console.error('[LOGGER] Failed to initialize log file:', error);
@@ -79,7 +79,7 @@ class Logger {
         if (existsSync(settingsPath)) {
           const settingsData = readFileSync(settingsPath, 'utf-8');
           const settings = JSON.parse(settingsData);
-          const envLevel = (settings.CLAUDE_MEM_LOG_LEVEL || 'INFO').toUpperCase();
+          const envLevel = (settings.OPENCODE_MEM_LOG_LEVEL || 'INFO').toUpperCase();
           this.level = LogLevel[envLevel as keyof typeof LogLevel] ?? LogLevel.INFO;
         } else {
           this.level = LogLevel.INFO;

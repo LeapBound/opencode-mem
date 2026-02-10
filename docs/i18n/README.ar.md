@@ -1,11 +1,11 @@
 <section dir="rtl">
 <h1 align="center">
   <br>
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-dark-mode.webp">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp" alt="Claude-Mem" width="400">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-dark-mode.webp">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp" alt="OpenCode-Mem" width="400">
     </picture>
   </a>
   <br>
@@ -65,9 +65,9 @@
 <p align="center">
   <a href="https://trendshift.io/repositories/15496" target="_blank">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/claude-mem | Trendshift" width="250" height="55"/>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/opencode-mem | Trendshift" width="250" height="55"/>
     </picture>
   </a>
 </p>
@@ -75,9 +75,9 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/cm-preview.gif" alt="Claude-Mem Preview" width="800">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/cm-preview.gif" alt="OpenCode-Mem Preview" width="800">
     </picture>
   </a>
 </p>
@@ -94,7 +94,7 @@
 </p>
 
 <p align="center"  dir="rtl">
-Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة لسياق عمل Claude Code. وظيفته الأساسية هي جعل "كلود" يتذكر ما فعله في جلسات العمل السابقة بسلاسة، عبر تسجيل تحركاته، وإنشاء ملخصات ذكية، واستدعائها في الجلسات المستقبلية. هذا يضمن عدم ضياع سياق المشروع حتى لو أغلقت البرنامج وفتحته لاحقاً.
+OpenCode-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة لسياق عمل Claude Code. وظيفته الأساسية هي جعل "كلود" يتذكر ما فعله في جلسات العمل السابقة بسلاسة، عبر تسجيل تحركاته، وإنشاء ملخصات ذكية، واستدعائها في الجلسات المستقبلية. هذا يضمن عدم ضياع سياق المشروع حتى لو أغلقت البرنامج وفتحته لاحقاً.
 </p>
 
 ---
@@ -105,9 +105,9 @@ Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة ل
 <div dir="ltr"  align="left">
 
 ```
-> /plugin marketplace add thedotmack/claude-mem
+> /plugin marketplace add thedotmack/opencode-mem
 
-> /plugin install claude-mem
+> /plugin install opencode-mem
 ```
 
 </div>
@@ -131,35 +131,35 @@ Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة ل
 
 ## المستندات 
 
-📚 **[عرض التوثيق الكامل](https://docs.claude-mem.ai/)** - تصفح على الموقع الرسمي
+📚 **[عرض التوثيق الكامل](https://docs.opencode-mem.ai/)** - تصفح على الموقع الرسمي
 
 ### البدء
 
-- **[دليل التثبيت](https://docs.claude-mem.ai/installation)** - البدء السريع والتثبيت المتقدم
-- **[دليل الاستخدام](https://docs.claude-mem.ai/usage/getting-started)** - كيف يعمل Claude-Mem تلقائيًا
-- **[أدوات البحث](https://docs.claude-mem.ai/usage/search-tools)** - استعلم عن سجل مشروعك بلغتك
-- **[الميزات التجريبية](https://docs.claude-mem.ai/beta-features)** - جرّب الميزات التجريبية مثل Endless Mode
+- **[دليل التثبيت](https://docs.opencode-mem.ai/installation)** - البدء السريع والتثبيت المتقدم
+- **[دليل الاستخدام](https://docs.opencode-mem.ai/usage/getting-started)** - كيف يعمل OpenCode-Mem تلقائيًا
+- **[أدوات البحث](https://docs.opencode-mem.ai/usage/search-tools)** - استعلم عن سجل مشروعك بلغتك
+- **[الميزات التجريبية](https://docs.opencode-mem.ai/beta-features)** - جرّب الميزات التجريبية مثل Endless Mode
 
 ### أفضل الممارسات
 
-- **[هندسة السياق](https://docs.claude-mem.ai/context-engineering)** - مبادئ تحسين سياق وكيل الذكاء الاصطناعي
-- **[الكشف التدريجي](https://docs.claude-mem.ai/progressive-disclosure)** - الفلسفة وراء استراتيجية تهيئة السياق في Claude-Mem
+- **[هندسة السياق](https://docs.opencode-mem.ai/context-engineering)** - مبادئ تحسين سياق وكيل الذكاء الاصطناعي
+- **[الكشف التدريجي](https://docs.opencode-mem.ai/progressive-disclosure)** - الفلسفة وراء استراتيجية تهيئة السياق في OpenCode-Mem
 
 ### البنية المعمارية
 
-- **[نظرة عامة](https://docs.claude-mem.ai/architecture/overview)** - مكونات النظام وتدفق البيانات
-- **[تطور البنية المعمارية](https://docs.claude-mem.ai/architecture-evolution)** - تطور المعمارية من v3 إلى v5
-- **[بنية برامج الربط (Hooks)](https://docs.claude-mem.ai/hooks-architecture)** - كيف يستخدم Claude-Mem خطافات دورة الحياة
-- **[مرجع برامج الربط (Hooks)](https://docs.claude-mem.ai/architecture/hooks)** - شرح 7 سكريبتات خطافات
-- **[خدمة العامل](https://docs.claude-mem.ai/architecture/worker-service)** - HTTP API وإدارة Bun
-- **[قاعدة البيانات](https://docs.claude-mem.ai/architecture/database)** - مخطط SQLite وبحث FTS5
-- **[بنية البحث](https://docs.claude-mem.ai/architecture/search-architecture)** - البحث المختلط مع قاعدة بيانات المتجهات Chroma
+- **[نظرة عامة](https://docs.opencode-mem.ai/architecture/overview)** - مكونات النظام وتدفق البيانات
+- **[تطور البنية المعمارية](https://docs.opencode-mem.ai/architecture-evolution)** - تطور المعمارية من v3 إلى v5
+- **[بنية برامج الربط (Hooks)](https://docs.opencode-mem.ai/hooks-architecture)** - كيف يستخدم OpenCode-Mem خطافات دورة الحياة
+- **[مرجع برامج الربط (Hooks)](https://docs.opencode-mem.ai/architecture/hooks)** - شرح 7 سكريبتات خطافات
+- **[خدمة العامل](https://docs.opencode-mem.ai/architecture/worker-service)** - HTTP API وإدارة Bun
+- **[قاعدة البيانات](https://docs.opencode-mem.ai/architecture/database)** - مخطط SQLite وبحث FTS5
+- **[بنية البحث](https://docs.opencode-mem.ai/architecture/search-architecture)** - البحث المختلط مع قاعدة بيانات المتجهات Chroma
 
 ### الإعدادات والتطوير
 
-- **[الإعدادات](https://docs.claude-mem.ai/configuration)** - متغيرات البيئة والإعدادات
-- **[التطوير](https://docs.claude-mem.ai/development)** - البناء، الاختبار، سير العمل للمساهمة
-- **[استكشاف الأخطاء وإصلاحها](https://docs.claude-mem.ai/troubleshooting)** - المشكلات الشائعة والحلول
+- **[الإعدادات](https://docs.opencode-mem.ai/configuration)** - متغيرات البيئة والإعدادات
+- **[التطوير](https://docs.opencode-mem.ai/development)** - البناء، الاختبار، سير العمل للمساهمة
+- **[استكشاف الأخطاء وإصلاحها](https://docs.opencode-mem.ai/troubleshooting)** - المشكلات الشائعة والحلول
 
 ---
 
@@ -174,12 +174,12 @@ Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة ل
 5. **مهارة mem-search** - استعلامات اللغة الطبيعية مع الكشف التدريجي
 6. **قاعدة بيانات المتجهات Chroma** - البحث الدلالي الهجين + الكلمات المفتاحية لاسترجاع السياق الذكي
 
-انظر [نظرة عامة على البنية المعمارية](https://docs.claude-mem.ai/architecture/overview) للتفاصيل.
+انظر [نظرة عامة على البنية المعمارية](https://docs.opencode-mem.ai/architecture/overview) للتفاصيل.
 
 ---
 
 ## أدوات البحث (MCP Search Tools)
-يوفر Claude-Mem بحثًا ذكيًا من خلال مهارة mem-search التي تُستدعى تلقائيًا عندما تسأل عن العمل السابق:
+يوفر OpenCode-Mem بحثًا ذكيًا من خلال مهارة mem-search التي تُستدعى تلقائيًا عندما تسأل عن العمل السابق:
 
 **كيف يعمل:**
 - فقط اسأل بشكل طبيعي: *"ماذا فعلنا في الجلسة الأخيرة؟"* أو *"هل أصلحنا هذا الخطأ من قبل؟"*
@@ -208,15 +208,15 @@ Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة ل
 "What was happening when we added the viewer UI?"
 ```
 
-انظر [دليل أدوات البحث](https://docs.claude-mem.ai/usage/search-tools) لأمثلة مفصلة.
+انظر [دليل أدوات البحث](https://docs.opencode-mem.ai/usage/search-tools) لأمثلة مفصلة.
 
 ---
 
 ## الميزات التجريبية
 
-يقدم Claude-Mem **قناة تجريبية** بميزات تجريبية مثل **Endless Mode** (بنية ذاكرة بيوميمتية للجلسات الممتدة). بدّل بين الإصدارات المستقرة والتجريبية من واجهة مستخدم عارض الويب على http://localhost:37777 ← الإعدادات.
+يقدم OpenCode-Mem **قناة تجريبية** بميزات تجريبية مثل **Endless Mode** (بنية ذاكرة بيوميمتية للجلسات الممتدة). بدّل بين الإصدارات المستقرة والتجريبية من واجهة مستخدم عارض الويب على http://localhost:37777 ← الإعدادات.
 
-انظر **[توثيق الميزات التجريبية](https://docs.claude-mem.ai/beta-features)** لتفاصيل حول Endless Mode وكيفية تجربته.
+انظر **[توثيق الميزات التجريبية](https://docs.opencode-mem.ai/beta-features)** لتفاصيل حول Endless Mode وكيفية تجربته.
 
 ---
 
@@ -231,15 +231,15 @@ Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة ل
 
 ## الإعدادات
 
-تتم إدارة الإعدادات في `~/.claude-mem/settings.json` (يتم إنشاؤه تلقائيًا بالقيم الافتراضية عند التشغيل الأول). قم بتكوين نموذج الذكاء الاصطناعي، منفذ العامل، دليل البيانات، مستوى السجل، وإعدادات حقن السياق.
+تتم إدارة الإعدادات في `~/.opencode-mem/settings.json` (يتم إنشاؤه تلقائيًا بالقيم الافتراضية عند التشغيل الأول). قم بتكوين نموذج الذكاء الاصطناعي، منفذ العامل، دليل البيانات، مستوى السجل، وإعدادات حقن السياق.
 
-انظر **[دليل الإعدادات](https://docs.claude-mem.ai/configuration)** لجميع الإعدادات المتاحة والأمثلة.
+انظر **[دليل الإعدادات](https://docs.opencode-mem.ai/configuration)** لجميع الإعدادات المتاحة والأمثلة.
 
 ---
 
 ## التطوير
 
-انظر **[دليل التطوير](https://docs.claude-mem.ai/development)** لتعليمات البناء، الاختبار، وسير عمل المساهمة.
+انظر **[دليل التطوير](https://docs.opencode-mem.ai/development)** لتعليمات البناء، الاختبار، وسير عمل المساهمة.
 
 ---
 
@@ -247,7 +247,7 @@ Claude-Mem هو نظام متطور مصمم لضغط وحفظ الذاكرة ل
 
 إذا واجهت مشكلة، اشرحها لـ Claude وسيقوم بتشغيل خاصية troubleshoot لإصلاحها ذاتياً.
 
-انظر **[دليل استكشاف الأخطاء وإصلاحها](https://docs.claude-mem.ai/troubleshooting)** للمشكلات الشائعة والحلول.
+انظر **[دليل استكشاف الأخطاء وإصلاحها](https://docs.opencode-mem.ai/troubleshooting)** للمشكلات الشائعة والحلول.
 
 ---
 
@@ -272,7 +272,7 @@ npm run bug-report
 4. تحديث المستندات عند الحاجه
 5. تقديم Pull Request
 
-انظر [دليل التطوير](https://docs.claude-mem.ai/development) لسير عمل المساهمة.
+انظر [دليل التطوير](https://docs.opencode-mem.ai/development) لسير عمل المساهمة.
 
 ---
 
@@ -298,8 +298,8 @@ npm run bug-report
 ## الدعم
 
 - **التوثيق**: [docs/](docs/)
-- **المشكلات**: [GitHub Issues](https://github.com/thedotmack/claude-mem/issues)
-- **المستودع**: [github.com/thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+- **المشكلات**: [GitHub Issues](https://github.com/thedotmack/opencode-mem/issues)
+- **المستودع**: [github.com/thedotmack/opencode-mem](https://github.com/thedotmack/opencode-mem)
 - **المؤلف**: Alex Newman ([@thedotmack](https://github.com/thedotmack))
 
 ---

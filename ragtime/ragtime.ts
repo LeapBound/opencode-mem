@@ -24,12 +24,12 @@ const CONFIG = {
   corpusPath: process.env.RAGTIME_CORPUS_PATH ||
     path.join(process.cwd(), "datasets", "epstein-mode"),
 
-  // Path to claude-mem plugin
+  // Path to opencode-mem plugin
   pluginPath: process.env.RAGTIME_PLUGIN_PATH ||
     path.join(process.cwd(), "plugin"),
 
   // Worker port
-  workerPort: parseInt(process.env.CLAUDE_MEM_WORKER_PORT || "37777", 10),
+  workerPort: parseInt(process.env.OPENCODE_MEM_WORKER_PORT || "37777", 10),
 
   // Max age of transcripts to keep (in hours)
   transcriptMaxAgeHours: parseInt(process.env.RAGTIME_TRANSCRIPT_MAX_AGE || "24", 10),
@@ -45,7 +45,7 @@ const CONFIG = {
 };
 
 // Set email-investigation mode for Claude-mem
-process.env.CLAUDE_MEM_MODE = "email-investigation";
+process.env.OPENCODE_MEM_MODE = "email-investigation";
 
 /**
  * Get list of markdown files to process, sorted numerically

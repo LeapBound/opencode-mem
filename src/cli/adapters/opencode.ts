@@ -70,7 +70,7 @@ export const opencodeAdapter: PlatformAdapter = {
     if (result.hookSpecificOutput) {
       const ctx = (result.hookSpecificOutput.additionalContext ?? '').trim();
       if (!ctx) return undefined;
-      return `<claude-mem-context>\n${ctx}\n</claude-mem-context>`;
+      return `<opencode-mem-context>\n${ctx}\n</opencode-mem-context>`;
     }
 
     // Default: no stdout (prevents polluting tool output / prompt)

@@ -1,3 +1,3 @@
-<claude-mem-context>
+<opencode-mem-context>
 
-</claude-mem-context>
+</opencode-mem-context>

@@ -110,7 +110,7 @@ async function main() {
   // Help flag
   if (args.includes('--help') || args.includes('-h')) {
     console.log(`
-Claude-Mem Queue Clearer
+OpenCode-Mem Queue Clearer
 
 Clear messages from the observation queue.
 
@@ -149,8 +149,8 @@ What is this for?
   const clearAll = args.includes('--all');
 
   console.log(clearAll
-    ? '\n=== Claude-Mem Queue Clearer (ALL) ===\n'
-    : '\n=== Claude-Mem Queue Clearer (Failed) ===\n');
+    ? '\n=== OpenCode-Mem Queue Clearer (ALL) ===\n'
+    : '\n=== OpenCode-Mem Queue Clearer (Failed) ===\n');
 
   // Check worker health
   const healthy = await checkWorkerHealth();

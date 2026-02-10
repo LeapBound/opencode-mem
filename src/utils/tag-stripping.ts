@@ -2,7 +2,7 @@
  * Tag Stripping Utilities
  *
  * Implements the dual-tag system for meta-observation control:
- * 1. <claude-mem-context> - System-level tag for auto-injected observations
+ * 1. <opencode-mem-context> - System-level tag for auto-injected observations
  *    (prevents recursive storage when context injection is active)
  * 2. <private> - User-level tag for manual privacy control
  *    (allows users to mark content they don't want persisted)
@@ -26,7 +26,7 @@ const MAX_TAG_COUNT = 100;
  */
 function countTags(content: string): number {
   const privateCount = (content.match(/<private>/g) || []).length;
-  const contextCount = (content.match(/<claude-mem-context>/g) || []).length;
+  const contextCount = (content.match(/<opencode-mem-context>/g) || []).length;
   const omoHookCount = (content.match(/<user-prompt-submit-hook>/g) || []).length;
   return privateCount + contextCount + omoHookCount;
 }
@@ -48,7 +48,7 @@ function stripTagsInternal(content: string): string {
   }
 
   return content
-    .replace(/<claude-mem-context>[\s\S]*?<\/claude-mem-context>/g, '')
+    .replace(/<opencode-mem-context>[\s\S]*?<\/opencode-mem-context>/g, '')
     .replace(/<user-prompt-submit-hook>[\s\S]*?<\/user-prompt-submit-hook>/g, '')
     .replace(/<private>[\s\S]*?<\/private>/g, '')
     .trim();

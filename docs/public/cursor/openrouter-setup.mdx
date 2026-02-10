@@ -1,11 +1,11 @@
 ---
 title: "Cursor + OpenRouter Setup"
-description: "Use Claude-Mem in Cursor with OpenRouter's 100+ AI models"
+description: "Use OpenCode-Mem in Cursor with OpenRouter's 100+ AI models"
 ---
 
 # Cursor + OpenRouter Setup
 
-This guide walks you through setting up Claude-Mem in Cursor using OpenRouter. OpenRouter provides access to 100+ AI models from various providers, including several free options.
+This guide walks you through setting up OpenCode-Mem in Cursor using OpenRouter. OpenRouter provides access to 100+ AI models from various providers, including several free options.
 
 <Info>
 **Model variety:** Access Claude, GPT-4, Gemini, Llama, Mistral, and many more through a single API key.
@@ -23,12 +23,12 @@ This guide walks you through setting up Claude-Mem in Cursor using OpenRouter. O
 **Free models available:** OpenRouter offers free versions of several models including Gemini Flash and others. Check the [model list](https://openrouter.ai/models?show_free=true) for current free options.
 </Tip>
 
-## Step 2: Clone and Build Claude-Mem
+## Step 2: Clone and Build OpenCode-Mem
 
 ```bash
 # Clone the repository
-git clone https://github.com/thedotmack/claude-mem.git
-cd claude-mem
+git clone https://github.com/thedotmack/opencode-mem.git
+cd opencode-mem
 
 # Install dependencies
 bun install
@@ -55,13 +55,13 @@ Create the settings file manually:
 
 ```bash
 # Create settings directory
-mkdir -p ~/.claude-mem
+mkdir -p ~/.opencode-mem
 
 # Create settings file with OpenRouter configuration
-cat > ~/.claude-mem/settings.json << 'EOF'
+cat > ~/.opencode-mem/settings.json << 'EOF'
 {
-  "CLAUDE_MEM_PROVIDER": "openrouter",
-  "CLAUDE_MEM_OPENROUTER_API_KEY": "YOUR_OPENROUTER_API_KEY"
+  "OPENCODE_MEM_PROVIDER": "openrouter",
+  "OPENCODE_MEM_OPENROUTER_API_KEY": "YOUR_OPENROUTER_API_KEY"
 }
 EOF
 ```
@@ -112,9 +112,9 @@ To specify a model, add to your settings:
 
 ```json
 {
-  "CLAUDE_MEM_PROVIDER": "openrouter",
-  "CLAUDE_MEM_OPENROUTER_API_KEY": "your-key",
-  "CLAUDE_MEM_OPENROUTER_MODEL": "google/gemini-2.0-flash-exp:free"
+  "OPENCODE_MEM_PROVIDER": "openrouter",
+  "OPENCODE_MEM_OPENROUTER_API_KEY": "your-key",
+  "OPENCODE_MEM_OPENROUTER_MODEL": "google/gemini-2.0-flash-exp:free"
 }
 ```
 
@@ -137,14 +137,14 @@ OpenRouter charges per token. To manage costs:
 Ensure your settings file exists with the correct format:
 
 ```bash
-cat ~/.claude-mem/settings.json
+cat ~/.opencode-mem/settings.json
 ```
 
 Should output something like:
 ```json
 {
-  "CLAUDE_MEM_PROVIDER": "openrouter",
-  "CLAUDE_MEM_OPENROUTER_API_KEY": "sk-or-..."
+  "OPENCODE_MEM_PROVIDER": "openrouter",
+  "OPENCODE_MEM_OPENROUTER_API_KEY": "sk-or-..."
 }
 ```
 
@@ -180,7 +180,7 @@ You can switch between OpenRouter, Gemini, and Claude SDK at any time by updatin
 
 ```json
 {
-  "CLAUDE_MEM_PROVIDER": "gemini"
+  "OPENCODE_MEM_PROVIDER": "gemini"
 }
 ```
 

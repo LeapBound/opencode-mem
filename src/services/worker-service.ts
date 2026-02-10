@@ -21,7 +21,7 @@ import { logger } from '../utils/logger.js';
 const WINDOWS_SPAWN_COOLDOWN_MS = 2 * 60 * 1000;
 
 function getWorkerSpawnLockPath(): string {
-  return path.join(SettingsDefaultsManager.get('CLAUDE_MEM_DATA_DIR'), '.worker-start-attempted');
+  return path.join(SettingsDefaultsManager.get('OPENCODE_MEM_DATA_DIR'), '.worker-start-attempted');
 }
 
 function shouldSkipSpawnOnWindows(): boolean {
@@ -290,7 +290,7 @@ export class WorkerService {
     this.server.registerRoutes(new DataRoutes(this.paginationHelper, this.dbManager, this.sessionManager, this.sseBroadcaster, this, this.startTime));
     this.server.registerRoutes(new SettingsRoutes(this.settingsManager));
     this.server.registerRoutes(new LogsRoutes());
-    this.server.registerRoutes(new MemoryRoutes(this.dbManager, 'claude-mem'));
+    this.server.registerRoutes(new MemoryRoutes(this.dbManager, 'opencode-mem'));
   }
 
   /**
@@ -333,7 +333,7 @@ export class WorkerService {
       const { USER_SETTINGS_PATH } = await import('../shared/paths.js');
 
       const settings = SettingsDefaultsManager.loadFromFile(USER_SETTINGS_PATH);
-      const modeId = settings.CLAUDE_MEM_MODE;
+      const modeId = settings.OPENCODE_MEM_MODE;
       ModeManager.getInstance().loadMode(modeId);
       logger.info('SYSTEM', `Mode loaded: ${modeId}`);
 
@@ -925,7 +925,7 @@ async function main() {
       const platform = process.argv[3];
       const event = process.argv[4];
       if (!platform || !event) {
-        console.error('Usage: claude-mem hook <platform> <event>');
+        console.error('Usage: opencode-mem hook <platform> <event>');
         console.error('Platforms: claude-code, opencode, oh-my-opencode, cursor, raw');
         console.error('Events: context, session-init, observation, summarize, session-complete');
         process.exit(1);

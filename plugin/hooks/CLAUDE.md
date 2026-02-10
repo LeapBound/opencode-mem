@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Oct 25, 2025
@@ -31,5 +31,5 @@
 
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
-| #38802 | 5:11 PM | 🔵 | Claude-Mem Hook Configuration Architecture | ~450 |
-</claude-mem-context>
+| #38802 | 5:11 PM | 🔵 | OpenCode-Mem Hook Configuration Architecture | ~450 |
+</opencode-mem-context>

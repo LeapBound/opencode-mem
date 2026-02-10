@@ -1,4 +1,4 @@
-# Claude-Mem PR Shipping Report
+# OpenCode-Mem PR Shipping Report
 *Generated: 2026-02-04*
 
 ## Executive Summary
@@ -111,7 +111,7 @@
 | Risk | Medium |
 
 **What it does:**
-- Adds `claude-mem generate` and `claude-mem clean` CLI commands
+- Adds `opencode-mem generate` and `opencode-mem clean` CLI commands
 - Fixes validation bugs (deleted folders recreated from stale DB)
 - Fixes Windows path handling
 - Adds automatic shell alias installation

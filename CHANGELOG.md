@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to claude-mem.
+All notable changes to opencode-mem.
 
 ## [v9.1.1] - 2026-02-07
 
@@ -44,9 +44,9 @@ All notable changes to claude-mem.
 ### New Features
 
 - **Manual memory storage** — New \`save_memory\` MCP tool and \`POST /api/memory/save\` endpoint for explicit memory capture (PR #662 by @darconada, closes #645)
-- **Project exclusion setting** — \`CLAUDE_MEM_EXCLUDED_PROJECTS\` glob patterns to exclude entire projects from tracking (PR #920 by @Spunky84)
-- **Folder exclude setting** — \`CLAUDE_MEM_FOLDER_MD_EXCLUDE\` JSON array to exclude paths from CLAUDE.md generation, fixing Xcode/drizzle build conflicts (PR #699 by @leepokai, closes #620)
-- **Folder CLAUDE.md opt-in** — \`CLAUDE_MEM_FOLDER_CLAUDEMD_ENABLED\` now defaults to \`false\` (opt-in) instead of always-on (PR #913 by @superbiche)
+- **Project exclusion setting** — \`OPENCODE_MEM_EXCLUDED_PROJECTS\` glob patterns to exclude entire projects from tracking (PR #920 by @Spunky84)
+- **Folder exclude setting** — \`OPENCODE_MEM_FOLDER_MD_EXCLUDE\` JSON array to exclude paths from CLAUDE.md generation, fixing Xcode/drizzle build conflicts (PR #699 by @leepokai, closes #620)
+- **Folder CLAUDE.md opt-in** — \`OPENCODE_MEM_FOLDER_CLAUDEMD_ENABLED\` now defaults to \`false\` (opt-in) instead of always-on (PR #913 by @superbiche)
 - **Generate/clean CLI commands** — \`generate\` and \`clean\` commands for CLAUDE.md management with \`--dry-run\` support (PR #657 by @thedotmack)
 - **Ragtime email investigation** — Batch processor for email investigation workflows (PR #863 by @thedotmack)
 
@@ -122,7 +122,7 @@ Thank you to the 35+ contributors whose PRs were reviewed in this release:
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v9.0.17...v9.1.0
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v9.0.17...v9.1.0
 
 ## [v9.0.17] - 2026-02-05
 
@@ -174,7 +174,7 @@ Resolves the "Worker did not become ready within 15 seconds" timeout error that 
 
 ### Isolated Credentials (#745)
 - **Prevents API key hijacking** from random project `.env` files
-- Credentials now sourced exclusively from `~/.claude-mem/.env`
+- Credentials now sourced exclusively from `~/.opencode-mem/.env`
 - Only whitelisted environment variables passed to SDK `query()` calls
 - Authentication method logging shows whether using Claude Code CLI subscription billing or explicit API key
 
@@ -201,7 +201,7 @@ The in-process architecture means hooks no longer need to spawn separate worker 
 - Better resource utilization
 - Elimination of process spawn failures on Windows
 
-Full PR: https://github.com/thedotmack/claude-mem/pull/722
+Full PR: https://github.com/thedotmack/opencode-mem/pull/722
 
 ## [v9.0.13] - 2026-02-05
 
@@ -236,7 +236,7 @@ This happened because Claude Code stores credentials in the config directory, an
 ### Solution
 
 Observer sessions now use the SDK's `cwd` option instead:
-- Sessions stored under `~/.claude-mem/observer-sessions/` project
+- Sessions stored under `~/.opencode-mem/observer-sessions/` project
 - Auth credentials in `~/.claude/` remain accessible
 - Observer sessions still won't pollute `claude --resume` lists
 
@@ -253,9 +253,9 @@ Anyone running v9.0.11 who saw "Invalid API key" errors should upgrade immediate
 ## Bug Fixes
 
 ### Observer Session Isolation (#837)
-Observer sessions created by claude-mem were polluting the `claude --resume` list, cluttering it with internal plugin sessions that users never intend to resume. In one user's case, 74 observer sessions out of ~220 total (34% noise).
+Observer sessions created by opencode-mem were polluting the `claude --resume` list, cluttering it with internal plugin sessions that users never intend to resume. In one user's case, 74 observer sessions out of ~220 total (34% noise).
 
-**Solution**: Observer processes now use a dedicated config directory (`~/.claude-mem/observer-config/`) to isolate their session files from user sessions.
+**Solution**: Observer processes now use a dedicated config directory (`~/.opencode-mem/observer-config/`) to isolate their session files from user sessions.
 
 Thanks to @Glucksberg for this fix! Fixes #832.
 
@@ -267,7 +267,7 @@ After a worker restart, stale `memory_session_id` values in the database could c
 Thanks to @bigph00t for this fix! Fixes #817.
 
 ---
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v9.0.10...v9.0.11
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v9.0.10...v9.0.11
 
 ## [v9.0.10] - 2026-01-26
 
@@ -294,7 +294,7 @@ The folder-level CLAUDE.md generation was failing to find observations due to a 
 
 ### Prevent Creation of Empty CLAUDE.md Files (#809)
 
-Previously, claude-mem would create new `CLAUDE.md` files in project directories even when there was no activity to display, cluttering codebases with empty context files showing only "*No recent activity*".
+Previously, opencode-mem would create new `CLAUDE.md` files in project directories even when there was no activity to display, cluttering codebases with empty context files showing only "*No recent activity*".
 
 **What changed:** The `updateFolderClaudeMdFiles` function now checks if the formatted content contains no activity before writing. If a `CLAUDE.md` file doesn't already exist and there's nothing to show, it will be skipped entirely. Existing files will still be updated to reflect "No recent activity" if that's the current state.
 
@@ -329,7 +329,7 @@ This release fixes a critical issue where Claude haiku subprocesses spawned by t
 - `src/services/worker/SessionManager.ts`: Verify subprocess exit on delete
 - `src/services/worker-service.ts`: Start/stop orphan reaper
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v9.0.7...v9.0.8
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v9.0.7...v9.0.8
 
 Fixes #737
 
@@ -337,7 +337,7 @@ Fixes #737
 
 ## Windows Console Popup Fix
 
-This release eliminates the annoying console window popups that Windows users experienced when claude-mem spawned background processes.
+This release eliminates the annoying console window popups that Windows users experienced when opencode-mem spawned background processes.
 
 ### Fixed
 - **Windows console popups eliminated** - Daemon spawn and Chroma operations no longer create visible console windows (#748, #708, #681, #676)
@@ -397,7 +397,7 @@ This release adds the `/do` and `/make-plan` development commands to the plugin 
 
 ### Full Changelog
 
-https://github.com/thedotmack/claude-mem/compare/v9.0.3...v9.0.4
+https://github.com/thedotmack/opencode-mem/compare/v9.0.3...v9.0.4
 
 ## [v9.0.3] - 2026-01-10
 
@@ -435,7 +435,7 @@ Fixed an issue where the worker service startup wasn't producing proper JSON sta
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v9.0.1...v9.0.2
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v9.0.1...v9.0.2
 
 ## [v9.0.1] - 2026-01-08
 
@@ -470,7 +470,7 @@ Fixed an issue where the worker service startup wasn't producing proper JSON sta
 - Removed hardcoded fake token counts from context injection
 - Standardized Claude Code 2.1.0 note wording across documentation
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v9.0.0...v9.0.1
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v9.0.0...v9.0.1
 
 ## [v9.0.0] - 2026-01-06
 
@@ -484,7 +484,7 @@ Version 9.0.0 introduces the **Live Context System** - a major new capability th
 - **Folder CLAUDE.md Files**: Each directory now gets an auto-generated CLAUDE.md file containing a chronological timeline of recent development activity
 - **Activity Timelines**: Tables show observation ID, time, type, title, and estimated token cost for relevant work in each folder
 - **Worktree Support**: Proper detection of git worktrees with project-aware filtering to show only relevant observations per worktree
-- **Configurable Limits**: Control observation count via `CLAUDE_MEM_CONTEXT_OBSERVATIONS` setting
+- **Configurable Limits**: Control observation count via `OPENCODE_MEM_CONTEXT_OBSERVATIONS` setting
 
 #### Modular Architecture Refactor
 - **Service Layer Decomposition**: Major refactoring from monolithic worker-service to modular domain services
@@ -506,7 +506,7 @@ Version 9.0.0 introduces the **Live Context System** - a major new capability th
 
 #### Settings & Configuration
 - **Auto-Creation**: Settings file automatically created with defaults on first run
-- **Worker Host Configuration**: `CLAUDE_MEM_WORKER_HOST` setting for custom worker endpoints
+- **Worker Host Configuration**: `OPENCODE_MEM_WORKER_HOST` setting for custom worker endpoints
 - Settings validation with helpful error messages
 
 #### MCP Tools
@@ -535,7 +535,7 @@ Version 9.0.0 introduces the **Live Context System** - a major new capability th
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.5.10...v9.0.0
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.5.10...v9.0.0
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
@@ -566,13 +566,13 @@ See PR #558 for complete details and diagnostic reports.
 
 The context injection header now displays the current date and time, making it easier to understand when context was generated.
 
-**Example:** `[claude-mem] recent context, 2026-01-04 2:46am EST`
+**Example:** `[opencode-mem] recent context, 2026-01-04 2:46am EST`
 
 This appears in both terminal (colored) output and markdown format, including empty state messages.
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.5.8...v8.5.9
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.5.8...v8.5.9
 
 ## [v8.5.8] - 2026-01-04
 
@@ -623,7 +623,7 @@ This release refactors the monolithic service architecture into focused, single-
 - Updated esbuild and MCP SDK to latest versions
 - Removed `bun.lock` from version control
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.5.6...v8.5.7
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.5.6...v8.5.7
 
 ## [v8.5.6] - 2026-01-04
 
@@ -672,7 +672,7 @@ This patch release enhances error handling and logging across all worker service
 ### Investigation Reports
 - Added detailed analysis documents for generator failures and observation duplication regressions
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.5.4...v8.5.5
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.5.4...v8.5.5
 
 ## [v8.5.4] - 2026-01-02
 
@@ -853,7 +853,7 @@ These files now have strict error propagation (no catch-and-continue):
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.5.2...v8.5.3
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.5.2...v8.5.3
 
 ## [v8.5.2] - 2025-12-31
 
@@ -918,7 +918,7 @@ This is a major release introducing **full Cursor IDE support**. Claude-mem now 
 
 ### Works Without Claude Code
 
-You can now use claude-mem with Cursor using free AI providers:
+You can now use opencode-mem with Cursor using free AI providers:
 - **Gemini** (recommended): 1,500 free requests/day, no credit card required
 - **OpenRouter**: Access to 100+ models including free options
 - **Claude SDK**: For Claude Code subscribers
@@ -950,11 +950,11 @@ Complete hook integration with Cursor's native hook system:
 - `context-inject.sh/.ps1` - Load relevant history
 
 ### Context Injection via `.cursor/rules`
-Relevant past context is automatically injected into Cursor sessions via the `.cursor/rules/claude-mem-context.mdc` file, giving your AI immediate awareness of prior work.
+Relevant past context is automatically injected into Cursor sessions via the `.cursor/rules/opencode-mem-context.mdc` file, giving your AI immediate awareness of prior work.
 
 ### Project Registry
 Multi-project support with automatic project detection:
-- Projects registered in `~/.claude-mem/cursor-projects.json`
+- Projects registered in `~/.opencode-mem/cursor-projects.json`
 - Context automatically scoped to current project
 - Works across multiple workspaces simultaneously
 
@@ -975,7 +975,7 @@ Full MCP server integration for Cursor:
 
 ## Documentation
 
-Full documentation available at [docs.claude-mem.ai/cursor](https://docs.claude-mem.ai/cursor):
+Full documentation available at [docs.opencode-mem.ai/cursor](https://docs.opencode-mem.ai/cursor):
 - Cursor Integration Overview
 - Gemini Setup Guide (free tier)
 - OpenRouter Setup Guide
@@ -986,20 +986,20 @@ Full documentation available at [docs.claude-mem.ai/cursor](https://docs.claude-
 ### For Cursor-Only Users (No Claude Code)
 
 ```bash
-git clone https://github.com/thedotmack/claude-mem.git
-cd claude-mem && bun install && bun run build
+git clone https://github.com/thedotmack/opencode-mem.git
+cd opencode-mem && bun install && bun run build
 bun run cursor:setup
 ```
 
 ### For Claude Code Users
 
 ```bash
-/plugin marketplace add thedotmack/claude-mem
-/plugin install claude-mem
-claude-mem cursor install
+/plugin marketplace add thedotmack/opencode-mem
+/plugin install opencode-mem
+opencode-mem cursor install
 ```
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.2.10...v8.5.0
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.2.10...v8.5.0
 
 ## [v8.2.10] - 2025-12-30
 
@@ -1043,7 +1043,7 @@ Thanks @yungweng for the detailed bug report!
 
 This patch release addresses a race condition where SIGTERM/SIGINT signals arriving during ChromaSync initialization could leave orphaned chroma-mcp processes. The fix moves signal handler registration from the start() method to the constructor, ensuring cleanup handlers exist throughout the entire initialization lifecycle.
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.2.7...v8.2.8
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.2.7...v8.2.8
 
 ## [v8.2.7] - 2025-12-29
 
@@ -1057,7 +1057,7 @@ This patch release addresses a race condition where SIGTERM/SIGINT signals arriv
 
 This release significantly reduces the token footprint of the plugin's MCP tools and documentation.
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.2.6...v8.2.7
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.2.6...v8.2.7
 
 ## [v8.2.6] - 2025-12-29
 
@@ -1069,7 +1069,7 @@ This release significantly reduces the token footprint of the plugin's MCP tools
 - Memory session ID capture for agent resume functionality
 - Comprehensive test suite for session ID refactoring
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.2.5...v8.2.6
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.2.5...v8.2.6
 
 ## [v8.2.5] - 2025-12-28
 
@@ -1087,7 +1087,7 @@ This patch release addresses several issues discovered after the session continu
 2. ChromaSync initialization is now lazy to prevent silent failures during startup
 3. Session linger timeout removed to eliminate artificial 5-second delays on session completion
 
-Full changelog: https://github.com/thedotmack/claude-mem/compare/v8.2.4...v8.2.5
+Full changelog: https://github.com/thedotmack/opencode-mem/compare/v8.2.4...v8.2.5
 
 ## [v8.2.4] - 2025-12-28
 
@@ -1099,7 +1099,7 @@ Patch release v8.2.4
 
 - Fix worker port environment variable in smart-install script
 - Implement file-based locking mechanism for worker operations to prevent race conditions
-- Fix restart command references in documentation (changed from `claude-mem restart` to `npm run worker:restart`)
+- Fix restart command references in documentation (changed from `opencode-mem restart` to `npm run worker:restart`)
 
 ## [v8.2.2] - 2025-12-27
 
@@ -1187,7 +1187,7 @@ Added comprehensive test suites:
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.2.0...v8.2.1
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.2.0...v8.2.1
 
 ## [v8.2.0] - 2025-12-26
 
@@ -1226,26 +1226,26 @@ This release introduces **Google Gemini API** as an alternative to the Claude Ag
 
 ### 📚 Documentation
 
-- New [Gemini Provider documentation](https://docs.claude-mem.ai/usage/gemini-provider) with setup guide and troubleshooting
+- New [Gemini Provider documentation](https://docs.opencode-mem.ai/usage/gemini-provider) with setup guide and troubleshooting
 
 ### ⚙️ New Settings
 
 | Setting | Values | Description |
 |---------|--------|-------------|
-| `CLAUDE_MEM_PROVIDER` | `claude` \| `gemini` | AI provider for observation extraction |
-| `CLAUDE_MEM_GEMINI_API_KEY` | string | Gemini API key |
-| `CLAUDE_MEM_GEMINI_MODEL` | see above | Gemini model to use |
+| `OPENCODE_MEM_PROVIDER` | `claude` \| `gemini` | AI provider for observation extraction |
+| `OPENCODE_MEM_GEMINI_API_KEY` | string | Gemini API key |
+| `OPENCODE_MEM_GEMINI_MODEL` | see above | Gemini model to use |
 | `gemini_has_billing` | boolean | Enable higher rate limits for paid accounts |
 
 ---
 
 ## 🙏 Contributor Shout-out
 
-Huge thanks to **Alexander Knigge** ([@AlexanderKnigge](https://x.com/AlexanderKnigge)) for contributing the Gemini provider implementation! This feature significantly expands claude-mem's flexibility and gives users more choice in their AI backend.
+Huge thanks to **Alexander Knigge** ([@AlexanderKnigge](https://x.com/AlexanderKnigge)) for contributing the Gemini provider implementation! This feature significantly expands opencode-mem's flexibility and gives users more choice in their AI backend.
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v8.1.0...v8.2.0
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v8.1.0...v8.2.0
 
 ## [v8.1.0] - 2025-12-25
 
@@ -1339,7 +1339,7 @@ Since we're now explicit about recovery instead of silently papering over proble
 
 ---
 
-**PR #437:** https://github.com/thedotmack/claude-mem/pull/437
+**PR #437:** https://github.com/thedotmack/opencode-mem/pull/437
 
 *The evidence: Observations #3646, #6738, #7598, #12860, #12866, #13046, #15259, #20995, #21055, #30524, #31080, #32114, #32116, #32125, #32126, #32127, #32146, #32324—the complete record of a 3-month battle.*
 
@@ -1391,10 +1391,10 @@ New "chill" remix of code mode for users who want fewer, more selective observat
 
 ## Usage
 
-Set in ~/.claude-mem/settings.json:
+Set in ~/.opencode-mem/settings.json:
 ```json
 {
-  "CLAUDE_MEM_MODE": "code--chill"
+  "OPENCODE_MEM_MODE": "code--chill"
 }
 ```
 
@@ -1448,12 +1448,12 @@ Set in ~/.claude-mem/settings.json:
 
 - **None** - Mode system is fully backward compatible
 - Default mode is 'code' (existing behavior)
-- Settings: New `CLAUDE_MEM_MODE` option (defaults to 'code')
+- Settings: New `OPENCODE_MEM_MODE` option (defaults to 'code')
 
 ---
 
-**Full Changelog**: https://github.com/thedotmack/claude-mem/compare/v7.4.5...v8.0.0
-**View PR**: https://github.com/thedotmack/claude-mem/pull/412
+**Full Changelog**: https://github.com/thedotmack/opencode-mem/compare/v7.4.5...v8.0.0
+**View PR**: https://github.com/thedotmack/opencode-mem/pull/412
 
 ## [v7.4.5] - 2025-12-21
 
@@ -1462,4 +1462,3 @@ Set in ~/.claude-mem/settings.json:
 - Fix missing `formatDateTime` import in SearchManager that broke `get_context_timeline` mem-search function
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
-

@@ -10,7 +10,7 @@
 import Database from 'bun:sqlite';
 import { resolve } from 'path';
 
-const DB_PATH = resolve(process.env.HOME!, '.claude-mem/claude-mem.db');
+const DB_PATH = resolve(process.env.HOME!, '.opencode-mem/opencode-mem.db');
 
 function formatTimestamp(epoch: number): string {
   return new Date(epoch).toLocaleString('en-US', {

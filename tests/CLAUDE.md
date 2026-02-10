@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Nov 10, 2025
@@ -55,4 +55,4 @@
 | #36858 | 1:50 AM | 🟣 | Phase 1 Implementation Completed via Subagent | ~499 |
 | #36854 | 1:49 AM | 🟣 | gemini-3-flash Model Tests Added to GeminiAgent Test Suite | ~470 |
 | #36851 | " | 🔵 | GeminiAgent Test Structure Analyzed | ~565 |
-</claude-mem-context>
+</opencode-mem-context>

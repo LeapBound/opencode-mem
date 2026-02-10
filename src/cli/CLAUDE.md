@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Dec 10, 2025
@@ -31,4 +31,4 @@
 | #26766 | 11:30 PM | ⚖️ | Root Cause Identified: Missing Post-Install Worker Restart Trigger in Plugin Update Flow | ~604 |
 | #26722 | 11:23 PM | 🔵 | Worker CLI TypeScript Source Shows Simple ProcessManager Delegation | ~394 |
 | #26721 | " | 🔵 | Worker CLI Source Code Shows Simple Restart Logic Without Delays | ~425 |
-</claude-mem-context>
+</opencode-mem-context>

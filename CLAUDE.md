@@ -1,4 +1,4 @@
-# Claude-Mem: AI Development Instructions
+# OpenCode-Mem: AI Development Instructions
 
 Claude-mem is a Claude Code plugin providing persistent memory across sessions. It captures tool usage, compresses observations using the Claude Agent SDK, and injects relevant context into future sessions.
 
@@ -10,7 +10,7 @@ Claude-mem is a Claude Code plugin providing persistent memory across sessions. 
 
 **Worker Service** (`src/services/worker-service.ts`) - Express API on port 37777, Bun-managed, handles AI processing asynchronously
 
-**Database** (`src/services/sqlite/`) - SQLite3 at `~/.claude-mem/claude-mem.db`
+**Database** (`src/services/sqlite/`) - SQLite3 at `~/.opencode-mem/opencode-mem.db`
 
 **Search Skill** (`plugin/skills/mem-search/SKILL.md`) - HTTP API for searching past work, auto-invoked when users ask about history
 
@@ -31,15 +31,15 @@ npm run build-and-sync        # Build, sync to marketplace, restart worker
 
 ## Configuration
 
-Settings are managed in `~/.claude-mem/settings.json`. The file is auto-created with defaults on first run.
+Settings are managed in `~/.opencode-mem/settings.json`. The file is auto-created with defaults on first run.
 
 ## File Locations
 
 - **Source**: `<project-root>/src/`
 - **Built Plugin**: `<project-root>/plugin/`
 - **Installed Plugin**: `~/.claude/plugins/marketplaces/thedotmack/`
-- **Database**: `~/.claude-mem/claude-mem.db`
-- **Chroma**: `~/.claude-mem/chroma/`
+- **Database**: `~/.opencode-mem/opencode-mem.db`
+- **Chroma**: `~/.opencode-mem/chroma/`
 
 ## Exit Code Strategy
 
@@ -61,7 +61,7 @@ See `private/context/claude-code/exit-codes.md` for full hook behavior matrix.
 
 ## Documentation
 
-**Public Docs**: https://docs.claude-mem.ai (Mintlify)
+**Public Docs**: https://docs.opencode-mem.ai (Mintlify)
 **Source**: `docs/public/` - MDX files, edit `docs.json` for navigation
 **Deploy**: Auto-deploys from GitHub on push to main
 

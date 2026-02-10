@@ -12,49 +12,52 @@ import { DEFAULT_OBSERVATION_TYPES_STRING, DEFAULT_OBSERVATION_CONCEPTS_STRING }
 // NOTE: Do NOT import logger here - it creates a circular dependency
 // logger.ts depends on SettingsDefaultsManager for its initialization
 
+const DEFAULT_DATA_DIR = join(homedir(), '.opencode-mem');
+const DEFAULT_SETTINGS_PATH = join(DEFAULT_DATA_DIR, 'settings.json');
+
 export interface SettingsDefaults {
-  CLAUDE_MEM_MODEL: string;
-  CLAUDE_MEM_CONTEXT_OBSERVATIONS: string;
-  CLAUDE_MEM_WORKER_PORT: string;
-  CLAUDE_MEM_WORKER_HOST: string;
-  CLAUDE_MEM_SKIP_TOOLS: string;
+  OPENCODE_MEM_MODEL: string;
+  OPENCODE_MEM_CONTEXT_OBSERVATIONS: string;
+  OPENCODE_MEM_WORKER_PORT: string;
+  OPENCODE_MEM_WORKER_HOST: string;
+  OPENCODE_MEM_SKIP_TOOLS: string;
   // AI Provider Configuration
-  CLAUDE_MEM_PROVIDER: string;  // 'claude' | 'gemini' | 'openrouter'
-  CLAUDE_MEM_CLAUDE_AUTH_METHOD: string;  // 'cli' | 'api' - how Claude provider authenticates
-  CLAUDE_MEM_GEMINI_API_KEY: string;
-  CLAUDE_MEM_GEMINI_MODEL: string;  // 'gemini-2.5-flash-lite' | 'gemini-2.5-flash' | 'gemini-3-flash-preview'
-  CLAUDE_MEM_GEMINI_RATE_LIMITING_ENABLED: string;  // 'true' | 'false' - enable rate limiting for free tier
-  CLAUDE_MEM_OPENROUTER_API_KEY: string;
-  CLAUDE_MEM_OPENROUTER_MODEL: string;
-  CLAUDE_MEM_OPENROUTER_SITE_URL: string;
-  CLAUDE_MEM_OPENROUTER_APP_NAME: string;
-  CLAUDE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES: string;
-  CLAUDE_MEM_OPENROUTER_MAX_TOKENS: string;
+  OPENCODE_MEM_PROVIDER: string;  // 'claude' | 'gemini' | 'openrouter'
+  OPENCODE_MEM_CLAUDE_AUTH_METHOD: string;  // 'cli' | 'api' - how Claude provider authenticates
+  OPENCODE_MEM_GEMINI_API_KEY: string;
+  OPENCODE_MEM_GEMINI_MODEL: string;  // 'gemini-2.5-flash-lite' | 'gemini-2.5-flash' | 'gemini-3-flash-preview'
+  OPENCODE_MEM_GEMINI_RATE_LIMITING_ENABLED: string;  // 'true' | 'false' - enable rate limiting for free tier
+  OPENCODE_MEM_OPENROUTER_API_KEY: string;
+  OPENCODE_MEM_OPENROUTER_MODEL: string;
+  OPENCODE_MEM_OPENROUTER_SITE_URL: string;
+  OPENCODE_MEM_OPENROUTER_APP_NAME: string;
+  OPENCODE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES: string;
+  OPENCODE_MEM_OPENROUTER_MAX_TOKENS: string;
   // System Configuration
-  CLAUDE_MEM_DATA_DIR: string;
-  CLAUDE_MEM_LOG_LEVEL: string;
-  CLAUDE_MEM_PYTHON_VERSION: string;
+  OPENCODE_MEM_DATA_DIR: string;
+  OPENCODE_MEM_LOG_LEVEL: string;
+  OPENCODE_MEM_PYTHON_VERSION: string;
   CLAUDE_CODE_PATH: string;
-  CLAUDE_MEM_MODE: string;
+  OPENCODE_MEM_MODE: string;
   // Token Economics
-  CLAUDE_MEM_CONTEXT_SHOW_READ_TOKENS: string;
-  CLAUDE_MEM_CONTEXT_SHOW_WORK_TOKENS: string;
-  CLAUDE_MEM_CONTEXT_SHOW_SAVINGS_AMOUNT: string;
-  CLAUDE_MEM_CONTEXT_SHOW_SAVINGS_PERCENT: string;
+  OPENCODE_MEM_CONTEXT_SHOW_READ_TOKENS: string;
+  OPENCODE_MEM_CONTEXT_SHOW_WORK_TOKENS: string;
+  OPENCODE_MEM_CONTEXT_SHOW_SAVINGS_AMOUNT: string;
+  OPENCODE_MEM_CONTEXT_SHOW_SAVINGS_PERCENT: string;
   // Observation Filtering
-  CLAUDE_MEM_CONTEXT_OBSERVATION_TYPES: string;
-  CLAUDE_MEM_CONTEXT_OBSERVATION_CONCEPTS: string;
+  OPENCODE_MEM_CONTEXT_OBSERVATION_TYPES: string;
+  OPENCODE_MEM_CONTEXT_OBSERVATION_CONCEPTS: string;
   // Display Configuration
-  CLAUDE_MEM_CONTEXT_FULL_COUNT: string;
-  CLAUDE_MEM_CONTEXT_FULL_FIELD: string;
-  CLAUDE_MEM_CONTEXT_SESSION_COUNT: string;
+  OPENCODE_MEM_CONTEXT_FULL_COUNT: string;
+  OPENCODE_MEM_CONTEXT_FULL_FIELD: string;
+  OPENCODE_MEM_CONTEXT_SESSION_COUNT: string;
   // Feature Toggles
-  CLAUDE_MEM_CONTEXT_SHOW_LAST_SUMMARY: string;
-  CLAUDE_MEM_CONTEXT_SHOW_LAST_MESSAGE: string;
-  CLAUDE_MEM_FOLDER_CLAUDEMD_ENABLED: string;
+  OPENCODE_MEM_CONTEXT_SHOW_LAST_SUMMARY: string;
+  OPENCODE_MEM_CONTEXT_SHOW_LAST_MESSAGE: string;
+  OPENCODE_MEM_FOLDER_CLAUDEMD_ENABLED: string;
   // Exclusion Settings
-  CLAUDE_MEM_EXCLUDED_PROJECTS: string;  // Comma-separated glob patterns for excluded project paths
-  CLAUDE_MEM_FOLDER_MD_EXCLUDE: string;  // JSON array of folder paths to exclude from CLAUDE.md generation
+  OPENCODE_MEM_EXCLUDED_PROJECTS: string;  // Comma-separated glob patterns for excluded project paths
+  OPENCODE_MEM_FOLDER_MD_EXCLUDE: string;  // JSON array of folder paths to exclude from CLAUDE.md generation
 }
 
 export class SettingsDefaultsManager {
@@ -62,48 +65,48 @@ export class SettingsDefaultsManager {
    * Default values for all settings
    */
   private static readonly DEFAULTS: SettingsDefaults = {
-    CLAUDE_MEM_MODEL: 'claude-sonnet-4-5',
-    CLAUDE_MEM_CONTEXT_OBSERVATIONS: '50',
-    CLAUDE_MEM_WORKER_PORT: '37777',
-    CLAUDE_MEM_WORKER_HOST: '127.0.0.1',
-    CLAUDE_MEM_SKIP_TOOLS: 'ListMcpResourcesTool,SlashCommand,Skill,TodoWrite,AskUserQuestion',
+    OPENCODE_MEM_MODEL: 'claude-sonnet-4-5',
+    OPENCODE_MEM_CONTEXT_OBSERVATIONS: '50',
+    OPENCODE_MEM_WORKER_PORT: '37777',
+    OPENCODE_MEM_WORKER_HOST: '127.0.0.1',
+    OPENCODE_MEM_SKIP_TOOLS: 'ListMcpResourcesTool,SlashCommand,Skill,TodoWrite,AskUserQuestion',
     // AI Provider Configuration
-    CLAUDE_MEM_PROVIDER: 'claude',  // Default to Claude
-    CLAUDE_MEM_CLAUDE_AUTH_METHOD: 'cli',  // Default to CLI subscription billing (not API key)
-    CLAUDE_MEM_GEMINI_API_KEY: '',  // Empty by default, can be set via UI or env
-    CLAUDE_MEM_GEMINI_MODEL: 'gemini-2.5-flash-lite',  // Default Gemini model (highest free tier RPM)
-    CLAUDE_MEM_GEMINI_RATE_LIMITING_ENABLED: 'true',  // Rate limiting ON by default for free tier users
-    CLAUDE_MEM_OPENROUTER_API_KEY: '',  // Empty by default, can be set via UI or env
-    CLAUDE_MEM_OPENROUTER_MODEL: 'xiaomi/mimo-v2-flash:free',  // Default OpenRouter model (free tier)
-    CLAUDE_MEM_OPENROUTER_SITE_URL: '',  // Optional: for OpenRouter analytics
-    CLAUDE_MEM_OPENROUTER_APP_NAME: 'claude-mem',  // App name for OpenRouter analytics
-    CLAUDE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES: '20',  // Max messages in context window
-    CLAUDE_MEM_OPENROUTER_MAX_TOKENS: '100000',  // Max estimated tokens (~100k safety limit)
+    OPENCODE_MEM_PROVIDER: 'claude',  // Default to Claude
+    OPENCODE_MEM_CLAUDE_AUTH_METHOD: 'cli',  // Default to CLI subscription billing (not API key)
+    OPENCODE_MEM_GEMINI_API_KEY: '',  // Empty by default, can be set via UI or env
+    OPENCODE_MEM_GEMINI_MODEL: 'gemini-2.5-flash-lite',  // Default Gemini model (highest free tier RPM)
+    OPENCODE_MEM_GEMINI_RATE_LIMITING_ENABLED: 'true',  // Rate limiting ON by default for free tier users
+    OPENCODE_MEM_OPENROUTER_API_KEY: '',  // Empty by default, can be set via UI or env
+    OPENCODE_MEM_OPENROUTER_MODEL: 'xiaomi/mimo-v2-flash:free',  // Default OpenRouter model (free tier)
+    OPENCODE_MEM_OPENROUTER_SITE_URL: '',  // Optional: for OpenRouter analytics
+    OPENCODE_MEM_OPENROUTER_APP_NAME: 'opencode-mem',  // App name for OpenRouter analytics
+    OPENCODE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES: '20',  // Max messages in context window
+    OPENCODE_MEM_OPENROUTER_MAX_TOKENS: '100000',  // Max estimated tokens (~100k safety limit)
     // System Configuration
-    CLAUDE_MEM_DATA_DIR: join(homedir(), '.claude-mem'),
-    CLAUDE_MEM_LOG_LEVEL: 'INFO',
-    CLAUDE_MEM_PYTHON_VERSION: '3.13',
+    OPENCODE_MEM_DATA_DIR: join(homedir(), '.opencode-mem'),
+    OPENCODE_MEM_LOG_LEVEL: 'INFO',
+    OPENCODE_MEM_PYTHON_VERSION: '3.13',
     CLAUDE_CODE_PATH: '', // Empty means auto-detect via 'which claude'
-    CLAUDE_MEM_MODE: 'code', // Default mode profile
+    OPENCODE_MEM_MODE: 'code', // Default mode profile
     // Token Economics
-    CLAUDE_MEM_CONTEXT_SHOW_READ_TOKENS: 'true',
-    CLAUDE_MEM_CONTEXT_SHOW_WORK_TOKENS: 'true',
-    CLAUDE_MEM_CONTEXT_SHOW_SAVINGS_AMOUNT: 'true',
-    CLAUDE_MEM_CONTEXT_SHOW_SAVINGS_PERCENT: 'true',
+    OPENCODE_MEM_CONTEXT_SHOW_READ_TOKENS: 'true',
+    OPENCODE_MEM_CONTEXT_SHOW_WORK_TOKENS: 'true',
+    OPENCODE_MEM_CONTEXT_SHOW_SAVINGS_AMOUNT: 'true',
+    OPENCODE_MEM_CONTEXT_SHOW_SAVINGS_PERCENT: 'true',
     // Observation Filtering
-    CLAUDE_MEM_CONTEXT_OBSERVATION_TYPES: DEFAULT_OBSERVATION_TYPES_STRING,
-    CLAUDE_MEM_CONTEXT_OBSERVATION_CONCEPTS: DEFAULT_OBSERVATION_CONCEPTS_STRING,
+    OPENCODE_MEM_CONTEXT_OBSERVATION_TYPES: DEFAULT_OBSERVATION_TYPES_STRING,
+    OPENCODE_MEM_CONTEXT_OBSERVATION_CONCEPTS: DEFAULT_OBSERVATION_CONCEPTS_STRING,
     // Display Configuration
-    CLAUDE_MEM_CONTEXT_FULL_COUNT: '5',
-    CLAUDE_MEM_CONTEXT_FULL_FIELD: 'narrative',
-    CLAUDE_MEM_CONTEXT_SESSION_COUNT: '10',
+    OPENCODE_MEM_CONTEXT_FULL_COUNT: '5',
+    OPENCODE_MEM_CONTEXT_FULL_FIELD: 'narrative',
+    OPENCODE_MEM_CONTEXT_SESSION_COUNT: '10',
     // Feature Toggles
-    CLAUDE_MEM_CONTEXT_SHOW_LAST_SUMMARY: 'true',
-    CLAUDE_MEM_CONTEXT_SHOW_LAST_MESSAGE: 'false',
-    CLAUDE_MEM_FOLDER_CLAUDEMD_ENABLED: 'false',
+    OPENCODE_MEM_CONTEXT_SHOW_LAST_SUMMARY: 'true',
+    OPENCODE_MEM_CONTEXT_SHOW_LAST_MESSAGE: 'false',
+    OPENCODE_MEM_FOLDER_CLAUDEMD_ENABLED: 'false',
     // Exclusion Settings
-    CLAUDE_MEM_EXCLUDED_PROJECTS: '',  // Comma-separated glob patterns for excluded project paths
-    CLAUDE_MEM_FOLDER_MD_EXCLUDE: '[]',  // JSON array of folder paths to exclude from CLAUDE.md generation
+    OPENCODE_MEM_EXCLUDED_PROJECTS: '',  // Comma-separated glob patterns for excluded project paths
+    OPENCODE_MEM_FOLDER_MD_EXCLUDE: '[]',  // JSON array of folder paths to exclude from CLAUDE.md generation
   };
 
   /**
@@ -117,7 +120,38 @@ export class SettingsDefaultsManager {
    * Get a default value from defaults (no environment variable override)
    */
   static get(key: keyof SettingsDefaults): string {
+    if (key === 'OPENCODE_MEM_DATA_DIR') {
+      return this.resolveDataDir();
+    }
     return this.DEFAULTS[key];
+  }
+
+  /**
+   * Resolve data directory with bootstrap-safe priority:
+   *   1) Environment variable
+   *   2) Legacy default settings file (~/.opencode-mem/settings.json)
+   *   3) Built-in default
+   */
+  private static resolveDataDir(): string {
+    const fromEnv = process.env.OPENCODE_MEM_DATA_DIR;
+    if (fromEnv && fromEnv.trim()) {
+      return fromEnv.trim();
+    }
+
+    try {
+      if (existsSync(DEFAULT_SETTINGS_PATH)) {
+        const settingsData = readFileSync(DEFAULT_SETTINGS_PATH, 'utf-8');
+        const parsed = JSON.parse(settingsData) as Partial<SettingsDefaults>;
+        const fromFile = parsed.OPENCODE_MEM_DATA_DIR;
+        if (typeof fromFile === 'string' && fromFile.trim()) {
+          return fromFile.trim();
+        }
+      }
+    } catch {
+      // Ignore parse/read failures and fall back to defaults
+    }
+
+    return this.DEFAULTS.OPENCODE_MEM_DATA_DIR;
   }
 
   /**
@@ -134,7 +168,7 @@ export class SettingsDefaultsManager {
    */
   static getBool(key: keyof SettingsDefaults): boolean {
     const value = this.get(key);
-    return value === 'true' || value === true;
+    return value === 'true';
   }
 
   /**
@@ -158,7 +192,7 @@ export class SettingsDefaultsManager {
    *
    * Configuration Priority:
    *   1. Environment variables (highest priority)
-   *   2. Settings file (~/.claude-mem/settings.json)
+   *   2. Settings file (~/.opencode-mem/settings.json)
    *   3. Default values (lowest priority)
    */
   static loadFromFile(settingsPath: string): SettingsDefaults {
@@ -172,7 +206,7 @@ export class SettingsDefaultsManager {
           }
           writeFileSync(settingsPath, JSON.stringify(defaults, null, 2), 'utf-8');
           // Use console instead of logger to avoid circular dependency
-          console.log('[SETTINGS] Created settings file with defaults:', settingsPath);
+          process.stderr.write(`[SETTINGS] Created settings file with defaults: ${settingsPath}\n`);
         } catch (error) {
           console.warn('[SETTINGS] Failed to create settings file, using in-memory defaults:', settingsPath, error);
         }
@@ -192,7 +226,7 @@ export class SettingsDefaultsManager {
         // Auto-migrate the file to flat schema
         try {
           writeFileSync(settingsPath, JSON.stringify(flatSettings, null, 2), 'utf-8');
-          console.log('[SETTINGS] Migrated settings file from nested to flat schema:', settingsPath);
+          process.stderr.write(`[SETTINGS] Migrated settings file from nested to flat schema: ${settingsPath}\n`);
         } catch (error) {
           console.warn('[SETTINGS] Failed to auto-migrate settings file:', settingsPath, error);
           // Continue with in-memory migration even if write fails

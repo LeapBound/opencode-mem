@@ -1,8 +1,8 @@
 /**
- * EnvManager - Centralized environment variable management for claude-mem
+ * EnvManager - Centralized environment variable management for opencode-mem
  *
- * Provides isolated credential storage in ~/.claude-mem/.env
- * This ensures claude-mem uses its own configured credentials,
+ * Provides isolated credential storage in OPENCODE_MEM_DATA_DIR/.env
+ * This ensures opencode-mem uses its own configured credentials,
  * not random ANTHROPIC_API_KEY values from project .env files.
  *
  * Issue #733: SDK was auto-discovering API keys from user's shell environment,
@@ -10,12 +10,11 @@
  */
 
 import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'fs';
-import { join, dirname } from 'path';
-import { homedir } from 'os';
+import { join } from 'path';
 import { logger } from '../utils/logger.js';
+import { DATA_DIR } from './paths.js';
 
-// Path to claude-mem's centralized .env file
-const DATA_DIR = join(homedir(), '.claude-mem');
+// Path to opencode-mem's centralized .env file
 export const ENV_FILE_PATH = join(DATA_DIR, '.env');
 
 // Essential system environment variables that subprocesses need to function
@@ -47,7 +46,7 @@ const ESSENTIAL_SYSTEM_VARS = [
   'CLAUDE_CODE_DEBUG_LOGS_DIR',
 ];
 
-// Credential keys that claude-mem manages
+// Credential keys that opencode-mem manages
 export const MANAGED_CREDENTIAL_KEYS = [
   'ANTHROPIC_API_KEY',
   'GEMINI_API_KEY',
@@ -99,9 +98,9 @@ function parseEnvFile(content: string): Record<string, string> {
  */
 function serializeEnvFile(env: Record<string, string>): string {
   const lines: string[] = [
-    '# claude-mem credentials',
-    '# This file stores API keys for claude-mem memory agent',
-    '# Edit this file or use claude-mem settings to configure',
+    '# opencode-mem credentials',
+    '# This file stores API keys for opencode-mem memory agent',
+    '# Edit this file or use opencode-mem settings to configure',
     '',
   ];
 
@@ -117,7 +116,7 @@ function serializeEnvFile(env: Record<string, string>): string {
 }
 
 /**
- * Load credentials from ~/.claude-mem/.env
+ * Load credentials from OPENCODE_MEM_DATA_DIR/.env
  * Returns empty object if file doesn't exist (means use CLI billing)
  */
 export function loadClaudeMemEnv(): ClaudeMemEnv {
@@ -143,7 +142,7 @@ export function loadClaudeMemEnv(): ClaudeMemEnv {
 }
 
 /**
- * Save credentials to ~/.claude-mem/.env
+ * Save credentials to OPENCODE_MEM_DATA_DIR/.env
  */
 export function saveClaudeMemEnv(env: ClaudeMemEnv): void {
   try {
@@ -195,7 +194,7 @@ export function saveClaudeMemEnv(env: ClaudeMemEnv): void {
  *
  * This is the key function that prevents Issue #733:
  * - Includes only essential system variables (PATH, HOME, etc.)
- * - Adds credentials ONLY from claude-mem's .env file
+ * - Adds credentials ONLY from opencode-mem's .env file
  * - Does NOT inherit random ANTHROPIC_API_KEY from user's shell
  *
  * @param includeCredentials - Whether to include API keys (default: true)
@@ -214,11 +213,11 @@ export function buildIsolatedEnv(includeCredentials: boolean = true): Record<str
   // 2. Add SDK entrypoint marker
   isolatedEnv.CLAUDE_CODE_ENTRYPOINT = 'sdk-ts';
 
-  // 3. Add credentials from claude-mem's .env file (NOT from process.env)
+  // 3. Add credentials from opencode-mem's .env file (NOT from process.env)
   if (includeCredentials) {
     const credentials = loadClaudeMemEnv();
 
-    // Only add ANTHROPIC_API_KEY if explicitly configured in claude-mem
+    // Only add ANTHROPIC_API_KEY if explicitly configured in opencode-mem
     // If not configured, CLI billing will be used (via pathToClaudeCodeExecutable)
     if (credentials.ANTHROPIC_API_KEY) {
       isolatedEnv.ANTHROPIC_API_KEY = credentials.ANTHROPIC_API_KEY;
@@ -236,7 +235,7 @@ export function buildIsolatedEnv(includeCredentials: boolean = true): Record<str
 }
 
 /**
- * Get a specific credential from claude-mem's .env
+ * Get a specific credential from opencode-mem's .env
  * Returns undefined if not set (which means use default/CLI billing)
  */
 export function getCredential(key: keyof ClaudeMemEnv): string | undefined {
@@ -245,7 +244,7 @@ export function getCredential(key: keyof ClaudeMemEnv): string | undefined {
 }
 
 /**
- * Set a specific credential in claude-mem's .env
+ * Set a specific credential in opencode-mem's .env
  * Pass empty string to remove the credential
  */
 export function setCredential(key: keyof ClaudeMemEnv, value: string): void {
@@ -255,7 +254,7 @@ export function setCredential(key: keyof ClaudeMemEnv, value: string): void {
 }
 
 /**
- * Check if claude-mem has an Anthropic API key configured
+ * Check if opencode-mem has an Anthropic API key configured
  * If false, it means CLI billing should be used
  */
 export function hasAnthropicApiKey(): boolean {
@@ -268,7 +267,7 @@ export function hasAnthropicApiKey(): boolean {
  */
 export function getAuthMethodDescription(): string {
   if (hasAnthropicApiKey()) {
-    return 'API key (from ~/.claude-mem/.env)';
+    return `API key (from ${ENV_FILE_PATH})`;
   }
   return 'Claude Code CLI (subscription billing)';
 }

@@ -237,10 +237,10 @@ async function syncAndBroadcastObservations(
 
   // Update folder CLAUDE.md files for touched folders (fire-and-forget)
   // This runs per-observation batch to ensure folders are updated as work happens
-  // Only runs if CLAUDE_MEM_FOLDER_CLAUDEMD_ENABLED is true (default: false)
+  // Only runs if OPENCODE_MEM_FOLDER_CLAUDEMD_ENABLED is true (default: false)
   const settings = SettingsDefaultsManager.loadFromFile(USER_SETTINGS_PATH);
   // Handle both string 'true' and boolean true from JSON settings
-  const settingValue = settings.CLAUDE_MEM_FOLDER_CLAUDEMD_ENABLED;
+  const settingValue = settings.OPENCODE_MEM_FOLDER_CLAUDEMD_ENABLED;
   const folderClaudeMdEnabled = settingValue === 'true' || settingValue === true;
 
   if (folderClaudeMdEnabled) {

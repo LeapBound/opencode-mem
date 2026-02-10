@@ -2,11 +2,11 @@
 
 <h1 align="center">
   <br>
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-dark-mode.webp">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/claude-mem-logo-for-light-mode.webp" alt="Claude-Mem" width="400">
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-dark-mode.webp">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/opencode-mem-logo-for-light-mode.webp" alt="OpenCode-Mem" width="400">
     </picture>
   </a>
   <br>
@@ -65,9 +65,9 @@
 <p align="center">
   <a href="https://trendshift.io/repositories/15496" target="_blank">
     <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg">
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/claude-mem | Trendshift" width="250" height="55"/>
+      <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge-dark.svg">
+      <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/trendshift-badge.svg" alt="thedotmack/opencode-mem | Trendshift" width="250" height="55"/>
     </picture>
   </a>
 </p>
@@ -75,9 +75,9 @@
 <br>
 
 <p align="center">
-  <a href="https://github.com/thedotmack/claude-mem">
+  <a href="https://github.com/thedotmack/opencode-mem">
     <picture>
-      <img src="https://raw.githubusercontent.com/thedotmack/claude-mem/main/docs/public/cm-preview.gif" alt="Claude-Mem Preview" width="800">
+      <img src="https://raw.githubusercontent.com/thedotmack/opencode-mem/main/docs/public/cm-preview.gif" alt="OpenCode-Mem Preview" width="800">
     </picture>
   </a>
 </p>
@@ -93,7 +93,7 @@
 </p>
 
 <p align="center">
-  Claude-Mem säilyttää kontekstin saumattomasti istuntojen välillä tallentamalla automaattisesti työkalujen käyttöhavaintoja, luomalla semanttisia yhteenvetoja ja asettamalla ne tulevien istuntojen saataville. Tämä mahdollistaa Clauden säilyttää tiedon jatkuvuuden projekteista senkin jälkeen, kun istunnot päättyvät tai yhteys palautuu.
+  OpenCode-Mem säilyttää kontekstin saumattomasti istuntojen välillä tallentamalla automaattisesti työkalujen käyttöhavaintoja, luomalla semanttisia yhteenvetoja ja asettamalla ne tulevien istuntojen saataville. Tämä mahdollistaa Clauden säilyttää tiedon jatkuvuuden projekteista senkin jälkeen, kun istunnot päättyvät tai yhteys palautuu.
 </p>
 
 ---
@@ -103,9 +103,9 @@
 Aloita uusi Claude Code -istunto terminaalissa ja syötä seuraavat komennot:
 
 ```
-> /plugin marketplace add thedotmack/claude-mem
+> /plugin marketplace add thedotmack/opencode-mem
 
-> /plugin install claude-mem
+> /plugin install opencode-mem
 ```
 
 Käynnistä Claude Code uudelleen. Aiempien istuntojen konteksti ilmestyy automaattisesti uusiin istuntoihin.
@@ -127,35 +127,35 @@ Käynnistä Claude Code uudelleen. Aiempien istuntojen konteksti ilmestyy automa
 
 ## Dokumentaatio
 
-📚 **[Näytä täydellinen dokumentaatio](https://docs.claude-mem.ai/)** - Selaa virallisella verkkosivustolla
+📚 **[Näytä täydellinen dokumentaatio](https://docs.opencode-mem.ai/)** - Selaa virallisella verkkosivustolla
 
 ### Aloitus
 
-- **[Asennusopas](https://docs.claude-mem.ai/installation)** - Pikaopas ja edistynyt asennus
-- **[Käyttöopas](https://docs.claude-mem.ai/usage/getting-started)** - Miten Claude-Mem toimii automaattisesti
-- **[Hakutyökalut](https://docs.claude-mem.ai/usage/search-tools)** - Kysy projektihistoriaasi luonnollisella kielellä
-- **[Beta-ominaisuudet](https://docs.claude-mem.ai/beta-features)** - Kokeile kokeellisia ominaisuuksia kuten Endless Mode
+- **[Asennusopas](https://docs.opencode-mem.ai/installation)** - Pikaopas ja edistynyt asennus
+- **[Käyttöopas](https://docs.opencode-mem.ai/usage/getting-started)** - Miten OpenCode-Mem toimii automaattisesti
+- **[Hakutyökalut](https://docs.opencode-mem.ai/usage/search-tools)** - Kysy projektihistoriaasi luonnollisella kielellä
+- **[Beta-ominaisuudet](https://docs.opencode-mem.ai/beta-features)** - Kokeile kokeellisia ominaisuuksia kuten Endless Mode
 
 ### Parhaat käytännöt
 
-- **[Kontekstisuunnittelu](https://docs.claude-mem.ai/context-engineering)** - AI-agentin kontekstin optimointiperiaatteet
-- **[Asteittainen paljastaminen](https://docs.claude-mem.ai/progressive-disclosure)** - Filosofia Claude-Mem-kontekstin valmistelustrategian takana
+- **[Kontekstisuunnittelu](https://docs.opencode-mem.ai/context-engineering)** - AI-agentin kontekstin optimointiperiaatteet
+- **[Asteittainen paljastaminen](https://docs.opencode-mem.ai/progressive-disclosure)** - Filosofia OpenCode-Mem-kontekstin valmistelustrategian takana
 
 ### Arkkitehtuuri
 
-- **[Yleiskatsaus](https://docs.claude-mem.ai/architecture/overview)** - Järjestelmän komponentit ja datavirta
-- **[Arkkitehtuurin kehitys](https://docs.claude-mem.ai/architecture-evolution)** - Matka versiosta v3 versioon v5
-- **[Koukku-arkkitehtuuri](https://docs.claude-mem.ai/hooks-architecture)** - Miten Claude-Mem käyttää elinkaarikkoukkuja
-- **[Koukku-viittaus](https://docs.claude-mem.ai/architecture/hooks)** - 7 koukku-skriptiä selitettynä
-- **[Worker-palvelu](https://docs.claude-mem.ai/architecture/worker-service)** - HTTP API ja Bun-hallinta
-- **[Tietokanta](https://docs.claude-mem.ai/architecture/database)** - SQLite-skeema ja FTS5-haku
-- **[Hakuarkkitehtuuri](https://docs.claude-mem.ai/architecture/search-architecture)** - Hybridihaku Chroma-vektoritietokannalla
+- **[Yleiskatsaus](https://docs.opencode-mem.ai/architecture/overview)** - Järjestelmän komponentit ja datavirta
+- **[Arkkitehtuurin kehitys](https://docs.opencode-mem.ai/architecture-evolution)** - Matka versiosta v3 versioon v5
+- **[Koukku-arkkitehtuuri](https://docs.opencode-mem.ai/hooks-architecture)** - Miten OpenCode-Mem käyttää elinkaarikkoukkuja
+- **[Koukku-viittaus](https://docs.opencode-mem.ai/architecture/hooks)** - 7 koukku-skriptiä selitettynä
+- **[Worker-palvelu](https://docs.opencode-mem.ai/architecture/worker-service)** - HTTP API ja Bun-hallinta
+- **[Tietokanta](https://docs.opencode-mem.ai/architecture/database)** - SQLite-skeema ja FTS5-haku
+- **[Hakuarkkitehtuuri](https://docs.opencode-mem.ai/architecture/search-architecture)** - Hybridihaku Chroma-vektoritietokannalla
 
 ### Asetukset ja kehitys
 
-- **[Asetukset](https://docs.claude-mem.ai/configuration)** - Ympäristömuuttujat ja asetukset
-- **[Kehitys](https://docs.claude-mem.ai/development)** - Rakentaminen, testaus, osallistuminen
-- **[Vianmääritys](https://docs.claude-mem.ai/troubleshooting)** - Yleiset ongelmat ja ratkaisut
+- **[Asetukset](https://docs.opencode-mem.ai/configuration)** - Ympäristömuuttujat ja asetukset
+- **[Kehitys](https://docs.opencode-mem.ai/development)** - Rakentaminen, testaus, osallistuminen
+- **[Vianmääritys](https://docs.opencode-mem.ai/troubleshooting)** - Yleiset ongelmat ja ratkaisut
 
 ---
 
@@ -170,13 +170,13 @@ Käynnistä Claude Code uudelleen. Aiempien istuntojen konteksti ilmestyy automa
 5. **mem-search-taito** - Luonnollisen kielen kyselyt asteittaisella paljastamisella
 6. **Chroma-vektoritietokanta** - Hybridi semanttinen + avainsanahaku älykkääseen kontekstin hakuun
 
-Katso [Arkkitehtuurin yleiskatsaus](https://docs.claude-mem.ai/architecture/overview) yksityiskohdista.
+Katso [Arkkitehtuurin yleiskatsaus](https://docs.opencode-mem.ai/architecture/overview) yksityiskohdista.
 
 ---
 
 ## mem-search-taito
 
-Claude-Mem tarjoaa älykkään haun mem-search-taidon kautta, joka käynnistyy automaattisesti kun kysyt aiemmasta työstä:
+OpenCode-Mem tarjoaa älykkään haun mem-search-taidon kautta, joka käynnistyy automaattisesti kun kysyt aiemmasta työstä:
 
 **Miten se toimii:**
 - Kysy vain luonnollisesti: *"Mitä teimme viime istunnossa?"* tai *"Korjasimmeko tämän bugin aiemmin?"*
@@ -205,15 +205,15 @@ Claude-Mem tarjoaa älykkään haun mem-search-taidon kautta, joka käynnistyy a
 "Mitä tapahtui kun lisäsimme katselukäyttöliittymän?"
 ```
 
-Katso [Hakutyökalujen opas](https://docs.claude-mem.ai/usage/search-tools) yksityiskohtaisia esimerkkejä varten.
+Katso [Hakutyökalujen opas](https://docs.opencode-mem.ai/usage/search-tools) yksityiskohtaisia esimerkkejä varten.
 
 ---
 
 ## Beta-ominaisuudet
 
-Claude-Mem tarjoaa **beta-kanavan** kokeellisilla ominaisuuksilla kuten **Endless Mode** (biomimeettinen muistiarkkitehtuuri pidennetyille istunnoille). Vaihda vakaan ja beta-version välillä web-katselukäyttöliittymästä osoitteessa http://localhost:37777 → Settings.
+OpenCode-Mem tarjoaa **beta-kanavan** kokeellisilla ominaisuuksilla kuten **Endless Mode** (biomimeettinen muistiarkkitehtuuri pidennetyille istunnoille). Vaihda vakaan ja beta-version välillä web-katselukäyttöliittymästä osoitteessa http://localhost:37777 → Settings.
 
-Katso **[Beta-ominaisuuksien dokumentaatio](https://docs.claude-mem.ai/beta-features)** yksityiskohdista Endless Moden ja sen kokeilemisen osalta.
+Katso **[Beta-ominaisuuksien dokumentaatio](https://docs.opencode-mem.ai/beta-features)** yksityiskohdista Endless Moden ja sen kokeilemisen osalta.
 
 ---
 
@@ -229,15 +229,15 @@ Katso **[Beta-ominaisuuksien dokumentaatio](https://docs.claude-mem.ai/beta-feat
 
 ## Asetukset
 
-Asetuksia hallitaan tiedostossa `~/.claude-mem/settings.json` (luodaan automaattisesti oletusarvoilla ensimmäisellä suorituskerralla). Määritä AI-malli, worker-portti, datahakemisto, lokitaso ja kontekstin injektointiasetukset.
+Asetuksia hallitaan tiedostossa `~/.opencode-mem/settings.json` (luodaan automaattisesti oletusarvoilla ensimmäisellä suorituskerralla). Määritä AI-malli, worker-portti, datahakemisto, lokitaso ja kontekstin injektointiasetukset.
 
-Katso **[Asetusopas](https://docs.claude-mem.ai/configuration)** kaikista saatavilla olevista asetuksista ja esimerkeistä.
+Katso **[Asetusopas](https://docs.opencode-mem.ai/configuration)** kaikista saatavilla olevista asetuksista ja esimerkeistä.
 
 ---
 
 ## Kehitys
 
-Katso **[Kehitysopas](https://docs.claude-mem.ai/development)** rakennusohjeista, testauksesta ja osallistumisen työnkulusta.
+Katso **[Kehitysopas](https://docs.opencode-mem.ai/development)** rakennusohjeista, testauksesta ja osallistumisen työnkulusta.
 
 ---
 
@@ -245,7 +245,7 @@ Katso **[Kehitysopas](https://docs.claude-mem.ai/development)** rakennusohjeista
 
 Jos kohtaat ongelmia, kuvaile ongelma Claudelle ja troubleshoot-taito diagnosoi automaattisesti ja tarjoaa korjauksia.
 
-Katso **[Vianmääritysopas](https://docs.claude-mem.ai/troubleshooting)** yleisistä ongelmista ja ratkaisuista.
+Katso **[Vianmääritysopas](https://docs.opencode-mem.ai/troubleshooting)** yleisistä ongelmista ja ratkaisuista.
 
 ---
 
@@ -268,7 +268,7 @@ Osallistuminen on tervetullutta! Ole hyvä:
 4. Päivitä dokumentaatio
 5. Lähetä Pull Request
 
-Katso [Kehitysopas](https://docs.claude-mem.ai/development) osallistumisen työnkulusta.
+Katso [Kehitysopas](https://docs.opencode-mem.ai/development) osallistumisen työnkulusta.
 
 ---
 
@@ -294,8 +294,8 @@ Katso [LICENSE](LICENSE)-tiedosto täydellisistä yksityiskohdista.
 ## Tuki
 
 - **Dokumentaatio**: [docs/](docs/)
-- **Ongelmat**: [GitHub Issues](https://github.com/thedotmack/claude-mem/issues)
-- **Repositorio**: [github.com/thedotmack/claude-mem](https://github.com/thedotmack/claude-mem)
+- **Ongelmat**: [GitHub Issues](https://github.com/thedotmack/opencode-mem/issues)
+- **Repositorio**: [github.com/thedotmack/opencode-mem](https://github.com/thedotmack/opencode-mem)
 - **Tekijä**: Alex Newman ([@thedotmack](https://github.com/thedotmack))
 
 ---

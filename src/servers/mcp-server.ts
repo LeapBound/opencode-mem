@@ -250,7 +250,7 @@ NEVER fetch full details without filtering first. 10x token savings.`,
         },
         project: {
           type: 'string',
-          description: 'Project name (uses "claude-mem" if omitted)'
+          description: 'Project name (uses "opencode-mem" if omitted)'
         }
       },
       required: ['text']

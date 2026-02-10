@@ -148,7 +148,7 @@ export class Server {
       res.status(200).json({
         status: 'ok',
         build: TEST_BUILD_ID,
-        managed: process.env.CLAUDE_MEM_MANAGED === 'true',
+        managed: process.env.OPENCODE_MEM_MANAGED === 'true',
         hasIpc: typeof process.send === 'function',
         platform: process.platform,
         pid: process.pid,
@@ -208,7 +208,7 @@ export class Server {
 
       // Handle Windows managed mode via IPC
       const isWindowsManaged = process.platform === 'win32' &&
-        process.env.CLAUDE_MEM_MANAGED === 'true' &&
+        process.env.OPENCODE_MEM_MANAGED === 'true' &&
         process.send;
 
       if (isWindowsManaged) {
@@ -227,7 +227,7 @@ export class Server {
 
       // Handle Windows managed mode via IPC
       const isWindowsManaged = process.platform === 'win32' &&
-        process.env.CLAUDE_MEM_MANAGED === 'true' &&
+        process.env.OPENCODE_MEM_MANAGED === 'true' &&
         process.send;
 
       if (isWindowsManaged) {

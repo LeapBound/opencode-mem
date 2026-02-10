@@ -3,7 +3,7 @@ import { readFileSync } from "fs";
 import { logger } from "../utils/logger.js";
 import { HOOK_TIMEOUTS, getTimeout } from "./hook-constants.js";
 import { SettingsDefaultsManager } from "./SettingsDefaultsManager.js";
-import { MARKETPLACE_ROOT } from "./paths.js";
+import { MARKETPLACE_ROOT, USER_SETTINGS_PATH } from "./paths.js";
 
 // Named constants for health checks
 const HEALTH_CHECK_TIMEOUT_MS = getTimeout(HOOK_TIMEOUTS.HEALTH_CHECK);
@@ -33,7 +33,7 @@ let cachedHost: string | null = null;
 
 /**
  * Get the worker port number from settings
- * Uses CLAUDE_MEM_WORKER_PORT from settings file or default (37777)
+ * Uses OPENCODE_MEM_WORKER_PORT from settings file or default (37777)
  * Caches the port value to avoid repeated file reads
  */
 export function getWorkerPort(): number {
@@ -41,15 +41,14 @@ export function getWorkerPort(): number {
     return cachedPort;
   }
 
-  const settingsPath = path.join(SettingsDefaultsManager.get('CLAUDE_MEM_DATA_DIR'), 'settings.json');
-  const settings = SettingsDefaultsManager.loadFromFile(settingsPath);
-  cachedPort = parseInt(settings.CLAUDE_MEM_WORKER_PORT, 10);
+  const settings = SettingsDefaultsManager.loadFromFile(USER_SETTINGS_PATH);
+  cachedPort = parseInt(settings.OPENCODE_MEM_WORKER_PORT, 10);
   return cachedPort;
 }
 
 /**
  * Get the worker host address
- * Uses CLAUDE_MEM_WORKER_HOST from settings file or default (127.0.0.1)
+ * Uses OPENCODE_MEM_WORKER_HOST from settings file or default (127.0.0.1)
  * Caches the host value to avoid repeated file reads
  */
 export function getWorkerHost(): string {
@@ -57,9 +56,8 @@ export function getWorkerHost(): string {
     return cachedHost;
   }
 
-  const settingsPath = path.join(SettingsDefaultsManager.get('CLAUDE_MEM_DATA_DIR'), 'settings.json');
-  const settings = SettingsDefaultsManager.loadFromFile(settingsPath);
-  cachedHost = settings.CLAUDE_MEM_WORKER_HOST;
+  const settings = SettingsDefaultsManager.loadFromFile(USER_SETTINGS_PATH);
+  cachedHost = settings.OPENCODE_MEM_WORKER_HOST;
   return cachedHost;
 }
 
@@ -78,7 +76,7 @@ export function clearPortCache(): void {
  * - Hooks have 15-second timeout, but full initialization can take 5+ minutes (MCP connection)
  * - /api/health returns 200 as soon as HTTP server is up (sufficient for hook communication)
  * - /api/readiness returns 503 until full initialization completes (too slow for hooks)
- * See: https://github.com/thedotmack/claude-mem/issues/811
+ * See: https://github.com/thedotmack/opencode-mem/issues/811
  */
 async function isWorkerHealthy(): Promise<boolean> {
   const port = getWorkerPort();

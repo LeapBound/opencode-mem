@@ -2,13 +2,13 @@
 
 Persistent memory + search tooling for OpenCode / Oh My OpenCode.
 
-This repository is a fork/port of `thedotmack/claude-mem` with the goal of running the same
+This repository is a fork/port of `thedotmack/opencode-mem` with the goal of running the same
 worker + MCP search tools in an OpenCode/OMO workflow.
 
 ## What you get
 
 - Worker service (HTTP API, default port `37777`)
-- SQLite-backed storage (default `~/.claude-mem/claude-mem.db`)
+- SQLite-backed storage (default `~/.opencode-mem/opencode-mem.db`)
 - MCP tools: `search`, `timeline`, `get_observations`, `save_memory`
 
 ## Oh My OpenCode integration

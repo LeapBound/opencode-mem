@@ -71,13 +71,13 @@ All free models support:
 
 | Setting | Values | Default | Description |
 |---------|--------|---------|-------------|
-| `CLAUDE_MEM_PROVIDER` | `claude`, `gemini`, `openrouter` | `claude` | AI provider for observation extraction |
-| `CLAUDE_MEM_OPENROUTER_API_KEY` | string | — | Your OpenRouter API key |
-| `CLAUDE_MEM_OPENROUTER_MODEL` | string | `xiaomi/mimo-v2-flash:free` | Model identifier (see list above) |
-| `CLAUDE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES` | number | `20` | Max messages in conversation history |
-| `CLAUDE_MEM_OPENROUTER_MAX_TOKENS` | number | `100000` | Token budget safety limit |
-| `CLAUDE_MEM_OPENROUTER_SITE_URL` | string | — | Optional: URL for analytics attribution |
-| `CLAUDE_MEM_OPENROUTER_APP_NAME` | string | `claude-mem` | Optional: App name for analytics |
+| `OPENCODE_MEM_PROVIDER` | `claude`, `gemini`, `openrouter` | `claude` | AI provider for observation extraction |
+| `OPENCODE_MEM_OPENROUTER_API_KEY` | string | — | Your OpenRouter API key |
+| `OPENCODE_MEM_OPENROUTER_MODEL` | string | `xiaomi/mimo-v2-flash:free` | Model identifier (see list above) |
+| `OPENCODE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES` | number | `20` | Max messages in conversation history |
+| `OPENCODE_MEM_OPENROUTER_MAX_TOKENS` | number | `100000` | Token budget safety limit |
+| `OPENCODE_MEM_OPENROUTER_SITE_URL` | string | — | Optional: URL for analytics attribution |
+| `OPENCODE_MEM_OPENROUTER_APP_NAME` | string | `opencode-mem` | Optional: App name for analytics |
 
 ### Using the Settings UI
 
@@ -91,13 +91,13 @@ Settings are applied immediately—no restart required.
 
 ### Manual Configuration
 
-Edit `~/.claude-mem/settings.json`:
+Edit `~/.opencode-mem/settings.json`:
 
 ```json
 {
-  "CLAUDE_MEM_PROVIDER": "openrouter",
-  "CLAUDE_MEM_OPENROUTER_API_KEY": "sk-or-v1-your-key-here",
-  "CLAUDE_MEM_OPENROUTER_MODEL": "xiaomi/mimo-v2-flash:free"
+  "OPENCODE_MEM_PROVIDER": "openrouter",
+  "OPENCODE_MEM_OPENROUTER_API_KEY": "sk-or-v1-your-key-here",
+  "OPENCODE_MEM_OPENROUTER_MODEL": "xiaomi/mimo-v2-flash:free"
 }
 ```
 
@@ -183,13 +183,13 @@ You can switch between providers at any time:
 
 ```json
 {
-  "CLAUDE_MEM_PROVIDER": "openrouter"
+  "OPENCODE_MEM_PROVIDER": "openrouter"
 }
 ```
 
 ## Fallback Behavior
 
-If OpenRouter encounters errors, claude-mem automatically falls back to the Claude Agent SDK:
+If OpenRouter encounters errors, opencode-mem automatically falls back to the Claude Agent SDK:
 
 **Triggers fallback:**
 - Rate limiting (HTTP 429)
@@ -239,7 +239,7 @@ This enables:
 ### "OpenRouter API key not configured"
 
 Either:
-- Set `CLAUDE_MEM_OPENROUTER_API_KEY` in `~/.claude-mem/settings.json`, or
+- Set `OPENCODE_MEM_OPENROUTER_API_KEY` in `~/.opencode-mem/settings.json`, or
 - Set the `OPENROUTER_API_KEY` environment variable
 
 ### Rate Limiting
@@ -259,8 +259,8 @@ Verify the model ID is correct:
 ### High Token Usage Warning
 
 If you see warnings about high token usage (>50,000 per request):
-- Reduce `CLAUDE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES`
-- Reduce `CLAUDE_MEM_OPENROUTER_MAX_TOKENS`
+- Reduce `OPENCODE_MEM_OPENROUTER_MAX_CONTEXT_MESSAGES`
+- Reduce `OPENCODE_MEM_OPENROUTER_MAX_TOKENS`
 - Consider a model with larger context window
 
 ### Connection Errors
@@ -279,8 +279,8 @@ OpenRouter uses an OpenAI-compatible REST API:
 **Headers**:
 ```
 Authorization: Bearer {apiKey}
-HTTP-Referer: https://github.com/thedotmack/claude-mem
-X-Title: claude-mem
+HTTP-Referer: https://github.com/thedotmack/opencode-mem
+X-Title: opencode-mem
 Content-Type: application/json
 ```
 

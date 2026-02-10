@@ -26,7 +26,7 @@ export const sessionInitHandler: EventHandler = {
 
     // Check if project is excluded from tracking
     const settings = SettingsDefaultsManager.loadFromFile(USER_SETTINGS_PATH);
-    if (cwd && isProjectExcluded(cwd, settings.CLAUDE_MEM_EXCLUDED_PROJECTS)) {
+    if (cwd && isProjectExcluded(cwd, settings.OPENCODE_MEM_EXCLUDED_PROJECTS)) {
       logger.info('HOOK', 'Project excluded from tracking', { cwd });
       return { continue: true, suppressOutput: true };
     }

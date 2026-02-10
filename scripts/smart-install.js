@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Smart Install Script for claude-mem
+ * Smart Install Script for opencode-mem
  *
  * Ensures Bun runtime and uv (Python package manager) are installed
  * (auto-installs if missing) and handles dependency installation when needed.

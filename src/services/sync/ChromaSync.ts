@@ -14,9 +14,8 @@ import { ParsedObservation, ParsedSummary } from '../../sdk/parser.js';
 import { SessionStore } from '../sqlite/SessionStore.js';
 import { logger } from '../../utils/logger.js';
 import { SettingsDefaultsManager } from '../../shared/SettingsDefaultsManager.js';
-import { USER_SETTINGS_PATH } from '../../shared/paths.js';
+import { DATA_DIR, USER_SETTINGS_PATH } from '../../shared/paths.js';
 import path from 'path';
-import os from 'os';
 import fs from 'fs';
 import { execSync } from 'child_process';
 
@@ -86,14 +85,14 @@ export class ChromaSync {
   private readonly BATCH_SIZE = 100;
 
   // Windows: Chroma disabled due to MCP SDK spawning console popups
-  // See: https://github.com/anthropics/claude-mem/issues/675
+  // See: https://github.com/anthropics/opencode-mem/issues/675
   // Will be re-enabled when we migrate to persistent HTTP server
   private readonly disabled: boolean;
 
   constructor(project: string) {
     this.project = project;
     this.collectionName = `cm__${project}`;
-    this.VECTOR_DB_DIR = path.join(os.homedir(), '.claude-mem', 'vector-db');
+    this.VECTOR_DB_DIR = path.join(DATA_DIR, 'vector-db');
 
     // Disable on Windows to prevent console popups from MCP subprocess spawning
     // The MCP SDK's StdioClientTransport spawns Python processes that create visible windows
@@ -111,7 +110,7 @@ export class ChromaSync {
    * Combines standard certifi certificates with enterprise security certificates (e.g., Zscaler)
    */
   private getCombinedCertPath(): string | undefined {
-    const combinedCertPath = path.join(os.homedir(), '.claude-mem', 'combined_certs.pem');
+    const combinedCertPath = path.join(DATA_DIR, 'combined_certs.pem');
 
     // If combined certs already exist and are recent (less than 24 hours old), use them
     if (fs.existsSync(combinedCertPath)) {
@@ -200,9 +199,9 @@ export class ChromaSync {
 
     try {
       // Use Python 3.13 by default to avoid onnxruntime compatibility issues with Python 3.14+
-      // See: https://github.com/thedotmack/claude-mem/issues/170 (Python 3.14 incompatibility)
+      // See: https://github.com/thedotmack/opencode-mem/issues/170 (Python 3.14 incompatibility)
       const settings = SettingsDefaultsManager.loadFromFile(USER_SETTINGS_PATH);
-      const pythonVersion = settings.CLAUDE_MEM_PYTHON_VERSION;
+      const pythonVersion = settings.OPENCODE_MEM_PYTHON_VERSION;
       const isWindows = process.platform === 'win32';
 
       // Get combined SSL certificate bundle for Zscaler/corporate proxy environments
@@ -243,7 +242,7 @@ export class ChromaSync {
 
       // Empty capabilities object: this client only calls Chroma tools, doesn't expose any
       this.client = new Client({
-        name: 'claude-mem-chroma-sync',
+        name: 'opencode-mem-chroma-sync',
         version: packageVersion
       }, {
         capabilities: {}
@@ -695,8 +694,12 @@ export class ChromaSync {
           }
         });
 
-        const data = result.content[0];
-        if (data.type !== 'text') {
+        const rawContent = (result && typeof result === 'object' && 'content' in result)
+          ? (result as { content?: unknown }).content
+          : undefined;
+        const content = Array.isArray(rawContent) ? rawContent : [];
+        const data = content[0];
+        if (!data || typeof data !== 'object' || !('type' in data) || data.type !== 'text' || !('text' in data) || typeof data.text !== 'string') {
           throw new Error('Unexpected response type from chroma_get_documents');
         }
 
@@ -981,13 +984,20 @@ export class ChromaSync {
       throw error;
     }
 
-    const resultText = result.content[0]?.text || (() => {
+    const rawContent = (result && typeof result === 'object' && 'content' in result)
+      ? (result as { content?: unknown }).content
+      : undefined;
+    const content = Array.isArray(rawContent) ? rawContent : [];
+    const firstContent = content[0];
+    const resultText = (firstContent && typeof firstContent === 'object' && 'text' in firstContent && typeof firstContent.text === 'string')
+      ? firstContent.text
+      : (() => {
       logger.error('CHROMA', 'Missing text in MCP chroma_query_documents result', {
         project: this.project,
         query_text: query
       });
       return '';
-    })();
+      })();
 
     // Parse JSON response
     let parsed: any;

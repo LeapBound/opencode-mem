@@ -11,7 +11,7 @@ import {
   type PidInfo
 } from '../../src/services/infrastructure/index.js';
 
-const DATA_DIR = path.join(homedir(), '.claude-mem');
+const DATA_DIR = path.join(homedir(), '.opencode-mem');
 const PID_FILE = path.join(DATA_DIR, 'worker.pid');
 
 describe('ProcessManager', () => {

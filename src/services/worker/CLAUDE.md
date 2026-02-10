@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Dec 10, 2025
@@ -87,7 +87,7 @@
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
 | #32949 | 10:55 PM | 🔵 | Complete settings persistence flow for Xiaomi MIMO v2 Flash model | ~320 |
-| #32948 | 10:53 PM | 🔵 | OpenRouterAgent uses CLAUDE_MEM_OPENROUTER_MODEL setting with Xiaomi as default | ~183 |
+| #32948 | 10:53 PM | 🔵 | OpenRouterAgent uses OPENCODE_MEM_OPENROUTER_MODEL setting with Xiaomi as default | ~183 |
 
 ### Dec 27, 2025
 
@@ -120,4 +120,4 @@
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
 | #36853 | 1:49 AM | 🔵 | GeminiAgent Implementation Reviewed for Model Support | ~555 |
-</claude-mem-context>
+</opencode-mem-context>

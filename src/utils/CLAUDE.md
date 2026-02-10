@@ -1,4 +1,4 @@
-<claude-mem-context>
+<opencode-mem-context>
 # Recent Activity
 
 ### Nov 5, 2025
@@ -55,4 +55,4 @@
 | ID | Time | T | Title | Read |
 |----|------|---|-------|------|
 | #30883 | 6:38 PM | 🔵 | Tag-Stripping DRY Violation Analysis | ~152 |
-</claude-mem-context>
+</opencode-mem-context>

@@ -4,7 +4,7 @@
     "name": "Alex Newman"
   },
   "metadata": {
-    "description": "opencode-mem local marketplace (fork of claude-mem)",
+    "description": "opencode-mem local marketplace (fork of opencode-mem)",
     "homepage": ""
   },
   "plugins": [

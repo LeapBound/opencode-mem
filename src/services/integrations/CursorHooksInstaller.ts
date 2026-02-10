@@ -1,5 +1,5 @@
 /**
- * CursorHooksInstaller - Cursor IDE integration for claude-mem
+ * CursorHooksInstaller - Cursor IDE integration for opencode-mem
  *
  * Extracted from worker-service.ts monolith to provide centralized Cursor integration.
  * Handles:
@@ -294,8 +294,8 @@ export function configureCursorMcp(target: CursorInstallTarget): number {
       }
     }
 
-    // Add claude-mem MCP server
-    config.mcpServers['claude-mem'] = {
+    // Add opencode-mem MCP server
+    config.mcpServers['opencode-mem'] = {
       command: 'node',
       args: [mcpServerPath]
     };
@@ -320,7 +320,7 @@ export function configureCursorMcp(target: CursorInstallTarget): number {
  * No longer copies shell scripts - uses node CLI directly
  */
 export async function installCursorHooks(_sourceDir: string, target: CursorInstallTarget): Promise<number> {
-  console.log(`\nInstalling Claude-Mem Cursor hooks (${target} level)...\n`);
+  console.log(`\nInstalling OpenCode-Mem Cursor hooks (${target} level)...\n`);
 
   const targetDir = getTargetDir(target);
   if (!targetDir) {
@@ -398,12 +398,12 @@ Hooks installed to: ${targetDir}/hooks.json
 Using unified CLI: bun worker-service.cjs hook cursor <command>
 
 Next steps:
-  1. Start claude-mem worker: claude-mem start
+  1. Start opencode-mem worker: opencode-mem start
   2. Restart Cursor to load the hooks
   3. Check Cursor Settings → Hooks tab to verify
 
 Context Injection:
-  Context from past sessions is stored in .cursor/rules/claude-mem-context.mdc
+  Context from past sessions is stored in .cursor/rules/opencode-mem-context.mdc
   and automatically included in every chat. It updates after each session ends.
 `);
 
@@ -454,7 +454,7 @@ async function setupProjectContext(targetDir: string, workspaceRoot: string): Pr
 
   if (!contextGenerated) {
     // Create placeholder context file
-    const rulesFile = path.join(rulesDir, 'claude-mem-context.mdc');
+    const rulesFile = path.join(rulesDir, 'opencode-mem-context.mdc');
     const placeholderContent = `---
 alwaysApply: true
 description: "Claude-mem context from past sessions (auto-updated)"
@@ -464,7 +464,7 @@ description: "Claude-mem context from past sessions (auto-updated)"
 
 *No context yet. Complete your first session and context will appear here.*
 
-Use claude-mem's MCP search tools for manual memory queries.
+Use opencode-mem's MCP search tools for manual memory queries.
 `;
     writeFileSync(rulesFile, placeholderContent);
     console.log(`  Created placeholder context file (will populate after first session)`);
@@ -479,7 +479,7 @@ Use claude-mem's MCP search tools for manual memory queries.
  * Uninstall Cursor hooks
  */
 export function uninstallCursorHooks(target: CursorInstallTarget): number {
-  console.log(`\nUninstalling Claude-Mem Cursor hooks (${target} level)...\n`);
+  console.log(`\nUninstalling OpenCode-Mem Cursor hooks (${target} level)...\n`);
 
   const targetDir = getTargetDir(target);
   if (!targetDir) {
@@ -515,7 +515,7 @@ export function uninstallCursorHooks(target: CursorInstallTarget): number {
 
     // Remove context file and unregister if project-level
     if (target === 'project') {
-      const contextFile = path.join(targetDir, 'rules', 'claude-mem-context.mdc');
+      const contextFile = path.join(targetDir, 'rules', 'opencode-mem-context.mdc');
       if (existsSync(contextFile)) {
         unlinkSync(contextFile);
         console.log(`  Removed context file`);
@@ -541,7 +541,7 @@ export function uninstallCursorHooks(target: CursorInstallTarget): number {
  * Check Cursor hooks installation status
  */
 export function checkCursorHooksStatus(): number {
-  console.log('\nClaude-Mem Cursor Hooks Status\n');
+  console.log('\nOpenCode-Mem Cursor Hooks Status\n');
 
   const locations: Array<{ name: string; dir: string }> = [
     { name: 'Project', dir: path.join(process.cwd(), '.cursor') },
@@ -599,7 +599,7 @@ export function checkCursorHooksStatus(): number {
 
       // Check for context file (project only)
       if (loc.name === 'Project') {
-        const contextFile = path.join(loc.dir, 'rules', 'claude-mem-context.mdc');
+        const contextFile = path.join(loc.dir, 'rules', 'opencode-mem-context.mdc');
         if (existsSync(contextFile)) {
           console.log(`   Context: Active`);
         } else {
@@ -613,7 +613,7 @@ export function checkCursorHooksStatus(): number {
   }
 
   if (!anyInstalled) {
-    console.log('No hooks installed. Run: claude-mem cursor install\n');
+    console.log('No hooks installed. Run: opencode-mem cursor install\n');
   }
 
   return 0;
@@ -680,9 +680,9 @@ export async function handleCursorCommand(subcommand: string, args: string[]): P
 
     default: {
       console.log(`
-Claude-Mem Cursor Integration
+OpenCode-Mem Cursor Integration
 
-Usage: claude-mem cursor <command> [options]
+Usage: opencode-mem cursor <command> [options]
 
 Commands:
   setup               Interactive guided setup (recommended for first-time users)
@@ -698,11 +698,11 @@ Commands:
 Examples:
   npm run cursor:setup                   # Interactive wizard (recommended)
   npm run cursor:install                 # Install for current project
-  claude-mem cursor install user         # Install globally for user
-  claude-mem cursor uninstall            # Remove from current project
-  claude-mem cursor status               # Check if hooks are installed
+  opencode-mem cursor install user         # Install globally for user
+  opencode-mem cursor uninstall            # Remove from current project
+  opencode-mem cursor status               # Check if hooks are installed
 
-For more info: https://docs.claude-mem.ai/cursor
+For more info: https://docs.opencode-mem.ai/cursor
       `);
       return 0;
     }

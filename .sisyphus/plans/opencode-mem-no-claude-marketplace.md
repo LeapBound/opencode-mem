@@ -15,7 +15,7 @@ Deliverables:
 - [x] Remove marketplace-based version lookup
 - [x] Ensure no other worker startup path reads `~/.claude/plugins/...` for version logic
 - [x] Run smoke verification with OpenCode plugin enabled
-- [ ] Commit + push
+- [x] Commit + push
 
 ---
 

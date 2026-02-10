@@ -16,7 +16,7 @@ import { exec } from 'child_process';
 import { promisify } from 'util';
 import { logger } from '../../utils/logger.js';
 import { getWorkerPort } from '../../shared/worker-utils.js';
-import { DATA_DIR, MARKETPLACE_ROOT, CLAUDE_CONFIG_DIR } from '../../shared/paths.js';
+import { DATA_DIR, CLAUDE_CONFIG_DIR } from '../../shared/paths.js';
 import {
   readCursorRegistry as readCursorRegistryFromFile,
   writeCursorRegistry as writeCursorRegistryToFile,
@@ -76,7 +76,7 @@ export function registerCursorProject(projectName: string, workspacePath: string
     installedAt: new Date().toISOString()
   };
   writeCursorRegistry(registry);
-  logger.info('CURSOR', 'Registered project for auto-context updates', { projectName, workspacePath });
+  logger.info('SYSTEM', 'Registered project for auto-context updates', { projectName, workspacePath });
 }
 
 /**
@@ -87,7 +87,7 @@ export function unregisterCursorProject(projectName: string): void {
   if (registry[projectName]) {
     delete registry[projectName];
     writeCursorRegistry(registry);
-    logger.info('CURSOR', 'Unregistered project', { projectName });
+    logger.info('SYSTEM', 'Unregistered project', { projectName });
   }
 }
 
@@ -114,10 +114,10 @@ export async function updateCursorContextForProject(projectName: string, port: n
 
     // Write to the project's Cursor rules file using shared utility
     writeContextFile(entry.workspacePath, context);
-    logger.debug('CURSOR', 'Updated context file', { projectName, workspacePath: entry.workspacePath });
+    logger.debug('SYSTEM', 'Updated context file', { projectName, workspacePath: entry.workspacePath });
   } catch (error) {
     // [ANTI-PATTERN IGNORED]: Background context update - failure is non-critical, user workflow continues
-    logger.error('CURSOR', 'Failed to update context file', { projectName }, error as Error);
+    logger.error('SYSTEM', 'Failed to update context file', { projectName }, error as Error);
   }
 }
 
@@ -127,14 +127,12 @@ export async function updateCursorContextForProject(projectName: string, port: n
 
 /**
  * Find cursor-hooks directory
- * Searches in order: marketplace install, source repo
+ * Searches in order: built plugin, source repo
  * Checks for hooks.json (unified CLI mode) or legacy shell scripts
  */
 export function findCursorHooksDir(): string | null {
   const possiblePaths = [
-    // Marketplace install location
-    path.join(MARKETPLACE_ROOT, 'cursor-hooks'),
-    // Development/source location (relative to built worker-service.cjs in plugin/scripts/)
+    // Built plugin location (relative to built worker-service.cjs in plugin/scripts/)
     path.join(path.dirname(__filename), '..', '..', 'cursor-hooks'),
     // Alternative dev location
     path.join(process.cwd(), 'cursor-hooks'),
@@ -153,13 +151,11 @@ export function findCursorHooksDir(): string | null {
 
 /**
  * Find MCP server script path
- * Searches in order: marketplace install, source repo
+ * Searches in order: built plugin, source repo
  */
 export function findMcpServerPath(): string | null {
   const possiblePaths = [
-    // Marketplace install location
-    path.join(MARKETPLACE_ROOT, 'plugin', 'scripts', 'mcp-server.cjs'),
-    // Development/source location (relative to built worker-service.cjs in plugin/scripts/)
+    // Built plugin location (relative to built worker-service.cjs in plugin/scripts/)
     path.join(path.dirname(__filename), 'mcp-server.cjs'),
     // Alternative dev location
     path.join(process.cwd(), 'plugin', 'scripts', 'mcp-server.cjs'),
@@ -175,13 +171,11 @@ export function findMcpServerPath(): string | null {
 
 /**
  * Find worker-service.cjs path for unified CLI
- * Searches in order: marketplace install, source repo
+ * Searches in order: built plugin, source repo
  */
 export function findWorkerServicePath(): string | null {
   const possiblePaths = [
-    // Marketplace install location
-    path.join(MARKETPLACE_ROOT, 'plugin', 'scripts', 'worker-service.cjs'),
-    // Development/source location (relative to built worker-service.cjs in plugin/scripts/)
+    // Built plugin location (relative to built worker-service.cjs in plugin/scripts/)
     path.join(path.dirname(__filename), 'worker-service.cjs'),
     // Alternative dev location
     path.join(process.cwd(), 'plugin', 'scripts', 'worker-service.cjs'),
@@ -263,7 +257,7 @@ export function configureCursorMcp(target: CursorInstallTarget): number {
 
   if (!mcpServerPath) {
     console.error('Could not find MCP server script');
-    console.error('   Expected at: ~/.claude/plugins/marketplaces/thedotmack/plugin/scripts/mcp-server.cjs');
+    console.error('   Expected at: plugin/scripts/mcp-server.cjs (built) or ./plugin/scripts/mcp-server.cjs (repo)');
     return 1;
   }
 
@@ -332,7 +326,7 @@ export async function installCursorHooks(_sourceDir: string, target: CursorInsta
   const workerServicePath = findWorkerServicePath();
   if (!workerServicePath) {
     console.error('Could not find worker-service.cjs');
-    console.error('   Expected at: ~/.claude/plugins/marketplaces/thedotmack/plugin/scripts/worker-service.cjs');
+    console.error('   Expected at: plugin/scripts/worker-service.cjs (built) or ./plugin/scripts/worker-service.cjs (repo)');
     return 1;
   }
 
@@ -449,7 +443,7 @@ async function setupProjectContext(targetDir: string, workspaceRoot: string): Pr
     }
   } catch (error) {
     // [ANTI-PATTERN IGNORED]: Fallback behavior - worker not running, use placeholder
-    logger.debug('CURSOR', 'Worker not running during install', {}, error as Error);
+    logger.debug('SYSTEM', 'Worker not running during install', {}, error as Error);
   }
 
   if (!contextGenerated) {
@@ -655,7 +649,7 @@ export async function handleCursorCommand(subcommand: string, args: string[]): P
 
       if (!cursorHooksDir) {
         console.error('Could not find cursor-hooks directory');
-        console.error('   Expected at: ~/.claude/plugins/marketplaces/thedotmack/cursor-hooks/');
+        console.error('   Expected at: cursor-hooks/ (built) or ./cursor-hooks/ (repo)');
         return 1;
       }
 

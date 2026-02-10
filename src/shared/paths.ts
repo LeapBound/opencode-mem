@@ -1,6 +1,6 @@
-import { join, dirname, basename, sep } from 'path';
+import { join, dirname, basename } from 'path';
 import { homedir } from 'os';
-import { existsSync, mkdirSync } from 'fs';
+import { mkdirSync } from 'fs';
 import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { SettingsDefaultsManager } from './SettingsDefaultsManager.js';
@@ -27,9 +27,6 @@ const _dirname = getDirname();
 export const DATA_DIR = SettingsDefaultsManager.get('OPENCODE_MEM_DATA_DIR');
 // Note: CLAUDE_CONFIG_DIR is a Claude Code setting, not opencode-mem, so leave as env var
 export const CLAUDE_CONFIG_DIR = process.env.CLAUDE_CONFIG_DIR || join(homedir(), '.claude');
-
-// Plugin installation directory - respects CLAUDE_CONFIG_DIR for users with custom Claude locations
-export const MARKETPLACE_ROOT = join(CLAUDE_CONFIG_DIR, 'plugins', 'marketplaces', 'thedotmack');
 
 // Data subdirectories
 export const ARCHIVES_DIR = join(DATA_DIR, 'archives');

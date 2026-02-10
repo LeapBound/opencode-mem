@@ -9,10 +9,11 @@
  * - HTTP-based shutdown requests
  */
 
-import path from 'path';
-import { readFileSync } from 'fs';
 import { logger } from '../../utils/logger.js';
-import { MARKETPLACE_ROOT } from '../../shared/paths.js';
+
+declare const __DEFAULT_PACKAGE_VERSION__: string;
+
+const packageVersion = typeof __DEFAULT_PACKAGE_VERSION__ !== 'undefined' ? __DEFAULT_PACKAGE_VERSION__ : '0.0.0-dev';
 
 /**
  * Check if a port is in use by querying the health endpoint
@@ -100,9 +101,7 @@ export async function httpShutdown(port: number): Promise<boolean> {
  * This is the "expected" version that should be running
  */
 export function getInstalledPluginVersion(): string {
-  const packageJsonPath = path.join(MARKETPLACE_ROOT, 'package.json');
-  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
-  return packageJson.version;
+  return packageVersion;
 }
 
 /**

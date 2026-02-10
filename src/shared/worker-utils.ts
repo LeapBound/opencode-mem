@@ -1,9 +1,11 @@
-import path from "path";
-import { readFileSync } from "fs";
 import { logger } from "../utils/logger.js";
 import { HOOK_TIMEOUTS, getTimeout } from "./hook-constants.js";
 import { SettingsDefaultsManager } from "./SettingsDefaultsManager.js";
-import { MARKETPLACE_ROOT, USER_SETTINGS_PATH } from "./paths.js";
+import { USER_SETTINGS_PATH } from "./paths.js";
+
+declare const __DEFAULT_PACKAGE_VERSION__: string;
+
+const packageVersion = typeof __DEFAULT_PACKAGE_VERSION__ !== 'undefined' ? __DEFAULT_PACKAGE_VERSION__ : '0.0.0-dev';
 
 // Named constants for health checks
 const HEALTH_CHECK_TIMEOUT_MS = getTimeout(HOOK_TIMEOUTS.HEALTH_CHECK);
@@ -90,9 +92,7 @@ async function isWorkerHealthy(): Promise<boolean> {
  * Get the current plugin version from package.json
  */
 function getPluginVersion(): string {
-  const packageJsonPath = path.join(MARKETPLACE_ROOT, 'package.json');
-  const packageJson = JSON.parse(readFileSync(packageJsonPath, 'utf-8'));
-  return packageJson.version;
+  return packageVersion;
 }
 
 /**

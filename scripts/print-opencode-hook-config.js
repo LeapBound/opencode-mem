@@ -10,11 +10,7 @@ function hookCommand(platform, event) {
   return `node ${JSON.stringify(bunRunner)} ${JSON.stringify(workerService)} hook ${platform} ${event}`;
 }
 
-function startCommand() {
-  return `node ${JSON.stringify(bunRunner)} ${JSON.stringify(workerService)} start`;
-}
-
-const config = {
+const nativeOmoConfig = {
   hooks: {
     UserPromptSubmit: [
       {
@@ -46,16 +42,8 @@ const config = {
   },
 };
 
-const omoConfig = {
-  claude_code: {
-    hooks: true,
-  },
-};
-
-if (process.argv.includes("--omo")) {
-  process.stdout.write(`${JSON.stringify(omoConfig, null, 2)}\n`);
-} else if (process.argv.includes("--all")) {
-  process.stdout.write(`${JSON.stringify({ oh_my_opencode: omoConfig, claude_settings: config }, null, 2)}\n`);
+if (process.argv.includes("--hooks-only")) {
+  process.stdout.write(`${JSON.stringify(nativeOmoConfig.hooks, null, 2)}\n`);
 } else {
-  process.stdout.write(`${JSON.stringify(config, null, 2)}\n`);
+  process.stdout.write(`${JSON.stringify(nativeOmoConfig, null, 2)}\n`);
 }

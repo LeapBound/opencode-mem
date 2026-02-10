@@ -69,7 +69,7 @@ export const opencodeAdapter: PlatformAdapter = {
     // So for OpenCode/OMO, stay silent unless we INTEND to inject context.
     if (result.hookSpecificOutput) {
       const ctx = (result.hookSpecificOutput.additionalContext ?? '').trim();
-      if (!ctx) return '';
+      if (!ctx) return undefined;
       return `<claude-mem-context>\n${ctx}\n</claude-mem-context>`;
     }
 

@@ -8,10 +8,10 @@ export interface HookCommandOptions {
   skipExit?: boolean;
 }
 
-export async function hookCommand(platform: string, event: EventType, options: HookCommandOptions = {}): Promise<number> {
+export async function hookCommand(platform: string, event: string, options: HookCommandOptions = {}): Promise<number> {
   try {
     const adapter = getPlatformAdapter(platform);
-    const handler = getEventHandler(event);
+    const handler = getEventHandler(event as EventType);
 
     const rawInput = await readJsonFromStdin();
     const input = adapter.normalizeInput(rawInput);
@@ -21,7 +21,10 @@ export async function hookCommand(platform: string, event: EventType, options: H
 
     if (output !== undefined && output !== null) {
       if (typeof output === 'string') {
-        process.stdout.write(output.endsWith('\n') ? output : `${output}\n`);
+        const text = output.trim();
+        if (text) {
+          process.stdout.write(output.endsWith('\n') ? output : `${output}\n`);
+        }
       } else {
         console.log(JSON.stringify(output));
       }

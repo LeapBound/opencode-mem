@@ -41,8 +41,21 @@ export const contextHandler: EventHandler = {
       throw new Error(`Context generation failed: ${response.status}`);
     }
 
-    const result = await response.text();
-    const additionalContext = result.trim();
+    const resultText = await response.text();
+
+    // Worker may temporarily return JSON during early init; normalize to text.
+    let additionalContext = resultText.trim();
+    if (additionalContext.startsWith('{') && additionalContext.includes('"content"')) {
+      try {
+        const parsed = JSON.parse(additionalContext) as any;
+        const text = parsed?.content?.find?.((c: any) => c?.type === 'text')?.text;
+        if (typeof text === 'string') {
+          additionalContext = text.trim();
+        }
+      } catch {
+        // keep as-is
+      }
+    }
 
     return {
       hookSpecificOutput: {

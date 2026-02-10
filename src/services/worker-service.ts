@@ -239,9 +239,12 @@ export class WorkerService {
 
     // Early handler for /api/context/inject — fail open if not yet initialized
     this.server.app.get('/api/context/inject', async (req, res, next) => {
-      if (!this.initializationCompleteFlag || !this.searchRoutes) {
-        logger.warn('SYSTEM', 'Context requested before initialization complete, returning empty');
-        res.status(200).json({ content: [{ type: 'text', text: '' }] });
+      // Context injection should be available as soon as SearchRoutes is ready.
+      // Don't gate on full initialization (MCP connect can take minutes).
+      if (!this.searchRoutes) {
+        logger.warn('SYSTEM', 'Context requested before SearchRoutes ready, returning empty');
+        res.setHeader('Content-Type', 'text/plain; charset=utf-8');
+        res.status(200).send('');
         return;
       }
 
@@ -252,6 +255,13 @@ export class WorkerService {
     // Exceptions: /api/health, /api/readiness, /api/version (handled by Server.ts core routes)
     // and /api/context/inject (handled above with fail-open)
     this.server.app.use('/api', async (req, res, next) => {
+      // Allow context injection during initialization once SearchRoutes exists.
+      // req.path here is WITHOUT the '/api' prefix.
+      if (req.path === '/context/inject') {
+        next();
+        return;
+      }
+
       if (this.initializationCompleteFlag) {
         next();
         return;

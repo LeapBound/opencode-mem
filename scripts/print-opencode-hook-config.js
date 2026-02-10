@@ -20,7 +20,6 @@ const config = {
       {
         matcher: "*",
         hooks: [
-          { type: "command", command: startCommand(), timeout: 60 },
           // Inject memory context into prompt (OMO will wrap stdout)
           { type: "command", command: hookCommand("opencode", "context"), timeout: 60 },
           { type: "command", command: hookCommand("opencode", "session-init"), timeout: 60 },
@@ -31,7 +30,6 @@ const config = {
       {
         matcher: "*",
         hooks: [
-          { type: "command", command: startCommand(), timeout: 60 },
           { type: "command", command: hookCommand("opencode", "observation"), timeout: 120 },
         ],
       },
@@ -40,7 +38,6 @@ const config = {
       {
         matcher: "*",
         hooks: [
-          { type: "command", command: startCommand(), timeout: 60 },
           { type: "command", command: hookCommand("opencode", "summarize"), timeout: 120 },
           { type: "command", command: hookCommand("opencode", "session-complete"), timeout: 30 },
         ],

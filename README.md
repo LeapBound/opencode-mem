@@ -11,17 +11,23 @@ worker + MCP search tools in an OpenCode/OMO workflow.
 - SQLite-backed storage (default `~/.opencode-mem/opencode-mem.db`)
 - MCP tools: `search`, `timeline`, `get_observations`, `save_memory`
 
-## Oh My OpenCode integration
+## OpenCode plugin integration (recommended)
 
-Use Oh My OpenCode native hooks directly in `~/.config/opencode/oh-my-opencode.json`
-to call this repo's worker hook commands.
+Use this project as an OpenCode plugin (single memory entrypoint, no manual hook wiring).
 
 See: `docs/opencode-setup.md`
 
 Helper commands:
 
-- `npm run opencode:hooks` -> full OMO-native config snippet (`{ "hooks": ... }`)
-- `npm run opencode:hooks:only` -> only the `hooks` object
+- `npm run opencode:plugin:install` -> install plugin entry into OpenCode config
+- `npm run opencode:plugin:status` -> show plugin install state + legacy hook detection
+- `npm run opencode:plugin:uninstall` -> remove plugin entry
+- `npm run opencode:plugin:print` -> print a minimal `{ "plugin": [...] }` snippet
+
+Legacy hook commands remain available only as fallback:
+
+- `npm run opencode:hooks`
+- `npm run opencode:hooks:only`
 
 ## Development
 

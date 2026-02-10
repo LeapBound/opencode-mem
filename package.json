@@ -27,8 +27,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./plugin/opencode-plugin.js"
     },
     "./sdk": {
       "types": "./dist/sdk/index.d.ts",
@@ -56,6 +55,10 @@
     "worker:stop": "bun plugin/scripts/worker-service.cjs stop",
     "worker:restart": "bun plugin/scripts/worker-service.cjs restart",
     "worker:status": "bun plugin/scripts/worker-service.cjs status",
+    "opencode:plugin:install": "node scripts/opencode-plugin-manager.js install",
+    "opencode:plugin:uninstall": "node scripts/opencode-plugin-manager.js uninstall",
+    "opencode:plugin:status": "node scripts/opencode-plugin-manager.js status",
+    "opencode:plugin:print": "node scripts/opencode-plugin-manager.js print",
     "opencode:hooks": "node scripts/print-opencode-hook-config.js",
     "opencode:hooks:only": "node scripts/print-opencode-hook-config.js --hooks-only",
     "queue": "bun scripts/check-pending-queue.ts",

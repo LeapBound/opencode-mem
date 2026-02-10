@@ -1,95 +1,71 @@
-# Oh My OpenCode setup
+# OpenCode setup (plugin-first)
 
-This repo integrates with Oh My OpenCode (OMO) using native OMO hooks.
+This repo now integrates with OpenCode using a native plugin entrypoint.
 
 Goal:
 
-- Start the worker service on demand (HTTP API on `127.0.0.1:37777` by default)
-- Stream tool observations to the worker on `PostToolUse`
-- Summarize and complete sessions on `Stop`
+- One memory entrypoint (plugin) instead of manual hook chains
+- Automatic context + session-init + observation + summarize + session-complete flow
+- Built-in duplicate protection in plugin lifecycle handlers
 
-## 1) Configure native hooks in OMO
+## 1) Install plugin into OpenCode config
 
-Edit `~/.config/opencode/oh-my-opencode.json` (or `.opencode/oh-my-opencode.json`).
-
-Print a ready-to-paste config snippet from your repo root:
+From repo root:
 
 ```bash
-npm run opencode:hooks
+npm run opencode:plugin:install
 ```
 
-If you only want the `hooks` object:
+Default target config:
+
+- `~/.config/opencode/opencode.json`
+
+Project-local target:
 
 ```bash
-npm run opencode:hooks:only
+node scripts/opencode-plugin-manager.js install --project
 ```
 
-Example output (replace `/ABS/PATH/TO/opencode-mem`):
+Package-name entry instead of local file URL:
 
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node /ABS/PATH/TO/opencode-mem/plugin/scripts/bun-runner.js /ABS/PATH/TO/opencode-mem/plugin/scripts/worker-service.cjs hook opencode context",
-            "timeout": 60
-          },
-          {
-            "type": "command",
-            "command": "node /ABS/PATH/TO/opencode-mem/plugin/scripts/bun-runner.js /ABS/PATH/TO/opencode-mem/plugin/scripts/worker-service.cjs hook opencode session-init",
-            "timeout": 60
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node /ABS/PATH/TO/opencode-mem/plugin/scripts/bun-runner.js /ABS/PATH/TO/opencode-mem/plugin/scripts/worker-service.cjs hook opencode observation",
-            "timeout": 120
-          }
-        ]
-      }
-    ],
-    "Stop": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node /ABS/PATH/TO/opencode-mem/plugin/scripts/bun-runner.js /ABS/PATH/TO/opencode-mem/plugin/scripts/worker-service.cjs hook opencode summarize",
-            "timeout": 120
-          },
-          {
-            "type": "command",
-            "command": "node /ABS/PATH/TO/opencode-mem/plugin/scripts/bun-runner.js /ABS/PATH/TO/opencode-mem/plugin/scripts/worker-service.cjs hook opencode session-complete",
-            "timeout": 30
-          }
-        ]
-      }
-    ]
-  }
-}
+```bash
+node scripts/opencode-plugin-manager.js install --package
 ```
 
-Notes:
+## 2) Check status
 
-- No `~/.claude/settings.json` is required in this setup.
-- `worker-service.cjs hook ...` auto-starts the worker if needed.
-- OMO's hook runner pipes JSON to stdin; `worker-service.cjs hook ...` consumes stdin.
+```bash
+npm run opencode:plugin:status
+```
 
-## 2) (Optional) Add MCP search tools to OpenCode
+Status reports:
 
-Configure a local MCP server that points at `plugin/scripts/mcp-server.cjs`.
-Exact config location depends on whether you are using OpenCode global config or project config.
+- Whether plugin entry exists
+- Whether old memory hook commands are still detected
+- Whether local plugin file exists
 
-Example config is provided at:
+## 3) Verify worker + API
 
-`.opencode/opencode.json.example`
+```bash
+npm run worker:status
+curl -sS http://127.0.0.1:37777/api/health
+curl -sS http://127.0.0.1:37777/api/readiness
+```
+
+## 4) Remove plugin (if needed)
+
+```bash
+npm run opencode:plugin:uninstall
+```
+
+## Notes
+
+- Installer auto-cleans legacy opencode-mem hook commands from `~/.config/opencode/oh-my-opencode.json`.
+- Installer also adds `claude-code-hooks` to `disabled_hooks` in OMO config to avoid duplicate memory writes.
+- Legacy hook snippets are still available but should be treated as fallback only.
+
+Config safety:
+
+- Reads both JSON and JSONC (`.jsonc`), so comments and trailing commas are accepted on read.
+- Before the first mutation of any config file, creates a sibling backup like `opencode.json.bak-YYYYMMDD-HHMMSS`.
+- Writes are atomic (temp file + rename) and idempotent (no rewrite if there are no net config changes).

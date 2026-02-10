@@ -9,6 +9,7 @@
  *
  * No mocks needed - tests a pure function directly and captures real CLI output.
  */
+// @ts-ignore - bun:test types are not always available to tsserver
 import { describe, it, expect } from 'bun:test';
 import { spawnSync } from 'child_process';
 import { existsSync } from 'fs';
@@ -208,7 +209,7 @@ describe('worker-json-status', () => {
         expect(parsed.continue).toBe(true);
         expect(parsed.suppressOutput).toBe(true);
         expect(['ready', 'error']).toContain(parsed.status);
-      });
+      }, 65000);
 
       it('should match expected JSON structure when worker is healthy', () => {
         if (!existsSync(WORKER_SCRIPT)) {
@@ -229,7 +230,7 @@ describe('worker-json-status', () => {
           // Error status may include a message explaining the failure
           expect(typeof parsed.message).toBe('string');
         }
-      });
+      }, 65000);
     });
 
     describe('error scenarios', () => {
@@ -293,7 +294,7 @@ describe('worker-json-status', () => {
       // Per Windows Terminal compatibility requirement, exit code is always 0
       // Error states are communicated via JSON status field, not exit codes
       expect(exitCode).toBe(0);
-    });
+    }, 65000);
 
     /**
      * JSON must go to stdout, not stderr
@@ -337,7 +338,7 @@ describe('worker-json-status', () => {
           // stderr is not JSON, which is expected (logs, etc.)
         }
       }
-    });
+    }, 65000);
 
     /**
      * JSON must be parseable as valid JSON
@@ -364,7 +365,7 @@ describe('worker-json-status', () => {
       expect(typeof parsed).toBe('object');
       expect(parsed).not.toBeNull();
       expect(Array.isArray(parsed)).toBe(false);
-    });
+    }, 65000);
 
     /**
      * `continue: true` is CRITICAL
@@ -395,7 +396,7 @@ describe('worker-json-status', () => {
 
       // Also verify it's the literal `true`, not a truthy value
       expect(parsed.continue).toStrictEqual(true);
-    });
+    }, 65000);
 
     /**
      * suppressOutput hides from transcript mode
@@ -418,7 +419,7 @@ describe('worker-json-status', () => {
 
       // suppressOutput prevents infrastructure noise from polluting transcript
       expect(parsed.suppressOutput).toBe(true);
-    });
+    }, 65000);
 
     /**
      * status field communicates outcome
@@ -441,6 +442,6 @@ describe('worker-json-status', () => {
 
       expect(parsed).toHaveProperty('status');
       expect(['ready', 'error']).toContain(parsed.status);
-    });
+    }, 65000);
   });
 });

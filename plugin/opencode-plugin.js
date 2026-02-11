@@ -9,11 +9,18 @@ const WORKER_SERVICE = path.join(__dirname, "scripts", "worker-service.cjs");
 
 const DEDUPE_TTL_MS = 5 * 60 * 1000;
 const STOP_DEBOUNCE_MS = 2500;
+const WORKER_PORT = Number(process.env.OPENCODE_MEM_WORKER_PORT || 37777);
+const WORKER_BASE_URL = `http://127.0.0.1:${WORKER_PORT}`;
+const SUMMARY_TRANSCRIPT_MAX_MESSAGES = 60;
+const SUMMARY_TRANSCRIPT_MAX_CHARS = 30000;
+const INTERNAL_SESSION_TTL_MS = 5 * 60 * 1000;
 
 const seen = new Map();
 const stopLocks = new Map();
 const stopTimes = new Map();
 const toolInputCache = new Map();
+const sessionModelCache = new Map();
+const internalSessionCache = new Map();
 
 function nowMs() {
   return Date.now();
@@ -32,6 +39,28 @@ function pruneSeen() {
       toolInputCache.delete(key);
     }
   }
+
+  for (const [key, model] of sessionModelCache.entries()) {
+    if (!model || now - model.ts > DEDUPE_TTL_MS) {
+      sessionModelCache.delete(key);
+    }
+  }
+
+  for (const [key, ts] of internalSessionCache.entries()) {
+    if (!ts || now - ts > INTERNAL_SESSION_TTL_MS) {
+      internalSessionCache.delete(key);
+    }
+  }
+}
+
+function isInternalSession(sessionID) {
+  if (!sessionID) return false;
+  return internalSessionCache.has(sessionID);
+}
+
+function markInternalSession(sessionID) {
+  if (!sessionID) return;
+  internalSessionCache.set(sessionID, nowMs());
 }
 
 function markSeen(key) {
@@ -121,6 +150,261 @@ function unwrapMemContext(text) {
   return (match[1] || "").trim();
 }
 
+function unwrapClientData(result) {
+  if (!result || typeof result !== "object") return result;
+  if (Object.prototype.hasOwnProperty.call(result, "data")) {
+    return result.data;
+  }
+  return result;
+}
+
+function clipText(text, maxChars) {
+  if (typeof text !== "string") return "";
+  if (text.length <= maxChars) return text;
+  return `${text.slice(0, maxChars)}\n...[truncated]`;
+}
+
+function extractPartsText(parts) {
+  if (!Array.isArray(parts)) return "";
+  return parts
+    .filter((part) => part && part.type === "text" && typeof part.text === "string")
+    .map((part) => part.text.trim())
+    .filter(Boolean)
+    .join("\n");
+}
+
+function buildSessionTranscript(messages) {
+  if (!Array.isArray(messages) || messages.length === 0) return "";
+
+  const recent = messages.slice(-SUMMARY_TRANSCRIPT_MAX_MESSAGES);
+  const blocks = [];
+
+  for (const entry of recent) {
+    const role = entry?.info?.role || "unknown";
+    const text = extractPartsText(entry?.parts || []);
+    if (!text) continue;
+    blocks.push(`[${role}]\n${text}`);
+  }
+
+  return clipText(blocks.join("\n\n"), SUMMARY_TRANSCRIPT_MAX_CHARS);
+}
+
+function buildSummaryPrompt(transcript) {
+  return [
+    "You are generating a compact structured memory summary for a coding session.",
+    "Return a JSON object with EXACT keys:",
+    "request, investigated, learned, completed, next_steps, notes",
+    "All values must be strings. Keep each field concise and factual.",
+    "Do not include markdown outside JSON.",
+    "",
+    "Session transcript:",
+    transcript || "(no transcript available)",
+  ].join("\n");
+}
+
+const SUMMARY_KEYS = ["request", "investigated", "learned", "completed", "next_steps", "notes"];
+
+function emptySummary() {
+  return {
+    request: "",
+    investigated: "",
+    learned: "",
+    completed: "",
+    next_steps: "",
+    notes: "",
+  };
+}
+
+function normalizeSummaryCandidate(candidate) {
+  const result = emptySummary();
+  if (!candidate || typeof candidate !== "object") return result;
+
+  for (const key of SUMMARY_KEYS) {
+    if (typeof candidate[key] === "string") {
+      result[key] = candidate[key].trim();
+    }
+  }
+
+  return result;
+}
+
+function parseJsonSummary(text) {
+  if (typeof text !== "string" || !text.trim()) return null;
+
+  const candidates = [];
+  const fencedJsonRegex = /```(?:json)?\s*([\s\S]*?)```/gi;
+  let match = fencedJsonRegex.exec(text);
+  while (match) {
+    if (match[1]) candidates.push(match[1].trim());
+    match = fencedJsonRegex.exec(text);
+  }
+  candidates.push(text.trim());
+
+  for (const candidate of candidates) {
+    try {
+      const parsed = JSON.parse(candidate);
+      if (parsed && typeof parsed === "object" && !Array.isArray(parsed)) {
+        const normalized = normalizeSummaryCandidate(parsed);
+        if (Object.values(normalized).some(Boolean)) {
+          return normalized;
+        }
+      }
+    } catch {}
+  }
+
+  return null;
+}
+
+function sectionKeyFromLabel(rawLabel) {
+  const label = String(rawLabel || "")
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, " ");
+
+  if (!label) return null;
+  if (label === "request" || label.includes("user request")) return "request";
+  if (label === "investigated" || label.includes("analysis") || label.includes("investigation")) {
+    return "investigated";
+  }
+  if (label === "learned" || label.includes("learning")) return "learned";
+  if (label === "completed" || label.includes("done") || label.includes("finished")) {
+    return "completed";
+  }
+  if (label === "next_steps" || label === "next steps" || label.includes("next step")) {
+    return "next_steps";
+  }
+  if (label === "notes" || label.includes("note")) return "notes";
+  return null;
+}
+
+function parseSectionSummary(text) {
+  if (typeof text !== "string" || !text.trim()) return emptySummary();
+
+  const result = emptySummary();
+  const lines = text.split(/\r?\n/);
+  let currentKey = null;
+
+  for (const line of lines) {
+    const headingMatch = line.match(/^\s*([A-Za-z_ ]+)\s*:\s*(.*)$/);
+    if (headingMatch) {
+      const key = sectionKeyFromLabel(headingMatch[1]);
+      if (key) {
+        currentKey = key;
+        const value = (headingMatch[2] || "").trim();
+        if (value) {
+          result[key] = result[key] ? `${result[key]}\n${value}` : value;
+        }
+        continue;
+      }
+    }
+
+    if (currentKey) {
+      const value = line.trim();
+      if (value) {
+        result[currentKey] = result[currentKey] ? `${result[currentKey]}\n${value}` : value;
+      }
+    }
+  }
+
+  return result;
+}
+
+function parseStructuredSummary(modelText) {
+  const jsonSummary = parseJsonSummary(modelText);
+  if (jsonSummary) return jsonSummary;
+
+  const sectionSummary = parseSectionSummary(modelText);
+  if (Object.values(sectionSummary).some(Boolean)) return sectionSummary;
+
+  const fallback = emptySummary();
+  fallback.notes = clipText(typeof modelText === "string" ? modelText.trim() : "", 4000);
+  return fallback;
+}
+
+async function generateSummaryWithOpenCode(client, contentSessionId, modelConfig) {
+  if (!client?.session) throw new Error("OpenCode client session API unavailable");
+
+  const messagesResult = await client.session.messages({ path: { id: contentSessionId } });
+  const messages = unwrapClientData(messagesResult);
+  const transcript = buildSessionTranscript(messages);
+  const prompt = buildSummaryPrompt(transcript);
+
+  let summarySessionId = "";
+  try {
+    const createResult = await client.session.create({
+      body: { title: `opencode-mem summary ${contentSessionId}` },
+    });
+    const summarySession = unwrapClientData(createResult);
+    summarySessionId = summarySession?.id || "";
+    if (!summarySessionId) throw new Error("Failed to create summary session");
+
+    markInternalSession(summarySessionId);
+
+    const body = {
+      parts: [{ type: "text", text: prompt }],
+    };
+    if (modelConfig?.providerID && modelConfig?.modelID) {
+      body.model = {
+        providerID: modelConfig.providerID,
+        modelID: modelConfig.modelID,
+      };
+    }
+
+    const promptResult = await client.session.prompt({
+      path: { id: summarySessionId },
+      body,
+    });
+    const response = unwrapClientData(promptResult);
+    const responseText = extractPartsText(response?.parts || []);
+    return parseStructuredSummary(responseText);
+  } finally {
+    if (summarySessionId) {
+      try {
+        await client.session.delete({ path: { id: summarySessionId } });
+      } catch {}
+    }
+  }
+}
+
+async function ingestSummary(contentSessionId, summary) {
+  const response = await fetch(`${WORKER_BASE_URL}/api/sessions/summarize/ingest`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({ contentSessionId, summary }),
+  });
+
+  if (!response.ok) {
+    const body = await response.text();
+    throw new Error(`ingest failed (${response.status}): ${body}`);
+  }
+
+  return response.json().catch(() => ({}));
+}
+
+async function runWorkerSummarizeFallback(sessionID, cwd, pluginUrl) {
+  const summarizeResult = await execHook(
+    "summarize",
+    {
+      session_id: sessionID,
+      cwd,
+      hook_event_name: "Stop",
+      hook_source: "opencode-plugin",
+      plugin_url: pluginUrl,
+    },
+    30000,
+  );
+
+  if (summarizeResult.code !== 0) {
+    safeLog("error", "summarize fallback failed", {
+      sessionID,
+      code: summarizeResult.code,
+      stderr: summarizeResult.stderr,
+    });
+  }
+}
+
 export default async function OpenCodeMemPlugin(ctx) {
   const cwd = ctx?.directory || process.cwd();
   const pluginUrl = pathToFileURL(__filename).href;
@@ -128,6 +412,7 @@ export default async function OpenCodeMemPlugin(ctx) {
   return {
     async "tool.execute.before"(input, output) {
       const sessionID = input?.sessionID || "unknown";
+      if (isInternalSession(sessionID)) return;
       const callID = input?.callID || "";
       if (!callID) return;
 
@@ -140,8 +425,21 @@ export default async function OpenCodeMemPlugin(ctx) {
 
     async "chat.message"(input, output) {
       const sessionID = input?.sessionID || "unknown";
+      if (isInternalSession(sessionID)) return;
       const messageID = input?.messageID || "";
       const prompt = buildPromptText(output?.parts || []);
+
+      if (
+        input?.model &&
+        typeof input.model.providerID === "string" &&
+        typeof input.model.modelID === "string"
+      ) {
+        sessionModelCache.set(sessionID, {
+          providerID: input.model.providerID,
+          modelID: input.model.modelID,
+          ts: nowMs(),
+        });
+      }
 
       const dedupeKey = `chat:${sessionID}:${messageID || prompt}`;
       if (!markSeen(dedupeKey)) return;
@@ -197,6 +495,7 @@ export default async function OpenCodeMemPlugin(ctx) {
       if (!output) return;
 
       const sessionID = input?.sessionID || "unknown";
+      if (isInternalSession(sessionID)) return;
       const callID = input?.callID || "";
       const toolName = input?.tool || "unknown";
       const cacheKey = `${sessionID}:${callID}`;
@@ -251,6 +550,8 @@ export default async function OpenCodeMemPlugin(ctx) {
       const sessionID = event?.properties?.sessionID;
       if (!sessionID) return;
 
+      if (isInternalSession(sessionID)) return;
+
       if (stopLocks.get(sessionID)) return;
       const last = stopTimes.get(sessionID) || 0;
       if (nowMs() - last < STOP_DEBOUNCE_MS) return;
@@ -259,24 +560,22 @@ export default async function OpenCodeMemPlugin(ctx) {
       stopTimes.set(sessionID, nowMs());
 
       try {
-        const summarizeResult = await execHook(
-          "summarize",
-          {
-            session_id: sessionID,
-            cwd,
-            hook_event_name: "Stop",
-            hook_source: "opencode-plugin",
-            plugin_url: pluginUrl,
-          },
-          30000,
-        );
+        let shouldFallbackSummarize = false;
 
-        if (summarizeResult.code !== 0) {
-          safeLog("error", "summarize failed", {
+        try {
+          const modelConfig = sessionModelCache.get(sessionID) || null;
+          const summary = await generateSummaryWithOpenCode(ctx?.client, sessionID, modelConfig);
+          await ingestSummary(sessionID, summary);
+        } catch (err) {
+          shouldFallbackSummarize = true;
+          safeLog("error", "plugin-side summarize/ingest failed", {
             sessionID,
-            code: summarizeResult.code,
-            stderr: summarizeResult.stderr,
+            error: safeError(err),
           });
+        }
+
+        if (shouldFallbackSummarize) {
+          await runWorkerSummarizeFallback(sessionID, cwd, pluginUrl);
         }
 
         const completeResult = await execHook(

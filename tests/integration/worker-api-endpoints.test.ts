@@ -12,10 +12,11 @@
 
 import { describe, it, expect, beforeEach, afterEach, spyOn, mock } from 'bun:test';
 import { logger } from '../../src/utils/logger.js';
+import express from 'express';
 
 // Mock middleware to avoid complex dependencies
 mock.module('../../src/services/worker/http/middleware.js', () => ({
-  createMiddleware: () => [],
+  createMiddleware: () => [express.json()],
   requireLocalhost: (_req: any, _res: any, next: any) => next(),
   summarizeRequestBody: () => 'test body',
 }));
@@ -23,6 +24,8 @@ mock.module('../../src/services/worker/http/middleware.js', () => ({
 // Import after mocks
 import { Server } from '../../src/services/server/Server.js';
 import type { ServerOptions } from '../../src/services/server/Server.js';
+import { SessionStore } from '../../src/services/sqlite/SessionStore.js';
+import { SessionRoutes } from '../../src/services/worker/http/routes/SessionRoutes.js';
 
 // Suppress logger output during tests
 let loggerSpies: ReturnType<typeof spyOn>[] = [];
@@ -225,6 +228,165 @@ describe('Worker API Endpoints Integration', () => {
       const contentType = response.headers.get('content-type');
 
       expect(contentType).toContain('application/json');
+    });
+  });
+
+  describe('Session Summary Ingest', () => {
+    it('should store a pre-generated summary via POST /api/sessions/summarize/ingest', async () => {
+      const store = new SessionStore(':memory:');
+
+      try {
+        server = new Server(mockOptions);
+
+        server.registerRoutes(new SessionRoutes(
+          { deleteSession: async () => {}, getSession: () => null } as any,
+          { getSessionStore: () => store } as any,
+          {} as any,
+          {} as any,
+          {} as any,
+          { broadcastSessionCompleted: () => {}, broadcastSummarizeQueued: () => {} } as any,
+          {} as any,
+        ));
+        server.finalizeRoutes();
+
+        await server.listen(testPort, '127.0.0.1');
+
+        const contentSessionId = `oc-test-ingest-${Date.now()}`;
+        const project = 'test-project-ingest';
+
+        const initRes = await fetch(`http://127.0.0.1:${testPort}/api/sessions/init`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contentSessionId,
+            project,
+            prompt: 'Please remember what we did in this session.'
+          })
+        });
+        expect(initRes.status).toBe(200);
+        const initBody = await initRes.json();
+        expect(initBody).toHaveProperty('skipped', false);
+
+        const ingestRes = await fetch(`http://127.0.0.1:${testPort}/api/sessions/summarize/ingest`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contentSessionId,
+            summary: {
+              request: 'Store a structured summary',
+              investigated: 'Worker ingest contract',
+              learned: 'Ingest endpoint stores SummaryInput',
+              completed: 'Posted summary to ingest route',
+              next_steps: 'Use context injection to confirm summary is visible',
+              notes: null,
+            }
+          })
+        });
+        expect(ingestRes.status).toBe(200);
+        const ingestBody = await ingestRes.json();
+        expect(ingestBody).toHaveProperty('status', 'stored');
+        expect(typeof ingestBody.summaryId === 'number' || ingestBody.summaryId === null).toBe(true);
+
+        const stored = store.getSummaryForSession(`ingest-${contentSessionId}`);
+        expect(stored).not.toBeNull();
+        expect(stored?.request).toBe('Store a structured summary');
+      } finally {
+        store.close();
+      }
+    });
+
+    it('should skip ingest if latest prompt was entirely private', async () => {
+      const store = new SessionStore(':memory:');
+
+      try {
+        server = new Server(mockOptions);
+
+        server.registerRoutes(new SessionRoutes(
+          { deleteSession: async () => {}, getSession: () => null } as any,
+          { getSessionStore: () => store } as any,
+          {} as any,
+          {} as any,
+          {} as any,
+          { broadcastSessionCompleted: () => {}, broadcastSummarizeQueued: () => {} } as any,
+          {} as any,
+        ));
+        server.finalizeRoutes();
+
+        await server.listen(testPort, '127.0.0.1');
+
+        const contentSessionId = `oc-test-ingest-private-${Date.now()}`;
+
+        const initRes = await fetch(`http://127.0.0.1:${testPort}/api/sessions/init`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contentSessionId,
+            project: 'test-project-ingest-private',
+            prompt: '<private>do not store</private>'
+          })
+        });
+        expect(initRes.status).toBe(200);
+        const initBody = await initRes.json();
+        expect(initBody).toHaveProperty('skipped', true);
+        expect(initBody).toHaveProperty('reason', 'private');
+
+        const ingestRes = await fetch(`http://127.0.0.1:${testPort}/api/sessions/summarize/ingest`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contentSessionId,
+            summary: {
+              request: 'should not store',
+              investigated: '',
+              learned: '',
+              completed: '',
+              next_steps: '',
+              notes: null,
+            }
+          })
+        });
+        expect(ingestRes.status).toBe(200);
+        const ingestBody = await ingestRes.json();
+        expect(ingestBody).toHaveProperty('status', 'skipped');
+        expect(ingestBody).toHaveProperty('reason', 'private');
+
+        const stored = store.getSummaryForSession(`ingest-${contentSessionId}`);
+        expect(stored).toBeNull();
+      } finally {
+        store.close();
+      }
+    });
+
+    it('should return 400 for invalid ingest payloads', async () => {
+      const store = new SessionStore(':memory:');
+
+      try {
+        server = new Server(mockOptions);
+
+        server.registerRoutes(new SessionRoutes(
+          { deleteSession: async () => {}, getSession: () => null } as any,
+          { getSessionStore: () => store } as any,
+          {} as any,
+          {} as any,
+          {} as any,
+          { broadcastSessionCompleted: () => {}, broadcastSummarizeQueued: () => {} } as any,
+          {} as any,
+        ));
+        server.finalizeRoutes();
+
+        await server.listen(testPort, '127.0.0.1');
+
+        const badRes = await fetch(`http://127.0.0.1:${testPort}/api/sessions/summarize/ingest`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contentSessionId: 'missing-summary'
+          })
+        });
+        expect(badRes.status).toBe(400);
+      } finally {
+        store.close();
+      }
     });
   });
 

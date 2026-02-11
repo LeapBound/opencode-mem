@@ -8,6 +8,11 @@ Goal:
 - Automatic context + session-init + observation + summarize + session-complete flow
 - Built-in duplicate protection in plugin lifecycle handlers
 
+Summary flow:
+
+- On `session.idle`, the plugin generates a structured summary using OpenCode's own model/provider context and ingests it into the worker via `POST /api/sessions/summarize/ingest`.
+- If plugin-side summary generation or ingest fails, it falls back to the worker-side `summarize` hook.
+
 ## 1) Install plugin into OpenCode config
 
 From repo root:
